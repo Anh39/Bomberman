@@ -1,4 +1,72 @@
 package Entities;
 
+import BackEnd.MainProcess;
+import BackEnd.Physics;
+import Graphic.Graphic;
+
+import java.util.Random;
+
 public class Enemy extends Entity{
+    private int cooldown;
+    public Enemy() {
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+    }
+
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    public void continueCooldown() {
+        cooldown++;
+    }
+    public void move() {
+        int moveX = 0; // Tọa độ X di chuyển thêm
+        int moveY = 0; // Tọa độ Y di chuyển thêm
+        int x = this.box.getX(); // Tọa độ hiện tại
+        int y = this.box.getY(); // Tọa độ hiện tại
+
+        // Đoạn code xác định hướng đi
+        // this.getSpeed() để lấy tốc độ của quái
+        // Physic.calculateDistance(player,this) để lấy khoảng cách giữa người chơi và quái, trả về double , quái , người chơi là 50*50
+        // người chơi là MainProcess.player , quái là this ; hitbox là thêm .box vào : MainProcess.player.box, this.box
+        // this.box.getX , getY , getWidth,getHeigh để lấy tọa độ và kích thước
+        // trục tọa độ :
+        /*
+        0---------------->x
+        |
+        |
+        |
+        |
+        mũi tên xuống
+        |y
+        //trục y hướng xuống dưới
+         */
+
+        // Chủ yếu là tính cho t cái moveX và moveY
+        // Bắt đầu
+        Random rand = new Random();
+        int direction = rand.nextInt(0,3+1);
+
+        if (direction == 0) {
+            moveX += this.getSpeed();
+        }
+        else if (direction == 1) {
+            moveX -= this.getSpeed();
+        }
+        else if (direction == 2) {
+            moveY += this.getSpeed();
+        }
+        else  {
+            moveY -= this.getSpeed();
+        }
+
+        // Kết thúc
+        boolean con = (x+moveX>=0) && (y+moveY>=0) && (x+moveX<=1400-50) && (y+moveY<=800-50); // Kiểm tra xem ngoài khung hình chưa
+        if ((!Physics.checkIntersectTerrain(MainProcess.terrains,this,moveX,moveY)) && con) { // Kiểm tra xem có giao với địa hình không
+                this.box.setLocation(x + moveX, y + moveY); // Di chuyển quái
+        }
+    }
 }

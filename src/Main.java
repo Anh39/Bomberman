@@ -1,7 +1,7 @@
-import Graphics.Render;
+import Graphic.Graphic;
 
 public class Main {
     public static void main(String[] args) {
-        Render render = new Render();
+        Graphic graphic = new Graphic();
     }
 }
