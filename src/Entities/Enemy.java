@@ -1,5 +1,6 @@
 package Entities;
 
+import BackEnd.DefaultParameter;
 import BackEnd.MainProcess;
 import BackEnd.Physics;
 import Graphic.Graphic;
@@ -24,8 +25,10 @@ public class Enemy extends Entity{
         return cooldown;
     }
     // Giảm cooldown đi 1
-    public void continueCooldown() {
-        cooldown++;
+    public void reduceCooldown() {
+        if (cooldown >0) {
+            cooldown--;
+        }
     }
 
     /**
@@ -77,5 +80,14 @@ public class Enemy extends Entity{
         if ((!Physics.checkIntersectTerrain(MainProcess.terrains,this,moveX,moveY)) && con) { // Kiểm tra xem có giao với địa hình không
                 this.box.setLocation(x + moveX, y + moveY); // Di chuyển quái
         }
+    }
+
+    @Override
+    public void setDefault() {
+        setHeath(DefaultParameter.enemyHeath);
+        setDamage(DefaultParameter.enemyDamage);
+        setSpeed(DefaultParameter.enemySpeed);
+        setRange(DefaultParameter.enemyRange);
+        setAngle(DefaultParameter.enemyAngle);
     }
 }

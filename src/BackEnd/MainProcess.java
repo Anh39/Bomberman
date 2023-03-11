@@ -24,8 +24,8 @@ public abstract class MainProcess {
      */
     public static void projectileDecay() {
         for (int i=0;i<projectiles.size();i++) {
-            projectiles.get(i).decay--;
-            if (projectiles.get(i).decay <= 0) {
+            projectiles.get(i).reduceDecay();
+            if (projectiles.get(i).getDecay() == 0) {
                 if (projectiles.get(i).getName().equals("Bomb")) {
                     denoteBomb(i);
                 }

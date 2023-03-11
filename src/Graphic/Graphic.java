@@ -8,9 +8,9 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 /**
- * Lớp xứ lý đồ họa nói chung
+ * Lớp trừu tượng xứ lý đồ họa nói chung
  */
-public class Graphic implements KeyListener {
+public abstract class Graphic {
     // Lưu trạng thái bàn phím
     public static ArrayList<KeyState> keyStates = new ArrayList<>();
     // Khung hình , cửa số chính
@@ -21,13 +21,12 @@ public class Graphic implements KeyListener {
     /**
      * Khởi tạo
      */
-    public Graphic() {
+    public static void startGraphic() {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.add(panel);
         frame.pack();
         frame.setVisible(true);
-        frame.addKeyListener(this);
         Menu.initialization(); // Khởi tạo menu
         Menu.addMenu(panel); // Ban đầu thêm menu
     }
@@ -36,13 +35,13 @@ public class Graphic implements KeyListener {
      * Khởi tạo game sau khi đóng menu chính
      */
     public static void initialization() {
-        MyClock myClock = new MyClock();
+        MyClock.startClock();
         MainProcess.generateTerrain();
         keyInitialization();
         StatusBar.initialization();
     }
-    // Key Event
 
+    // Key Event
     /**
      * Khởi tạo trạng thái bàn phím
      */
@@ -59,35 +58,38 @@ public class Graphic implements KeyListener {
         keyStates.add(downKey);
         keyStates.add(spaceKey);
         keyStates.add(eKey);
-    }
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
+        KeyListener keyListener = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
 
-    /**
-     * Phương thức mặc định của bàn phím
-     * @param e the event to be processed
-     */
-    @Override
-    public void keyPressed(KeyEvent e) {
-        //System.out.println(e.getKeyCode());
-        for (int i = 0; i < keyStates.size(); i++) {
-            if (keyStates.get(i).getKeyCode() == e.getKeyCode()) {
-                keyStates.get(i).setState(true);
+            /**
+             * Phương thức mặc định của bàn phím
+             * @param e the event to be processed
+             */
+            @Override
+            public void keyPressed(KeyEvent e) {
+                //System.out.println(e.getKeyCode());
+                for (int i = 0; i < keyStates.size(); i++) {
+                    if (keyStates.get(i).getKeyCode() == e.getKeyCode()) {
+                        keyStates.get(i).setState(true);
+                    }
+                }
+                MainProcess.playerInput(keyStates);
             }
-        }
-        MainProcess.playerInput(keyStates);
-    }
-    /**
-     * Phương thức mặc định của bàn phím
-     * @param e the event to be processed
-     */
-    @Override
-    public void keyReleased(KeyEvent e) {
-        for (int i = 0; i < keyStates.size(); i++) {
-            if (keyStates.get(i).getKeyCode() == e.getKeyCode()) {
-                keyStates.get(i).setState(false);
+            /**
+             * Phương thức mặc định của bàn phím
+             * @param e the event to be processed
+             */
+            @Override
+            public void keyReleased(KeyEvent e) {
+                for (int i = 0; i < keyStates.size(); i++) {
+                    if (keyStates.get(i).getKeyCode() == e.getKeyCode()) {
+                        keyStates.get(i).setState(false);
+                    }
+                }
             }
-        }
+        };
+        frame.addKeyListener(keyListener);
     }
 }

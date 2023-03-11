@@ -1,5 +1,7 @@
 package Entities;
 
+import BackEnd.DefaultParameter;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -33,12 +35,12 @@ public abstract class Entity {
      * Đặt mức mặc định
      */
     public void setDefault() {
-        this.heath = 100;
-        this.damage = 10;
-        this.speed = 10;
-        this.range = 1;
-        this.angle = 0;
-        this.name = "Default";
+        this.heath = DefaultParameter.entityHeath;
+        this.damage = DefaultParameter.entityDamage;
+        this.speed = DefaultParameter.entitySpeed;
+        this.range = DefaultParameter.entityRange;
+        this.angle = DefaultParameter.entityAngle;
+        this.name = DefaultParameter.entityName;
     }
 
     /**

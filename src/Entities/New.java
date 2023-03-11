@@ -1,5 +1,6 @@
 package Entities;
 
+import BackEnd.DefaultParameter;
 import Graphic.StatusBar;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ public abstract class New {
         Player player = new Player();
         player.setDefault();
         player.box.setIcon(playerImg1);
-        player.setRange(5);
+        player.setRange(DefaultParameter.playerRange);
         return player;
     }
     //Enemy
@@ -35,7 +36,7 @@ public abstract class New {
         enemy.setDefault();
         enemy.setCooldown(0);
         enemy.box.setIcon(slimeImg);
-        enemy.setRange(3);
+        enemy.setRange(DefaultParameter.entityRange);
         return enemy;
     }
     //Terrain
@@ -49,39 +50,39 @@ public abstract class New {
     public static void grass(Terrain tree) {
         tree.setDefault();
         tree.box.setIcon(grassImg);
-        tree.setPassable(true);
+        tree.setPassable(DefaultParameter.grassPassable);
     }
     public static Terrain tree() {
         Terrain tree = new Terrain();
         tree.setDefault();
         tree.box.setIcon(treeImg);
-        tree.setPassable(false);
+        tree.setPassable(DefaultParameter.treePassable);
         return tree;
     }
     //Projectile
     public static Projectile bomb(Entity entity) {
         Projectile bomb = new Projectile();
         bomb.setDefault();
-        bomb.setSpeed(0);
+        bomb.setDecay(DefaultParameter.bombDecay);
         bomb.box.setIcon(bombImg);
         bomb.setName("Bomb");
         bomb.setRange(entity.getRange());
         if (entity instanceof Player) {
-            bomb.setDamageToTerrain(true);
-            bomb.setDamageToEnemy(true);
-            bomb.setDamageToPlayer(false);
+            bomb.setDamageToTerrain(DefaultParameter.playerDamageToTerrain);
+            bomb.setDamageToEnemy(DefaultParameter.playerDamageToEnemy);
+            bomb.setDamageToPlayer(DefaultParameter.playerDamageToPlayer);
         }
         else if (entity instanceof Enemy) {
-            bomb.setDamageToTerrain(true);
-            bomb.setDamageToEnemy(false);
-            bomb.setDamageToPlayer(true);
+            bomb.setDamageToTerrain(DefaultParameter.enemyDamageToTerrain);
+            bomb.setDamageToEnemy(DefaultParameter.enemyDamageToEnemy);
+            bomb.setDamageToPlayer(DefaultParameter.enemyDamageToPlayer);
         }
         return bomb;
     }
     public static Projectile bombFragment(Projectile source) {
         Projectile bombFragment = new Projectile();
         bombFragment.setDefault();
-        bombFragment.setSpeed(0);
+        bombFragment.setDecay(DefaultParameter.bombFragmentDecay);
         bombFragment.box.setIcon(bombFragmentImg);
         bombFragment.setName("Bomb Fragment");
         bombFragment.setDamageToTerrain(source.isDamageToTerrain());

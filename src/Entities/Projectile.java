@@ -1,5 +1,7 @@
 package Entities;
 
+import BackEnd.DefaultParameter;
+
 /**
  * Kế thừa từ Entity
  * Đối tượng đạn/ bomb nói chung
@@ -11,11 +13,24 @@ public class Projectile extends Entity{
     private boolean damageToPlayer = false;
     private boolean damageToTerrain = false;
     // Thời gian tồn tại của Projectile
-    public int decay = 10; // = n*10, n = seconds
+    private int decay = 10; // = n*10, n = seconds
     public Projectile() {
 
     }
 
+    public void setDecay(int decay) {
+        this.decay = decay;
+    }
+
+    public int getDecay() {
+        return decay;
+    }
+
+    public void reduceDecay() {
+        if (decay > 0) {
+            decay --;
+        }
+    }
     public boolean isDamageToEnemy() {
         return damageToEnemy;
     }
@@ -38,5 +53,14 @@ public class Projectile extends Entity{
 
     public void setDamageToTerrain(boolean damageToTerrain) {
         this.damageToTerrain = damageToTerrain;
+    }
+
+    @Override
+    public void setDefault() {
+        setHeath(DefaultParameter.projectileHeath);
+        setDamage(DefaultParameter.projectileDamage);
+        setSpeed(DefaultParameter.projectileSpeed);
+        setRange(DefaultParameter.projectileRange);
+        setAngle(DefaultParameter.projectileAngle);
     }
 }

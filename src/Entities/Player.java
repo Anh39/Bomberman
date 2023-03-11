@@ -1,5 +1,6 @@
 package Entities;
 
+import BackEnd.DefaultParameter;
 import BackEnd.KeyState;
 import BackEnd.Physics;
 
@@ -16,7 +17,6 @@ public class Player extends Entity{
     public Player() {
         this.box.setLocation(50,50);
     }
-
     /**
      * Phương thức để di chuyển nhân vật
      * @param keyStates: Trạng thái bàn phím
@@ -51,5 +51,14 @@ public class Player extends Entity{
         if ((!Physics.checkIntersectTerrain(terrains,this,moveX,moveY)) && con) {
             this.box.setLocation(x + moveX, y + moveY);
         }
+    }
+
+    @Override
+    public void setDefault() {
+        setHeath(DefaultParameter.playerHeath);
+        setDamage(DefaultParameter.playerDamage);
+        setSpeed(DefaultParameter.playerSpeed);
+        setRange(DefaultParameter.playerRange);
+        setAngle(DefaultParameter.playerAngle);
     }
 }

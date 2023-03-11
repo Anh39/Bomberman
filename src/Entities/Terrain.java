@@ -1,5 +1,7 @@
 package Entities;
 
+import BackEnd.DefaultParameter;
+
 /**
  * Kế thừa từ Entity
  * Đối tượng địa hình
@@ -10,7 +12,6 @@ public class Terrain extends Entity{
     // Note : Mỗi ô hiển thị trên màn hình đều chứa địa hình
     private boolean passable;
     public Terrain() {
-        passable = false;
     }
 
     public void setPassable(boolean passable) {
@@ -19,5 +20,15 @@ public class Terrain extends Entity{
 
     public boolean isPassable() {
         return passable;
+    }
+
+    @Override
+    public void setDefault() {
+        setHeath(DefaultParameter.terrainHeath);
+        setDamage(DefaultParameter.terrainDamage);
+        setSpeed(DefaultParameter.terrainSpeed);
+        setRange(DefaultParameter.terrainRange);
+        setAngle(DefaultParameter.terrainAngle);
+        setPassable(DefaultParameter.terrainPassable);
     }
 }
