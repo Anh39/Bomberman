@@ -24,6 +24,8 @@ public class Terrain extends Entity{
 
     @Override
     public void setDefault() {
+        bar.setMaximum(DefaultParameter.terrainMaxHeath);
+        setMaxHeath(DefaultParameter.terrainMaxHeath);
         setHeath(DefaultParameter.terrainHeath);
         setDamage(DefaultParameter.terrainDamage);
         setSpeed(DefaultParameter.terrainSpeed);

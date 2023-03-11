@@ -12,6 +12,8 @@ import java.awt.*;
 public abstract class Entity {
     // Dùng JLabel box để làm hitbox cho đối tượng
     public JLabel box;
+    public JProgressBar bar;
+    private int maxHeath;
     private int heath;
     private int damage;
     private int speed;
@@ -23,6 +25,15 @@ public abstract class Entity {
         this.box = new JLabel();
         this.box.setBounds(50,50,50,50);
         this.box.setOpaque(false);
+        this.bar = new JProgressBar();
+        this.bar.setMinimum(0);
+        this.bar.setMaximum(100);
+        this.bar.setBounds(0,0,50,10);
+        this.bar.setValue(50);
+        this.bar.setStringPainted(true);
+        this.bar.setForeground(Color.red);
+        this.bar.setBackground(Color.black);
+        this.maxHeath = 0;
         this.heath = 0;
         this.damage = 0;
         this.speed = 0;
@@ -35,6 +46,8 @@ public abstract class Entity {
      * Đặt mức mặc định
      */
     public void setDefault() {
+        bar.setMaximum(DefaultParameter.entityMaxHeath);
+        this.maxHeath = DefaultParameter.entityMaxHeath;
         this.heath = DefaultParameter.entityHeath;
         this.damage = DefaultParameter.entityDamage;
         this.speed = DefaultParameter.entitySpeed;
@@ -47,6 +60,8 @@ public abstract class Entity {
      * Đặt mức 0 , dùng cho khởi tạo buff
      */
     public void setZero() {
+        bar.setMaximum(0);
+        bar.setVisible(false);
         this.heath = 0;
         this.damage = 0;
         this.speed = 0;
@@ -60,8 +75,17 @@ public abstract class Entity {
      * Dùng để rút gọn cho lệnh Entity.box.setLocation(int x,int y);
      */
     public void setLocation(Dimension dim) {
-        this.box.setLocation((int)dim.getWidth(),(int)dim.getHeight());
+        int x = (int)dim.getWidth();
+        int y = (int)dim.getHeight();
+        this.setLocation(x,y);
     }
+    public void setLocation(int x, int y) {
+        this.box.setLocation(x,y);
+        //x -= this.box.getWidth()/2;
+        y -= this.bar.getHeight() + this.box.getHeight()*0.1;
+        this.bar.setLocation(x,y);
+    }
+
 
     /**
      * Phương thức dùng để giảm máu
@@ -70,7 +94,20 @@ public abstract class Entity {
     public void reduceHeath(int damage) {
         this.heath -= damage;
     }
+    public void calculateHeathBar() {
+        this.bar.setValue(this.getHeath());
+        this.bar.setString(String.valueOf(this.getHeath()));
+    }
     //Getter,Setter
+
+    public void setMaxHeath(int maxHeath) {
+        this.maxHeath = maxHeath;
+    }
+
+    public int getMaxHeath() {
+        return maxHeath;
+    }
+
     public void setHeath(int heath) {
         this.heath = heath;
     }

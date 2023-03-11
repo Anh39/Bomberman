@@ -3,6 +3,7 @@ package Entities;
 import BackEnd.DefaultParameter;
 import BackEnd.KeyState;
 import BackEnd.Physics;
+import Graphic.Graphic;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class Player extends Entity{
      * Khởi tạo mặc định
      */
     public Player() {
-        this.box.setLocation(50,50);
+        this.box.setLocation(0,0);
     }
     /**
      * Phương thức để di chuyển nhân vật
@@ -47,14 +48,20 @@ public class Player extends Entity{
                 }
             }
         }
-        boolean con = (x+moveX>=0) && (y+moveY>=0) && (x+moveX<=1400-50) && (y+moveY<=800-50);
+        boolean con1 = x+moveX>=0;
+        boolean con2 = y+moveY>=0;
+        boolean con3 = x+moveX<=Graphic.panel.getWidth() -this.box.getWidth();
+        boolean con4 = y+moveY<=Graphic.panel.getHeight()-this.box.getHeight();
+        boolean con = con1 && con2 && con3 && con4;
         if ((!Physics.checkIntersectTerrain(terrains,this,moveX,moveY)) && con) {
-            this.box.setLocation(x + moveX, y + moveY);
+            this.setLocation(x + moveX, y + moveY);
         }
     }
 
     @Override
     public void setDefault() {
+        bar.setMaximum(DefaultParameter.playerMaxHeath);
+        setMaxHeath(DefaultParameter.playerMaxHeath);
         setHeath(DefaultParameter.playerHeath);
         setDamage(DefaultParameter.playerDamage);
         setSpeed(DefaultParameter.playerSpeed);

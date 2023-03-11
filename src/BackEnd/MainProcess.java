@@ -89,6 +89,19 @@ public abstract class MainProcess {
                 if (key == 37 || key == 38 || key == 39 || key == 40) {
                     MyClock.playerMove(keyStates);
                 }
+                if (key == 81) {
+                    newGame();
+                }
+                if (key == 27) {
+                    if (Graphic.menuBarState) {
+                        Graphic.closeMenuBar();
+                        Graphic.menuBarState = false;
+                    }
+                    else {
+                        Graphic.openMenuBar();
+                        Graphic.menuBarState = true;
+                    }
+                }
             }
         }
     }
@@ -153,7 +166,9 @@ public abstract class MainProcess {
      * Khởi tạo địa hình ngẫu nhiên
      */
     public static void generateTerrain() {
-        int size = 28*16;
+        int height = (Graphic.panel.getHeight()) / 50;
+        int width = (Graphic.panel.getWidth()) / 50;
+        int size = height*width;
         for (int i=0;i<size;i++) {
             Terrain temp;
             Random rand = new Random();
@@ -195,8 +210,8 @@ public abstract class MainProcess {
      */
     public static Dimension getRandomCoordinates() {
         Dimension dim = new Dimension();
-        dim.height = getRandom(0,800,50);
-        dim.width = getRandom(0,1400,50);
+        dim.height = getRandom(0,Graphic.panel.getHeight(),DefaultParameter.labelHeight);
+        dim.width = getRandom(0,Graphic.panel.getWidth(),DefaultParameter.labelWidth);
         return dim;
     }
     //Other
@@ -213,9 +228,43 @@ public abstract class MainProcess {
         for (int i=0;i<enemies.size();i++) {
             if (enemies.get(i).getHeath() <= 0) {
                 Graphic.panel.remove(enemies.get(i).box);
+                Graphic.panel.remove(enemies.get(i).bar);
                 Graphic.panel.repaint();
                 enemies.remove(i);
             }
         }
+    }
+    public static void processStatusBar() {
+        for (Terrain terrain : terrains) {
+            terrain.calculateHeathBar();
+        }
+        for (Enemy enemy : enemies) {
+            enemy.calculateHeathBar();
+        }
+        player.calculateHeathBar();
+    }
+    public static void newGame() {
+        clearMap();
+        terrains.clear();
+        enemies.clear();
+        projectiles.clear();
+        player = New.player();
+        generateTerrain();
+    }
+    public static void clearMap() {
+        for (Terrain terrain : terrains) {
+            Graphic.panel.remove(terrain.box);
+            Graphic.panel.remove(terrain.bar);
+        }
+        for (Enemy enemy : enemies) {
+            Graphic.panel.remove(enemy.box);
+            Graphic.panel.remove(enemy.bar);
+        }
+        for (Projectile projectile : projectiles) {
+            Graphic.panel.remove(projectile.box);
+            Graphic.panel.remove(projectile.bar);
+        }
+        Graphic.panel.remove(player.box);
+        Graphic.panel.remove(player.bar);
     }
 }

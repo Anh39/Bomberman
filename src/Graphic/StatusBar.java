@@ -1,5 +1,7 @@
 package Graphic;
 
+import Entities.*;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,6 +16,6 @@ public abstract class StatusBar {
         textField.setBounds(0,0,250,50);
         textField.setOpaque(false);
         textField.setFont(font);
-        Graphic.panel.add(textField,Integer.valueOf(10));
+        //Graphic.panel.add(textField,Integer.valueOf(10));
     }
 }

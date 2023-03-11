@@ -57,6 +57,8 @@ public class Projectile extends Entity{
 
     @Override
     public void setDefault() {
+        bar.setMaximum(DefaultParameter.projectileMaxHeath);
+        setMaxHeath(DefaultParameter.projectileMaxHeath);
         setHeath(DefaultParameter.projectileHeath);
         setDamage(DefaultParameter.projectileDamage);
         setSpeed(DefaultParameter.projectileSpeed);

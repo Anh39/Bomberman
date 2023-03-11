@@ -3,6 +3,7 @@ package Graphic;
 import BackEnd.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -17,18 +18,23 @@ public abstract class Graphic {
     public static JFrame frame = new JFrame();
     // Bảng để đặt vào cửa sổ
     public static MyPanel panel = new MyPanel();
-
+    // Bảng nền
+    public static MyPanel basePanel = new MyPanel();
+    public static boolean menuBarState = false;
     /**
      * Khởi tạo
      */
     public static void startGraphic() {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        frame.add(panel);
+        frame.add(basePanel);
+        basePanel.setPreferredSize(new Dimension(DefaultParameter.panelWidth,DefaultParameter.panelHeight));
+        basePanel.add(panel);
+        panel.setBounds(0,0,DefaultParameter.panelWidth,DefaultParameter.panelHeight);
         frame.pack();
         frame.setVisible(true);
-        Menu.initialization(); // Khởi tạo menu
-        Menu.addMenu(panel); // Ban đầu thêm menu
+        MyMenu.mainMenuInitialization(); // Khởi tạo menu
+        MyMenu.addMainMenu(panel); // Ban đầu thêm menu
     }
 
     /**
@@ -39,8 +45,16 @@ public abstract class Graphic {
         MainProcess.generateTerrain();
         keyInitialization();
         StatusBar.initialization();
+        MyMenu.subMenuInitialization();
     }
-
+    public static void openMenuBar() {
+        panel.setLocation(DefaultParameter.panelStartWidth,DefaultParameter.panelStartHeight);
+        MyMenu.addSubMenu();
+    }
+    public static void closeMenuBar() {
+        MyMenu.removeSubMenu();
+        panel.setLocation(0,0);
+    }
     // Key Event
     /**
      * Khởi tạo trạng thái bàn phím
@@ -52,12 +66,16 @@ public abstract class Graphic {
         KeyState downKey = new KeyState(40);
         KeyState spaceKey = new KeyState(32);
         KeyState eKey = new KeyState(69);
+        KeyState qKey = new KeyState(81);
+        KeyState escKey = new KeyState(27);
         keyStates.add(leftKey);
         keyStates.add(rightKey);
         keyStates.add(upKey);
         keyStates.add(downKey);
         keyStates.add(spaceKey);
         keyStates.add(eKey);
+        keyStates.add(qKey);
+        keyStates.add(escKey);
         KeyListener keyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -69,7 +87,7 @@ public abstract class Graphic {
              */
             @Override
             public void keyPressed(KeyEvent e) {
-                //System.out.println(e.getKeyCode());
+                System.out.println(e.getKeyCode());
                 for (int i = 0; i < keyStates.size(); i++) {
                     if (keyStates.get(i).getKeyCode() == e.getKeyCode()) {
                         keyStates.get(i).setState(true);

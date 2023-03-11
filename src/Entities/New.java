@@ -16,6 +16,7 @@ public abstract class New {
     public static ImageIcon loadGameImg = new ImageIcon(New.class.getResource("/Images/loadGameImage.png"));
     public static ImageIcon configGameImg = new ImageIcon(New.class.getResource("/Images/configGameImage.png"));
     public static ImageIcon exitGameImg = new ImageIcon(New.class.getResource("/Images/exitGameImage.png"));
+    public static ImageIcon miniNewGameImg = new ImageIcon(New.class.getResource("/Images/miniNewGameImage.png"));
     public static ImageIcon playerImg1 = new ImageIcon(New.class.getResource("/Images/Player1.png"));
     public static ImageIcon grassImg = new ImageIcon(New.class.getResource("/Images/Grass Terrain.png"));
     public static ImageIcon treeImg = new ImageIcon(New.class.getResource("/Images/Tree Terrain.png"));
@@ -63,6 +64,7 @@ public abstract class New {
     public static Projectile bomb(Entity entity) {
         Projectile bomb = new Projectile();
         bomb.setDefault();
+        bomb.setDamage(entity.getDamage());
         bomb.setDecay(DefaultParameter.bombDecay);
         bomb.box.setIcon(bombImg);
         bomb.setName("Bomb");
@@ -83,6 +85,7 @@ public abstract class New {
         Projectile bombFragment = new Projectile();
         bombFragment.setDefault();
         bombFragment.setDecay(DefaultParameter.bombFragmentDecay);
+        bombFragment.setDamage(source.getDamage());
         bombFragment.box.setIcon(bombFragmentImg);
         bombFragment.setName("Bomb Fragment");
         bombFragment.setDamageToTerrain(source.isDamageToTerrain());
@@ -91,29 +94,40 @@ public abstract class New {
         bombFragment.setRange(source.getRange());
         return bombFragment;
     }
-    //Menu
+    //MyMenu
+    public static JButton miniNewGameButton() {
+        JButton result = new JButton();
+        result.setFocusable(false);
+        result.setIcon(miniNewGameImg);
+        return result;
+    }
     public static JButton newGameButton() {
         JButton result = new JButton();
+        result.setFocusable(false);
         result.setIcon(newGameImg);
         return result;
     }
     public static JButton loadGameButton() {
         JButton result = new JButton();
+        result.setFocusable(false);
         result.setIcon(loadGameImg);
         return result;
     }
     public static JButton configGameButton() {
         JButton result = new JButton();
+        result.setFocusable(false);
         result.setIcon(configGameImg);
         return result;
     }
     public static JButton exitGameButton() {
         JButton result = new JButton();
+        result.setFocusable(false);
         result.setIcon(exitGameImg);
         return result;
     }
     public static JTextArea tutorial() {
         JTextArea tutorial = new JTextArea();
+        tutorial.setFocusable(false);
         tutorial.setBounds(500,300,500,200);
         tutorial.setFont(StatusBar.font);
         return tutorial;

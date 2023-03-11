@@ -4,8 +4,24 @@ package BackEnd;
  * Lớp trừu tượng chứa các thông số mặc định
  */
 public abstract class DefaultParameter {
+    // Frame
+    public static final int panelStartWidth = 0;
+    public static final int panelStartHeight = 50;
+    public static final int panelWidth = 1400;
+    public static final int panelHeight = 750;
+    // Label
+    public static final int labelWidth = 50;
+    public static final int labelHeight = 50;
+    // Time
+    public static final int baseClockDelay = 10;
+    public static final int renderDelay = 10;
+    public static final int enemyMoveDelay = 5;
+    public static final int playerMoveDelay = 1;
+    public static final int bombDelay = 10;
+    public static final int damageDelay = 10;
     // Parameter
     // Entity
+    public static int entityMaxHeath = 100;
     public static int entityHeath = 100;
     public static int entityDamage = 10;
     public static int entitySpeed = 10;
@@ -13,6 +29,7 @@ public abstract class DefaultParameter {
     public static double entityAngle = 0;
     public static String entityName = "Default";
     // Enemy
+    public static int enemyMaxHeath = 100;
     public static int enemyHeath = 100;
     public static int enemyDamage = 10;
     public static int enemySpeed = 10;
@@ -24,7 +41,8 @@ public abstract class DefaultParameter {
     public static boolean enemyDamageToPlayer = true;
     public static boolean enemyDamageToEnemy = false;
     // Player
-    public static int playerHeath = 100;
+    public static int playerMaxHeath = 1000;
+    public static int playerHeath = 1000;
     public static int playerDamage = 10;
     public static int playerSpeed = 10;
     public static int playerRange = 3;
@@ -34,6 +52,7 @@ public abstract class DefaultParameter {
     public static boolean playerDamageToEnemy = true;
     public static int playerMoveCount = 5;
     // Projectile
+    public static int projectileMaxHeath = 100;
     public static int projectileHeath = 100;
     public static int projectileDamage = 10;
     public static int projectileSpeed = 0;
@@ -42,7 +61,8 @@ public abstract class DefaultParameter {
     public static int bombDecay = 15;
     public static int bombFragmentDecay = 10;
     // Terrain
-    public static int terrainHeath = 100;
+    public static int terrainMaxHeath = 100;
+    public static int terrainHeath = 50;
     public static int terrainDamage = 0;
     public static int terrainSpeed = 0;
     public static int terrainRange = 0;
@@ -50,12 +70,4 @@ public abstract class DefaultParameter {
     public static boolean terrainPassable = false;
     public static boolean treePassable = false;
     public static boolean grassPassable = true;
-    // Time
-    public static final int baseClockDelay = 10;
-    public static final int renderDelay = 10;
-    public static final int enemyMoveDelay = 5;
-    public static final int playerMoveDelay = 1;
-    public static final int bombDelay = 10;
-    public static final int deathDelay = 10;
-    public static final int damageDelay = 10;
 }

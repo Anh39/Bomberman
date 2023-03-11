@@ -69,6 +69,7 @@ public abstract class MyClock{
         if (renderDelay > DefaultParameter.renderDelay) {
             renderDelay = 0;
             MainProcess.processDeath();
+            MainProcess.processStatusBar();
             Render.render(MainProcess.terrains,MainProcess.enemies,MainProcess.projectiles,MainProcess.player);
         }
         if (bombDelay > DefaultParameter.bombDelay) {

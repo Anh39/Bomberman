@@ -45,6 +45,7 @@ public abstract class Render {
         for (Enemy enemy : enemies) {
             if (enemy.box != null && !Graphic.panel.isAncestorOf(enemy.box)) {
                 Graphic.panel.add(enemy.box,Integer.valueOf(5));
+                Graphic.panel.add(enemy.bar, Integer.valueOf(10));
             }
         }
         for (Projectile projectile : projectiles) {
@@ -54,6 +55,7 @@ public abstract class Render {
         }
         if (!Graphic.panel.isAncestorOf(player.box)) {
             Graphic.panel.add(player.box, Integer.valueOf(7));
+            Graphic.panel.add(player.bar, Integer.valueOf(10));
         }
         Graphic.panel.repaint();
     }
