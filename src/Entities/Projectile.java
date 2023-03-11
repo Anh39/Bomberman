@@ -1,10 +1,17 @@
 package Entities;
 
+/**
+ * Kế thừa từ Entity
+ * Đối tượng đạn/ bomb nói chung
+ */
+
 public class Projectile extends Entity{
+    // Khả năng gây damage đến các đối tượng
     private boolean damageToEnemy = false;
     private boolean damageToPlayer = false;
     private boolean damageToTerrain = false;
-    public int decay = 10; // n*10, n = seconds
+    // Thời gian tồn tại của Projectile
+    public int decay = 10; // = n*10, n = seconds
     public Projectile() {
 
     }

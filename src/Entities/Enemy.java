@@ -6,11 +6,16 @@ import Graphic.Graphic;
 
 import java.util.Random;
 
+/**
+ * Kế thừa từ Entity.
+ * Đối tượng kẻ địch
+ */
+
 public class Enemy extends Entity{
+    //cooldown ở đây là khoảng thời gian giữa 2 lần đặt bom
     private int cooldown;
     public Enemy() {
     }
-
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
     }
@@ -18,10 +23,14 @@ public class Enemy extends Entity{
     public int getCooldown() {
         return cooldown;
     }
-
+    // Giảm cooldown đi 1
     public void continueCooldown() {
         cooldown++;
     }
+
+    /**
+     * Phương thức dùng để di chuyển kẻ địch
+     */
     public void move() {
         int moveX = 0; // Tọa độ X di chuyển thêm
         int moveY = 0; // Tọa độ Y di chuyển thêm

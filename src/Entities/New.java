@@ -4,7 +4,13 @@ import Graphic.StatusBar;
 
 import javax.swing.*;
 
+/**
+ * Lớp trừu tượng dùng để khởi tạo các đối tượng
+ * Chủ yếu dùng để làm giản độ dài các đoạn code khác
+ */
+
 public abstract class New {
+    // Hình ảnh để khởi tạo đối tượng
     public static ImageIcon newGameImg = new ImageIcon(New.class.getResource("/Images/newGameImage.png"));
     public static ImageIcon loadGameImg = new ImageIcon(New.class.getResource("/Images/loadGameImage.png"));
     public static ImageIcon configGameImg = new ImageIcon(New.class.getResource("/Images/configGameImage.png"));

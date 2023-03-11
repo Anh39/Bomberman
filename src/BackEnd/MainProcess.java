@@ -7,56 +7,21 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Lớp trừu tượng để tính toán đa số các tác vụ trong game
+ */
 public abstract class MainProcess {
     public static ArrayList<Terrain> terrains = new ArrayList<Terrain>();
     public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     public static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
     public static Player player = New.player();
-    public static int renderTime = 0;
-    public static int bombTime = 0;
-    public static int damageTime = 0;
-    public static int enemyMoveTime = 0;
+    // dùng để tạo cooldown cho việc đặt bom của người chơi
     public static boolean playerBombPlaced = false;
-    //Time
-    public static void runTime() {
-        renderTime++;
-        bombTime++;
-        damageTime++;
-        enemyMoveTime++;
-        if (renderTime > 10) {
-            renderTime = 0;
-            processDeath();
-        }
-        if (bombTime > 10) {
-            bombTime = 0;
-            playerBombPlaced = false;
-            projectileDecay();
-        }
-        if (damageTime > 5) {
-            Physics.processProjectileDamage(terrains,enemies,projectiles,player);
-            damageTime = 0;
-        }
-        if (enemyMoveTime > 5) {
-            enemyMoveTime = 0;
-            for (Enemy enemy : enemies) {
-                enemy.move();
-            }
-        }
-        //Internal Cool down
-        for (Enemy enemy : enemies) {
-            if (enemy.getCooldown() > 300) {
-                if (Physics.calculateDistance(enemy, player) < 300) {
-                    placeBomb(enemy);
-                    enemy.setCooldown(0);
-                }
-            }
-            else {
-                enemy.continueCooldown();
-            }
-        }
-
-    }
     // Projectile
+
+    /**
+     * Xừ lý thời gian tồn tại của bom/đạn
+     */
     public static void projectileDecay() {
         for (int i=0;i<projectiles.size();i++) {
             projectiles.get(i).decay--;
@@ -70,6 +35,11 @@ public abstract class MainProcess {
             }
         }
     }
+
+    /**
+     * Kích nổ bom, tạo các mảnh bom
+     * @param index : vị trí của quả bom trong ArrayList<Projectile>
+     */
     public static void denoteBomb(int index) {
         Projectile temp = projectiles.get(index);
         int x = temp.box.getX();
@@ -101,18 +71,32 @@ public abstract class MainProcess {
             }
         }
     }
+
+    /**
+     * Xử lý đầu vào từ bàn phím
+     * @param keyStates : trạng thái của bàn phím
+     */
     public static void playerInput(ArrayList<KeyState> keyStates) {
         for (int i=0;i<keyStates.size();i++) {
             if (keyStates.get(i).getState()) {
-                if (keyStates.get(i).getKeyCode() == 32) {
+                int key = keyStates.get(i).getKeyCode();
+                if (key == 32) {
                     placeBomb(player);
                 }
-                if (keyStates.get(i).getKeyCode() == 69) {
+                if (key == 69) {
                     spawnEnemy();
+                }
+                if (key == 37 || key == 38 || key == 39 || key == 40) {
+                    MyClock.playerMove(keyStates);
                 }
             }
         }
     }
+
+    /**
+     * Đặt bom tại vị trí của đối tượng
+     * @param entity : đối tượng bất kỳ
+     */
     public static void placeBomb(Entity entity) {
         if (entity instanceof Player) {
             if (playerBombPlaced) {
@@ -126,6 +110,11 @@ public abstract class MainProcess {
         Graphic.panel.repaint();
     }
     //Player
+
+    /**
+     * Dùng để khởi tạo người chơi để không dính vào cây, kẻ địch
+     * Note : hiện tại chưa dùng
+     */
     public static void spawnPlayer() {
         player.setLocation(getRandomCoordinates());
         for (int i=0;i<terrains.size();i++) {
@@ -140,10 +129,11 @@ public abstract class MainProcess {
             }
         }
     }
-    public static void playerMove(ArrayList<KeyState> keyStates) {
-        player.move(keyStates,terrains);
-    }
     //Enemy
+
+    /**
+     * Tạo ra kẻ địch tại vị trí ngẫu nhiên không giao với địa hình không đi qua được
+     */
     public static void spawnEnemy() {
         Enemy enemy = New.slime();
         enemy.setLocation(getRandomCoordinates());
@@ -158,6 +148,10 @@ public abstract class MainProcess {
         enemies.add(enemy);
     }
     //Terrain
+
+    /**
+     * Khởi tạo địa hình ngẫu nhiên
+     */
     public static void generateTerrain() {
         int size = 28*16;
         for (int i=0;i<size;i++) {
@@ -182,10 +176,23 @@ public abstract class MainProcess {
             terrains.add(temp);
         }
     }
+
+    /**
+     * Phương thức lấy ngẫu nhiên 1 trục tọa độ và làm tròn theo distance
+     * @param from
+     * @param to
+     * @param distance
+     * @return
+     */
     public static int getRandom(int from, int to, int distance) {
         Random rand = new Random();
         return rand.nextInt(from/distance,to/distance)*distance;
     }
+
+    /**
+     * Phương thức lấy ngẫu nhiên 2 trục tọa độ
+     * @return trả về dưới dạng Dimenson, Dimenson.getWidth() để lấy tọa độ x, Dimenson.getHeight() để lấy tọa độ y.
+     */
     public static Dimension getRandomCoordinates() {
         Dimension dim = new Dimension();
         dim.height = getRandom(0,800,50);
@@ -193,6 +200,10 @@ public abstract class MainProcess {
         return dim;
     }
     //Other
+
+    /**
+     * Phương thức để loại bỏ các đối tượng đã chết (Heath<=0)
+     */
     public static void processDeath() {
         for (int i=0;i<terrains.size();i++) {
             if (terrains.get(i).getHeath() <= 0) {

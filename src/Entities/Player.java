@@ -5,10 +5,23 @@ import BackEnd.Physics;
 
 import java.util.ArrayList;
 
+/**
+ * Kế thừ từ Entity
+ * Đối tượng người chơi
+ */
 public class Player extends Entity{
+    /**
+     * Khởi tạo mặc định
+     */
     public Player() {
         this.box.setLocation(50,50);
     }
+
+    /**
+     * Phương thức để di chuyển nhân vật
+     * @param keyStates: Trạng thái bàn phím
+     * @param terrains: Địa hình
+     */
     public void move(ArrayList<KeyState> keyStates, ArrayList<Terrain> terrains) {
         int x = this.box.getX();
         int y = this.box.getY();
