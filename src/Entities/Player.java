@@ -4,6 +4,7 @@ import BackEnd.DefaultParameter;
 import BackEnd.KeyState;
 import BackEnd.Physics;
 import Graphic.Graphic;
+import Graphic.TestModule;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
  * Đối tượng người chơi
  */
 public class Player extends Entity{
-    private int moveCount = 0;
     /**
      * Khởi tạo mặc định
      */
@@ -60,13 +60,10 @@ public class Player extends Entity{
         boolean con4 = y+moveY<=Graphic.panel.getHeight()-this.box.getHeight();
         boolean con = con1 && con2 && con3 && con4;
         if ((!Physics.checkIntersectTerrain(terrains,this,moveX,moveY)) && con) {
-            if (moveCount == 5) {
-                moveCount = 1;
-            }
-            else {
-                moveCount++;
-            }
             this.setLocation(x + moveX, y + moveY);
+            if (TestModule.testEnable) {
+                TestModule.movePanel(moveX, moveY);
+            }
         }
     }
 
@@ -78,6 +75,8 @@ public class Player extends Entity{
         setDamage(DefaultParameter.playerDamage);
         setSpeed(DefaultParameter.playerSpeed);
         setRange(DefaultParameter.playerRange);
+        setHeathRegen(DefaultParameter.playerHeathRegen);
+        setRegenDuration(DefaultParameter.playerRegenDuration);
         setAngle(DefaultParameter.playerAngle);
     }
 }

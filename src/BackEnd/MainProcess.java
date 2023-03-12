@@ -134,7 +134,31 @@ public abstract class MainProcess {
     public static void generateTerrain() {
         int height = (Graphic.panel.getHeight()) / 50;
         int width = (Graphic.panel.getWidth()) / 50;
-        int size = height*width;
+        for (int i=0;i<width;i++) {
+            for (int j=0;j<height;j++) {
+                Terrain grass = New.grass();
+                grass.setLocation(i*grass.box.getWidth(),j*grass.box.getHeight());
+                terrains.add(grass);
+            }
+        }
+        int treeNumber = height*width/DefaultParameter.treeRatio;
+        for (int i=0;i<treeNumber;i++) {
+            ArrayList<Integer> indexArr = new ArrayList<Integer>();
+            for (int j=0;j<terrains.size();j++) {
+                if (terrains.get(i).isPassable()) {
+                    if (!terrains.get(i).isOverlapped()) {
+                        indexArr.add(i);
+                    }
+                }
+            }
+            Random rand = new Random();
+            int index = rand.nextInt(0,indexArr.size());
+            Terrain tree = New.tree();
+            tree.setLocation(terrains.get(index).box.getX(),terrains.get(index).box.getY());
+            terrains.add(tree);
+            System.out.println( "Generating map : " + (i+1)*100/treeNumber + "%");
+        }
+        /*int size = height*width;
         for (int i=0;i<size;i++) {
             Terrain temp;
             Random rand = new Random();
@@ -155,7 +179,8 @@ public abstract class MainProcess {
                 }
             }
             terrains.add(temp);
-        }
+            System.out.println( "Generating map : " + (i+1)*100/size + "%");
+        }*/
     }
 
     /**
@@ -188,7 +213,10 @@ public abstract class MainProcess {
     public static void processDeath() {
         for (int i=0;i<terrains.size();i++) {
             if (terrains.get(i).getHeath() <= 0) {
-                New.grass(terrains.get(i));
+                Graphic.panel.remove(terrains.get(i).box);
+                Graphic.panel.remove(terrains.get(i).bar);
+                Graphic.panel.repaint();
+                terrains.remove(i);
             }
         }
         for (int i=0;i<enemies.size();i++) {

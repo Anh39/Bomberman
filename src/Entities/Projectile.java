@@ -63,6 +63,8 @@ public class Projectile extends Entity{
         setDamage(DefaultParameter.projectileDamage);
         setSpeed(DefaultParameter.projectileSpeed);
         setRange(DefaultParameter.projectileRange);
+        setHeathRegen(DefaultParameter.projectileHeathRegen);
+        setRegenDuration(DefaultParameter.projectileRegenDuration);
         setAngle(DefaultParameter.projectileAngle);
     }
 }

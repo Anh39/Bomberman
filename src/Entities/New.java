@@ -45,19 +45,16 @@ public abstract class New {
         Terrain grass = new Terrain();
         grass.setDefault();
         grass.box.setIcon(grassImg);
-        grass.setPassable(true);
+        grass.setPassable(DefaultParameter.grassPassable);
+        grass.setOverlapped(false);
         return grass;
-    }
-    public static void grass(Terrain tree) {
-        tree.setDefault();
-        tree.box.setIcon(grassImg);
-        tree.setPassable(DefaultParameter.grassPassable);
     }
     public static Terrain tree() {
         Terrain tree = new Terrain();
         tree.setDefault();
         tree.box.setIcon(treeImg);
         tree.setPassable(DefaultParameter.treePassable);
+        tree.setOverlapped(false);
         return tree;
     }
     //Projectile

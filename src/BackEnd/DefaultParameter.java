@@ -26,6 +26,8 @@ public abstract class DefaultParameter {
     public static int entityDamage = 10;
     public static int entitySpeed = 10;
     public static int entityRange = 1;
+    public static int entityHeathRegen = 0;
+    public static int entityRegenDuration = 0;
     public static double entityAngle = 0;
     public static String entityName = "Default";
     // Enemy
@@ -34,6 +36,8 @@ public abstract class DefaultParameter {
     public static int enemyDamage = 10;
     public static int enemySpeed = 10;
     public static int enemyRange = 1;
+    public static int enemyHeathRegen = 0;
+    public static int enemyRegenDuration = 0;
     public static double enemyAngle = 0;
     public static int enemyCooldown = 100;
     public static int enemySightDistance = 300;
@@ -44,19 +48,23 @@ public abstract class DefaultParameter {
     public static int playerMaxHeath = 1000;
     public static int playerHeath = 1000;
     public static int playerDamage = 10;
-    public static int playerSpeed = 10;
+    public static int playerSpeed = 5;
     public static int playerRange = 3;
+    public static int playerHeathRegen = 0;
+    public static int playerRegenDuration = 0;
     public static double playerAngle = 0;
     public static boolean playerDamageToTerrain = true;
     public static boolean playerDamageToPlayer = false;
     public static boolean playerDamageToEnemy = true;
-    public static int playerMoveCount = 5;
+    public static int playerMoveCount = 10;
     // Projectile
     public static int projectileMaxHeath = 100;
     public static int projectileHeath = 100;
     public static int projectileDamage = 10;
     public static int projectileSpeed = 0;
     public static int projectileRange = 0;
+    public static int projectileHeathRegen = 0;
+    public static int projectileRegenDuration = 0;
     public static double projectileAngle = 0;
     public static int bombDecay = 15;
     public static int bombFragmentDecay = 10;
@@ -66,8 +74,12 @@ public abstract class DefaultParameter {
     public static int terrainDamage = 0;
     public static int terrainSpeed = 0;
     public static int terrainRange = 0;
+    public static int terrainHeathRegen = 0;
+    public static int terrainRegenDuration = 0;
     public static double terrainAngle = 0;
     public static boolean terrainPassable = false;
     public static boolean treePassable = false;
     public static boolean grassPassable = true;
+    //Other
+    public static int treeRatio = 5;
 }

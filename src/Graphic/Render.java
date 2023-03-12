@@ -39,7 +39,12 @@ public abstract class Render {
         }
         for (Terrain terrain : terrains) {
             if (terrain.box != null && !Graphic.panel.isAncestorOf(terrain.box)) {
-                Graphic.panel.add(terrain.box,Integer.valueOf(1));
+                if (terrain.isPassable()) {
+                    Graphic.panel.add(terrain.box, Integer.valueOf(1));
+                }
+                else {
+                    Graphic.panel.add(terrain.box,Integer.valueOf(2));
+                }
             }
         }
         for (Enemy enemy : enemies) {

@@ -18,6 +18,8 @@ public abstract class Entity {
     private int damage;
     private int speed;
     private int range;
+    private int heathRegen;
+    private int regenDuration;
     // angle là góc quay, hiện tại chưa có ứng dụng
     private double angle;
     private String name;
@@ -38,6 +40,8 @@ public abstract class Entity {
         this.damage = 0;
         this.speed = 0;
         this.range = 0;
+        this.heathRegen = 0;
+        this.regenDuration = 0;
         this.angle = 0;
         this.name = "";
     }
@@ -52,6 +56,8 @@ public abstract class Entity {
         this.damage = DefaultParameter.entityDamage;
         this.speed = DefaultParameter.entitySpeed;
         this.range = DefaultParameter.entityRange;
+        this.heathRegen = DefaultParameter.entityHeathRegen;
+        this.regenDuration = DefaultParameter.entityRegenDuration;
         this.angle = DefaultParameter.entityAngle;
         this.name = DefaultParameter.entityName;
     }
@@ -66,6 +72,8 @@ public abstract class Entity {
         this.damage = 0;
         this.speed = 0;
         this.range = 0;
+        this.heathRegen = 0;
+        this.regenDuration = 0;
         this.angle = 0;
         this.name = "Zero";
     }
@@ -138,6 +146,22 @@ public abstract class Entity {
 
     public void setRange(int range) {
         this.range = range;
+    }
+
+    public int getHeathRegen() {
+        return heathRegen;
+    }
+
+    public void setHeathRegen(int heathRegen) {
+        this.heathRegen = heathRegen;
+    }
+
+    public int getRegenDuration() {
+        return regenDuration;
+    }
+
+    public void setRegenDuration(int regenDuration) {
+        this.regenDuration = regenDuration;
     }
 
     public double getAngle() {

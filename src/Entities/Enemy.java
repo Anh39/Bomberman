@@ -94,6 +94,8 @@ public class Enemy extends Entity{
         setDamage(DefaultParameter.enemyDamage);
         setSpeed(DefaultParameter.enemySpeed);
         setRange(DefaultParameter.enemyRange);
+        setHeathRegen(DefaultParameter.enemyHeathRegen);
+        setRegenDuration(DefaultParameter.enemyRegenDuration);
         setAngle(DefaultParameter.enemyAngle);
     }
 }

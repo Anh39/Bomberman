@@ -4,9 +4,6 @@ import BackEnd.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 /**
  * Lớp trừu tượng xứ lý đồ họa nói chung
@@ -47,10 +44,8 @@ public abstract class Graphic {
         KeyBoard.keyInitialization();
         StatusBar.initialization();
         MyMenu.subMenuInitialization();
+        if (TestModule.testEnable) {
+            TestModule.panelTestInitialize();
+        }
     }
-    // Key Event
-    /**
-     * Khởi tạo trạng thái bàn phím
-     */
-
 }

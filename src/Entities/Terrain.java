@@ -11,6 +11,7 @@ public class Terrain extends Entity{
     // Khả năng đi qua của địa hình . VD: cỏ thì đi qua được còn cây thì không
     // Note : Mỗi ô hiển thị trên màn hình đều chứa địa hình
     private boolean passable;
+    private boolean overlapped;
     public Terrain() {
     }
 
@@ -22,6 +23,14 @@ public class Terrain extends Entity{
         return passable;
     }
 
+    public void setOverlapped(boolean overlapped) {
+        this.overlapped = overlapped;
+    }
+
+    public boolean isOverlapped() {
+        return overlapped;
+    }
+
     @Override
     public void setDefault() {
         bar.setMaximum(DefaultParameter.terrainMaxHeath);
@@ -30,6 +39,8 @@ public class Terrain extends Entity{
         setDamage(DefaultParameter.terrainDamage);
         setSpeed(DefaultParameter.terrainSpeed);
         setRange(DefaultParameter.terrainRange);
+        setHeathRegen(DefaultParameter.terrainHeathRegen);
+        setRegenDuration(DefaultParameter.terrainRegenDuration);
         setAngle(DefaultParameter.terrainAngle);
         setPassable(DefaultParameter.terrainPassable);
     }
