@@ -22,6 +22,7 @@ import Graphic.Graphic;
  *  + JLabel (hitbox của các đối tượng)
  *  + JTextField
  *  + JButton
+ *  + JProgressBar
  *  + ImageIcon
  */
 

@@ -32,7 +32,7 @@ public abstract class Entity {
         this.bar.setValue(50);
         this.bar.setStringPainted(true);
         this.bar.setForeground(Color.red);
-        this.bar.setBackground(Color.black);
+        this.bar.setBackground(Color.white);
         this.maxHeath = 0;
         this.heath = 0;
         this.damage = 0;

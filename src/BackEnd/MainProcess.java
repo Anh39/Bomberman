@@ -24,8 +24,8 @@ public abstract class MainProcess {
      */
     public static void projectileDecay() {
         for (int i=0;i<projectiles.size();i++) {
-            projectiles.get(i).reduceDecay();
-            if (projectiles.get(i).getDecay() == 0) {
+            projectiles.get(i).reduceDuration();
+            if (projectiles.get(i).getDuration() == 0) {
                 if (projectiles.get(i).getName().equals("Bomb")) {
                     denoteBomb(i);
                 }
@@ -67,40 +67,6 @@ public abstract class MainProcess {
                     Projectile bomFragment = New.bombFragment(temp);
                     bomFragment.box.setLocation(x,y+i*height);
                     projectiles.add(bomFragment);
-                }
-            }
-        }
-    }
-
-    /**
-     * Xử lý đầu vào từ bàn phím
-     * @param keyStates : trạng thái của bàn phím
-     */
-    public static void playerInput(ArrayList<KeyState> keyStates) {
-        for (int i=0;i<keyStates.size();i++) {
-            if (keyStates.get(i).getState()) {
-                int key = keyStates.get(i).getKeyCode();
-                if (key == 32) {
-                    placeBomb(player);
-                }
-                if (key == 69) {
-                    spawnEnemy();
-                }
-                if (key == 37 || key == 38 || key == 39 || key == 40) {
-                    MyClock.playerMove(keyStates);
-                }
-                if (key == 81) {
-                    newGame();
-                }
-                if (key == 27) {
-                    if (Graphic.menuBarState) {
-                        Graphic.closeMenuBar();
-                        Graphic.menuBarState = false;
-                    }
-                    else {
-                        Graphic.openMenuBar();
-                        Graphic.menuBarState = true;
-                    }
                 }
             }
         }

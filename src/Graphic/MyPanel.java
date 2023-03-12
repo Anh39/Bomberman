@@ -19,14 +19,10 @@ import java.awt.event.*;
  * panel.remove() : xóa phần tử khỏi bảng ( sau đó cần refresh)
  */
 public class MyPanel extends JLayeredPane {
-    private int startWidth = 0;
-    private int startHeight = 0;
     /**
      * Khởi tạo không tham số
      */
     public MyPanel() {
-        this.startWidth = DefaultParameter.panelStartWidth;
-        this.startHeight = DefaultParameter.panelStartHeight;
         this.setPreferredSize(new Dimension(DefaultParameter.panelWidth, DefaultParameter.panelHeight));
         this.setBackground(Color.black);
         this.setLayout(null);
@@ -37,26 +33,8 @@ public class MyPanel extends JLayeredPane {
      * @param height : chiều rộng
      */
     public MyPanel(int width, int height) {
-        this.startWidth = DefaultParameter.panelStartWidth;
-        this.startHeight = DefaultParameter.panelStartHeight;
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.black);
         this.setLayout(null);
-    }
-
-    public void setStartWidth(int startWidth) {
-        this.startWidth = startWidth;
-    }
-
-    public int getStartWidth() {
-        return startWidth;
-    }
-
-    public void setStartHeight(int startHeight) {
-        this.startHeight = startHeight;
-    }
-
-    public int getStartHeight() {
-        return startHeight;
     }
 }

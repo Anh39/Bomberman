@@ -13,22 +13,22 @@ public class Projectile extends Entity{
     private boolean damageToPlayer = false;
     private boolean damageToTerrain = false;
     // Thời gian tồn tại của Projectile
-    private int decay = 10; // = n*10, n = seconds
+    private int duration = 10; // = n*10, n = seconds
     public Projectile() {
 
     }
 
-    public void setDecay(int decay) {
-        this.decay = decay;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
-    public int getDecay() {
-        return decay;
+    public int getDuration() {
+        return duration;
     }
 
-    public void reduceDecay() {
-        if (decay > 0) {
-            decay --;
+    public void reduceDuration() {
+        if (duration > 0) {
+            duration--;
         }
     }
     public boolean isDamageToEnemy() {

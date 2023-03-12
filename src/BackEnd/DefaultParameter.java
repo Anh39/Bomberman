@@ -5,8 +5,8 @@ package BackEnd;
  */
 public abstract class DefaultParameter {
     // Frame
-    public static final int panelStartWidth = 0;
-    public static final int panelStartHeight = 50;
+    public static final int menuPanelWidth = 1400;
+    public static final int menuPanelHeight = 50;
     public static final int panelWidth = 1400;
     public static final int panelHeight = 750;
     // Label

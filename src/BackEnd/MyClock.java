@@ -4,6 +4,7 @@ import Entities.Enemy;
 import Graphic.Render;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public abstract class MyClock{
     public static boolean playerMoveAvailable = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static boolean isPlayerMove = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static int playerMovedCount = 0; // Biến dùng cho việc xử lý di chuyển của người chơi
-    private static ArrayList<KeyState> localKeyState; // Biến dùng cho việc xử lý di chuyển của người chơi
+    private static Dimension playerMoveDim = new Dimension();
 
     /**
      * Bắt đầu bộ tính giờ
@@ -36,16 +37,6 @@ public abstract class MyClock{
             @Override
             public void actionPerformed(ActionEvent e) {
                 runTime();
-                if (isPlayerMove) {
-                    if (playerMovedCount == DefaultParameter.playerMoveCount) {
-                        playerMovedCount = 0;
-                        isPlayerMove = false;
-                    }
-                    else if (playerMoveAvailable) {
-                        MainProcess.player.move(localKeyState, MainProcess.terrains);
-                        playerMovedCount++;
-                    }
-                }
             }
         };
         timer = new Timer(DefaultParameter.baseClockDelay, actionListener);
@@ -62,6 +53,17 @@ public abstract class MyClock{
         damageDelay++;
         enemyMoveDelay++;
         playerMoveDelay++;
+        if (isPlayerMove) {
+            //System.out.println(playerMovedCount);
+            if (playerMovedCount == DefaultParameter.playerMoveCount) {
+                playerMovedCount = 0;
+                isPlayerMove = false;
+            }
+            else if (playerMoveAvailable) {
+                MainProcess.player.move((int) playerMoveDim.getWidth(),(int) playerMoveDim.getHeight(),MainProcess.terrains);
+                playerMovedCount++;
+            }
+        }
         if (playerMoveDelay > DefaultParameter.playerMoveDelay) {
             playerMoveAvailable= true;
             playerMoveDelay = 0;
@@ -108,7 +110,7 @@ public abstract class MyClock{
      */
     public static void playerMove(ArrayList<KeyState> keyStates) {
             if (!isPlayerMove) {
-                localKeyState = keyStates;
+                playerMoveDim = MainProcess.player.getMove(keyStates);
                 isPlayerMove = true;
             }
     }

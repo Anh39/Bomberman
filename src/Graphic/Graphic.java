@@ -12,15 +12,13 @@ import java.util.ArrayList;
  * Lớp trừu tượng xứ lý đồ họa nói chung
  */
 public abstract class Graphic {
-    // Lưu trạng thái bàn phím
-    public static ArrayList<KeyState> keyStates = new ArrayList<>();
     // Khung hình , cửa số chính
     public static JFrame frame = new JFrame();
     // Bảng để đặt vào cửa sổ
     public static MyPanel panel = new MyPanel();
     // Bảng nền
     public static MyPanel basePanel = new MyPanel();
-    public static boolean menuBarState = false;
+    public static MyPanel menuPanel = new MyPanel();
     /**
      * Khởi tạo
      */
@@ -29,8 +27,11 @@ public abstract class Graphic {
         frame.setResizable(false);
         frame.add(basePanel);
         basePanel.setPreferredSize(new Dimension(DefaultParameter.panelWidth,DefaultParameter.panelHeight));
-        basePanel.add(panel);
+        basePanel.add(panel,Integer.valueOf(1));
         panel.setBounds(0,0,DefaultParameter.panelWidth,DefaultParameter.panelHeight);
+        basePanel.add(menuPanel,Integer.valueOf(2));
+        menuPanel.setBounds(0,0,DefaultParameter.menuPanelWidth,DefaultParameter.menuPanelHeight);
+        menuPanel.setVisible(false);
         frame.pack();
         frame.setVisible(true);
         MyMenu.mainMenuInitialization(); // Khởi tạo menu
@@ -43,71 +44,13 @@ public abstract class Graphic {
     public static void initialization() {
         MyClock.startClock();
         MainProcess.generateTerrain();
-        keyInitialization();
+        KeyBoard.keyInitialization();
         StatusBar.initialization();
         MyMenu.subMenuInitialization();
-    }
-    public static void openMenuBar() {
-        panel.setLocation(DefaultParameter.panelStartWidth,DefaultParameter.panelStartHeight);
-        MyMenu.addSubMenu();
-    }
-    public static void closeMenuBar() {
-        MyMenu.removeSubMenu();
-        panel.setLocation(0,0);
     }
     // Key Event
     /**
      * Khởi tạo trạng thái bàn phím
      */
-    private static void keyInitialization() {
-        KeyState leftKey = new KeyState(37);
-        KeyState upKey = new KeyState(38);
-        KeyState rightKey = new KeyState(39);
-        KeyState downKey = new KeyState(40);
-        KeyState spaceKey = new KeyState(32);
-        KeyState eKey = new KeyState(69);
-        KeyState qKey = new KeyState(81);
-        KeyState escKey = new KeyState(27);
-        keyStates.add(leftKey);
-        keyStates.add(rightKey);
-        keyStates.add(upKey);
-        keyStates.add(downKey);
-        keyStates.add(spaceKey);
-        keyStates.add(eKey);
-        keyStates.add(qKey);
-        keyStates.add(escKey);
-        KeyListener keyListener = new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
 
-            /**
-             * Phương thức mặc định của bàn phím
-             * @param e the event to be processed
-             */
-            @Override
-            public void keyPressed(KeyEvent e) {
-                System.out.println(e.getKeyCode());
-                for (int i = 0; i < keyStates.size(); i++) {
-                    if (keyStates.get(i).getKeyCode() == e.getKeyCode()) {
-                        keyStates.get(i).setState(true);
-                    }
-                }
-                MainProcess.playerInput(keyStates);
-            }
-            /**
-             * Phương thức mặc định của bàn phím
-             * @param e the event to be processed
-             */
-            @Override
-            public void keyReleased(KeyEvent e) {
-                for (int i = 0; i < keyStates.size(); i++) {
-                    if (keyStates.get(i).getKeyCode() == e.getKeyCode()) {
-                        keyStates.get(i).setState(false);
-                    }
-                }
-            }
-        };
-        frame.addKeyListener(keyListener);
-    }
 }

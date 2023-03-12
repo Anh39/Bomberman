@@ -5,6 +5,7 @@ import BackEnd.KeyState;
 import BackEnd.Physics;
 import Graphic.Graphic;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -12,27 +13,22 @@ import java.util.ArrayList;
  * Đối tượng người chơi
  */
 public class Player extends Entity{
+    private int moveCount = 0;
     /**
      * Khởi tạo mặc định
      */
     public Player() {
         this.box.setLocation(0,0);
     }
-    /**
-     * Phương thức để di chuyển nhân vật
-     * @param keyStates: Trạng thái bàn phím
-     * @param terrains: Địa hình
-     */
-    public void move(ArrayList<KeyState> keyStates, ArrayList<Terrain> terrains) {
-        int x = this.box.getX();
-        int y = this.box.getY();
+    public Dimension getMove(ArrayList<KeyState> keyStates) {
         int moveX = 0;
         int moveY = 0;
+        Dimension dim = new Dimension();
         for (int i=0;i<keyStates.size();i++) {
             if (keyStates.get(i).getState()) {
                 switch (keyStates.get(i).getKeyCode()) {
                     case 37:
-                        moveX -= this.getSpeed();
+                         moveX -= this.getSpeed();
                         break;
                     case 38:
                         moveY -= this.getSpeed();
@@ -48,12 +44,28 @@ public class Player extends Entity{
                 }
             }
         }
+        dim.setSize(moveX,moveY);
+        return dim;
+    }
+    /**
+     * Phương thức để di chuyển nhân vật
+     * @param terrains: Địa hình
+     */
+    public void move(int moveX,int moveY, ArrayList<Terrain> terrains) {
+        int x = this.box.getX();
+        int y = this.box.getY();
         boolean con1 = x+moveX>=0;
         boolean con2 = y+moveY>=0;
         boolean con3 = x+moveX<=Graphic.panel.getWidth() -this.box.getWidth();
         boolean con4 = y+moveY<=Graphic.panel.getHeight()-this.box.getHeight();
         boolean con = con1 && con2 && con3 && con4;
         if ((!Physics.checkIntersectTerrain(terrains,this,moveX,moveY)) && con) {
+            if (moveCount == 5) {
+                moveCount = 1;
+            }
+            else {
+                moveCount++;
+            }
             this.setLocation(x + moveX, y + moveY);
         }
     }

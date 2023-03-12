@@ -89,15 +89,14 @@ public abstract class MyMenu {
                 }
             }
         };
+        Graphic.menuPanel.add(miniNewGameButton);
         miniNewGameButton.addActionListener(actionListener);
         miniNewGameButton.setBounds(0,0,100,50);
     }
     public static void addSubMenu() {
-        Graphic.basePanel.add(miniNewGameButton);
-        Graphic.basePanel.repaint();
+        Graphic.menuPanel.repaint();
     }
     public static void removeSubMenu() {
-        Graphic.basePanel.remove(miniNewGameButton);
-        Graphic.basePanel.repaint();
+        Graphic.menuPanel.repaint();
     }
 }

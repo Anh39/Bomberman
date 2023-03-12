@@ -65,7 +65,7 @@ public abstract class New {
         Projectile bomb = new Projectile();
         bomb.setDefault();
         bomb.setDamage(entity.getDamage());
-        bomb.setDecay(DefaultParameter.bombDecay);
+        bomb.setDuration(DefaultParameter.bombDecay);
         bomb.box.setIcon(bombImg);
         bomb.setName("Bomb");
         bomb.setRange(entity.getRange());
@@ -84,7 +84,7 @@ public abstract class New {
     public static Projectile bombFragment(Projectile source) {
         Projectile bombFragment = new Projectile();
         bombFragment.setDefault();
-        bombFragment.setDecay(DefaultParameter.bombFragmentDecay);
+        bombFragment.setDuration(DefaultParameter.bombFragmentDecay);
         bombFragment.setDamage(source.getDamage());
         bombFragment.box.setIcon(bombFragmentImg);
         bombFragment.setName("Bomb Fragment");
