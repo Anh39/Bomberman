@@ -206,4 +206,23 @@ public abstract class New {
         return <buffName>;
     }
      */
+        public static Buff Health() {
+        Buff moreHealth = new Buff();
+        moreHealth.setHeath(moreHealth.getHeath() + 50);
+        moreHealth.setName("More Health");
+        return moreHealth;
+    }
+
+    public static Buff StrongerBomb() {
+        Buff strongerBomb =  new Buff();
+        strongerBomb.setZero();
+        strongerBomb.setRange(strongerBomb.getRange() + 1);
+        return strongerBomb;
+    }
+    public static Buff MoreSpeed() {
+        Buff faster =  new Buff();
+        faster.setZero();
+        faster.setSpeed(faster.getSpeed() + 10);
+        return faster;
+    }
 }
