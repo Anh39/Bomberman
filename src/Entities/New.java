@@ -18,10 +18,8 @@ public abstract class New {
     //public static ImageIcon playerImg1 = new ImageIcon(New.class.getResource("/Images/Player1.png"));
     public static ImageIcon grassImg = new ImageIcon(New.class.getResource("/Images/Grass Terrain.png"));
     public static ImageIcon treeImg = new ImageIcon(New.class.getResource("/Images/Tree Terrain.png"));
-    public static ImageIcon bombImg = new ImageIcon(New.class.getResource("/Images/Bomb.png"));
-    public static ImageIcon bombFragmentImg = new ImageIcon(New.class.getResource("/Images/bombFragment.png"));
-    public static ImageIcon slimeImg = new ImageIcon(New.class.getResource("/Images/Slime1.png"));
     public static ImageIcon menuBackGround = new ImageIcon(New.class.getResource("/Images/Menu Background.jpg"));
+    public static ImageIcon heathRegenBuff = new ImageIcon(New.class.getResource("/Images/Regen Heath Buff.png"));
     public static ImageIcon testImg = new ImageIcon(New.class.getResource("/Images/Test.png"));
     //Player
     public static Player player() {
@@ -36,9 +34,8 @@ public abstract class New {
         Enemy enemy = new Enemy();
         enemy.setDefault();
         enemy.setCooldown(0);
-        enemy.box.setIcon(slimeImg);
         enemy.setRange(DefaultParameter.entityRange);
-        enemy.setSpeed(50);
+        enemy.setSpeed(10);
         return enemy;
     }
     //Terrain
@@ -64,7 +61,6 @@ public abstract class New {
         bomb.setDefault();
         bomb.setDamage(entity.getDamage());
         bomb.setDuration(DefaultParameter.bombDecay);
-        bomb.box.setIcon(bombImg);
         bomb.setName("Bomb");
         bomb.setRange(entity.getRange());
         if (entity instanceof Player) {
@@ -84,7 +80,6 @@ public abstract class New {
         bombFragment.setDefault();
         bombFragment.setDuration(DefaultParameter.bombFragmentDecay);
         bombFragment.setDamage(source.getDamage());
-        bombFragment.box.setIcon(bombFragmentImg);
         bombFragment.setName("Bomb Fragment");
         bombFragment.setDamageToTerrain(source.isDamageToTerrain());
         bombFragment.setDamageToPlayer(source.isDamageToPlayer());
@@ -184,8 +179,8 @@ public abstract class New {
         tutorial.setFont(StatusBar.font);
         return tutorial;
     }
-    public static JTextField statusField() {
-        JTextField status = new JTextField();
+    public static JTextArea statusField() {
+        JTextArea status = new JTextArea();
         status.setOpaque(false);
         status.setFocusable(false);
         status.setBounds(0,0,250,50);
@@ -210,6 +205,7 @@ public abstract class New {
         Buff moreHealth = new Buff();
         moreHealth.setHeath(moreHealth.getHeath() + 50);
         moreHealth.setName("More Health");
+        moreHealth.box.setIcon(heathRegenBuff);
         return moreHealth;
     }
 

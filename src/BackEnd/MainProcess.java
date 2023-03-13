@@ -14,6 +14,8 @@ public abstract class MainProcess {
     public static ArrayList<Terrain> terrains = new ArrayList<Terrain>();
     public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     public static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+    public static ArrayList<Buff> buffs = new ArrayList<>();
+
     public static Player player = New.player();
     // dùng để tạo cooldown cho việc đặt bom của người chơi
     public static boolean playerBombPlaced = false;
@@ -126,6 +128,17 @@ public abstract class MainProcess {
         }
         enemies.add(enemy);
     }
+    public static void spawnBuff() {
+        Random rand = new Random();
+        int buffNumber = rand.nextInt(1,DefaultParameter.maxNumberOfBuffs+1);
+        // Làm giống vậy , dùng else if (buffNumber == 2 , 3 ,4 , ...)
+        if (buffNumber == 1) {
+            Buff buff = New.Health();
+            buffs.add(buff);
+        }
+        //
+        buffs.get(buffs.size()-1).setLocation(getAvailableCoordinates());
+    }
     //Terrain
 
     /**
@@ -145,9 +158,9 @@ public abstract class MainProcess {
         for (int i=0;i<treeNumber;i++) {
             ArrayList<Integer> indexArr = new ArrayList<Integer>();
             for (int j=0;j<terrains.size();j++) {
-                if (terrains.get(i).isPassable()) {
-                    if (!terrains.get(i).isOverlapped()) {
-                        indexArr.add(i);
+                if (terrains.get(j).isPassable()) {
+                    if (!terrains.get(j).isOverlapped()) {
+                        indexArr.add(j);
                     }
                 }
             }
@@ -182,6 +195,20 @@ public abstract class MainProcess {
         dim.width = getRandom(0,Graphic.panel.getWidth(),DefaultParameter.labelWidth);
         return dim;
     }
+    public static Dimension getAvailableCoordinates() {
+        ArrayList<Integer> indexArr = new ArrayList<Integer>();
+        for (int i=0;i<terrains.size();i++) {
+            if (terrains.get(i).isPassable()) {
+                if (!terrains.get(i).isOverlapped()) {
+                    indexArr.add(i);
+                }
+            }
+        }
+        Random rand = new Random();
+        int index = rand.nextInt(0,indexArr.size());
+        Dimension dim = new Dimension(terrains.get(index).box.getX(),terrains.get(index).box.getY());
+        return dim;
+    }
     //Other
 
     /**
@@ -205,6 +232,17 @@ public abstract class MainProcess {
                 player.addScore();
             }
         }
+        for (int i=0;i<buffs.size();i++) {
+            if (buffs.get(i).isReceived()) {
+                if (buffs.get(i).getBuffDuration() == 0) {
+                    buffs.get(i).removeBuff();
+                    buffs.remove(i);
+                }
+                else if (buffs.get(i).getBuffDuration() < 0) {
+                    buffs.remove(i);
+                }
+            }
+        }
     }
     public static void processStatusBar() {
         for (Terrain terrain : terrains) {
@@ -220,6 +258,7 @@ public abstract class MainProcess {
         terrains.clear();
         enemies.clear();
         projectiles.clear();
+        buffs.clear();
         player = New.player();
         generateTerrain();
     }
@@ -235,6 +274,10 @@ public abstract class MainProcess {
         for (Projectile projectile : projectiles) {
             Graphic.panel.remove(projectile.box);
             Graphic.panel.remove(projectile.bar);
+        }
+        for (Buff buff : buffs) {
+            Graphic.panel.remove(buff.box);
+            Graphic.panel.remove(buff.bar);
         }
         Graphic.panel.remove(player.box);
         Graphic.panel.remove(player.bar);

@@ -13,20 +13,27 @@ import java.awt.*;
 public abstract class StatusBar {
     private static MyPanel statusPanel = Graphic.statusPanel;
     public static Font font = new Font("Arial", Font.PLAIN,20);
-    private static JTextField heathStatus = New.statusField();
-    private static JTextField playerScoreStatus = New.statusField();
+    private static JTextArea basicStatus = New.statusField();
+    private static JTextArea playerScoreStatus = New.statusField();
     public static void initialization() {
         statusPanel.setBounds(0,0,250,500);
         statusPanel.setLocation(0,50);
 
-        statusPanel.add(heathStatus,Integer.valueOf(5));
+        basicStatus.setBounds(0,0,basicStatus.getWidth(),basicStatus.getHeight()*4);
+
+        statusPanel.add(basicStatus,Integer.valueOf(5));
         statusPanel.add(playerScoreStatus,Integer.valueOf(5));
 
-        heathStatus.setLocation(0,0);
-        playerScoreStatus.setLocation(heathStatus.getX(),heathStatus.getY()+heathStatus.getHeight());
+        basicStatus.setLocation(0,0);
+        playerScoreStatus.setLocation(basicStatus.getX(), basicStatus.getY()+ basicStatus.getHeight());
     }
     public static void updateStatusPanel() {
-        heathStatus.setText("Heath : " + MainProcess.player.getHeath());
+        String temp = "";
+        temp += "Heath : " + MainProcess.player.getHeath();
+        temp += "\nDamage : " + MainProcess.player.getDamage();
+        temp += "\nSpeed : " + MainProcess.player.getSpeed();
+        temp += "\nRange : " + MainProcess.player.getRange();
+        basicStatus.setText(temp);
         playerScoreStatus.setText("Score : " + MainProcess.player.getScore());
     }
 }

@@ -39,8 +39,6 @@ public class Terrain extends Entity{
         setDamage(DefaultParameter.terrainDamage);
         setSpeed(DefaultParameter.terrainSpeed);
         setRange(DefaultParameter.terrainRange);
-        setHeathRegen(DefaultParameter.terrainHeathRegen);
-        setRegenDuration(DefaultParameter.terrainRegenDuration);
         setAngle(DefaultParameter.terrainAngle);
         setPassable(DefaultParameter.terrainPassable);
     }

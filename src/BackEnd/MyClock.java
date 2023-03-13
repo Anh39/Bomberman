@@ -24,7 +24,6 @@ public abstract class MyClock{
     public static boolean isPlayerMove = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static int playerMovedCount = 0; // Biến dùng cho việc xử lý di chuyển của người chơi
     private static Dimension playerMoveDim = new Dimension();
-    public static int renderStateDelay = 0;
     public static int renderState = 1;
 
     /**
@@ -57,7 +56,6 @@ public abstract class MyClock{
         enemyMoveDelay++;
         playerMoveDelay++;
         renderDelay++;
-        renderStateDelay++;
         if (isPlayerMove) {
             //System.out.println(playerMovedCount);
             if (playerMovedCount == DefaultParameter.playerMoveCount) {
@@ -76,9 +74,14 @@ public abstract class MyClock{
         if (renderDelay > DefaultParameter.renderDelay) {
             renderDelay = 0;
             StatusBar.updateStatusPanel();
+            Physics.processBuffContact(MainProcess.buffs,MainProcess.player);
             MainProcess.processDeath();
             MainProcess.processStatusBar();
-            Render.render(MainProcess.terrains,MainProcess.enemies,MainProcess.projectiles,MainProcess.player);
+            Render.render(MainProcess.terrains,MainProcess.enemies,MainProcess.projectiles,MainProcess.buffs,MainProcess.player);
+            renderState++;
+            if (renderState > DefaultParameter.maxRenderStates) {
+                renderState = 1;
+            }
         }
         if (bombDelay > DefaultParameter.bombDelay) {
             bombDelay = 0;
@@ -93,13 +96,6 @@ public abstract class MyClock{
             enemyMoveDelay = 0;
             for (Enemy enemy : MainProcess.enemies) {
                 enemy.move();
-            }
-        }
-        if (renderStateDelay > DefaultParameter.renderStateDelay) {
-            renderStateDelay = 0;
-            renderState++;
-            if (renderState > DefaultParameter.maxRenderStates) {
-                renderState = 1;
             }
         }
         //Internal Cool down

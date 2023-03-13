@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public abstract class Render {
     // Hình ảnh cho việc render. Hiện chưa code
     static ArrayList<ImageIcon> playerImg = new ArrayList<ImageIcon>();
-    static ArrayList<ImageIcon> terrainImg = new ArrayList<ImageIcon>();
+    static ArrayList<ImageIcon> projectileImg = new ArrayList<ImageIcon>();
     static ArrayList<ImageIcon> enemyImg = new ArrayList<ImageIcon>();
     private static final double PI = Math.PI;
     public static boolean rendering = false;
@@ -25,7 +25,7 @@ public abstract class Render {
      * @param projectiles : bom/đạn
      * @param player : người chơi
      */
-    public static void render(ArrayList<Terrain> terrains, ArrayList<Enemy> enemies, ArrayList<Projectile> projectiles, Player player) {
+    public static void render(ArrayList<Terrain> terrains, ArrayList<Enemy> enemies, ArrayList<Projectile> projectiles,ArrayList<Buff> buffs, Player player) {
         // Dùng để kiểm soát render hay không
         if (!rendering) {
             return;
@@ -45,13 +45,22 @@ public abstract class Render {
                 }
             }
         }
+        for (Buff buff : buffs) {
+            if (buff.box != null && !Graphic.panel.isAncestorOf(buff.box)) {
+                if (!buff.isReceived()) {
+                    Graphic.panel.add(buff.box, Integer.valueOf(3));
+                }
+            }
+        }
         for (Enemy enemy : enemies) {
+            enemyAnimation(enemy);
             if (enemy.box != null && !Graphic.panel.isAncestorOf(enemy.box)) {
                 Graphic.panel.add(enemy.box,Integer.valueOf(5));
                 Graphic.panel.add(enemy.bar, Integer.valueOf(10));
             }
         }
         for (Projectile projectile : projectiles) {
+            projectileAnimation(projectile);
             if (projectile.box != null && !Graphic.panel.isAncestorOf(projectile.box)) {
                 Graphic.panel.add(projectile.box,Integer.valueOf(5));
             }
@@ -59,6 +68,7 @@ public abstract class Render {
         if (!Graphic.panel.isAncestorOf(player.box)) {
             Graphic.panel.add(player.box, Integer.valueOf(7));
             Graphic.panel.add(player.bar, Integer.valueOf(10));
+
         }
         playerAnimation(player);
         Graphic.panel.repaint();
@@ -67,36 +77,66 @@ public abstract class Render {
         //System.out.println(player.getAngle());
         //System.out.println(MyClock.renderState);
         double view = PI/4;
+        int index = 0;
         if (player.getAngle() >= 0 - view && player.getAngle() <= PI/2 - view) {
-            if (MyClock.renderState == 1) {
-                player.box.setIcon(playerImg.get(1-1));
-            }
+            index += MyClock.renderState%6;
         }
         else if (player.getAngle() >= PI/2 - view && player.getAngle() <= PI - view) {
-            if (MyClock.renderState == 1) {
-                player.box.setIcon(playerImg.get(2-1));
-            }
+            index += MyClock.renderState%6 + 6;
         }
         else if (player.getAngle() >= PI - view && player.getAngle() <= PI*3/2 - view) {
-            if (MyClock.renderState == 1) {
-                player.box.setIcon(playerImg.get(3-1));
-            }
+            index += MyClock.renderState%6 + 6*2;
         }
         else {
-            if (MyClock.renderState == 1) {
-                player.box.setIcon(playerImg.get(4-1));
-            }
+            index += MyClock.renderState%6 + 6*3;
         }
+        player.box.setIcon(playerImg.get(index));
         Graphic.panel.repaint();
     }
-    public static void playerImageInitialize() {
-        ImageIcon playerImg1 = new ImageIcon(Render.class.getResource("/Images/Player1.png"));
-        ImageIcon playerImg2 = new ImageIcon(Render.class.getResource("/Images/Player2.png"));
-        ImageIcon playerImg3 = new ImageIcon(Render.class.getResource("/Images/Player3.png"));
-        ImageIcon playerImg4 = new ImageIcon(Render.class.getResource("/Images/Player4.png"));
-        playerImg.add(playerImg1);
-        playerImg.add(playerImg2);
-        playerImg.add(playerImg3);
-        playerImg.add(playerImg4);
+    private static void enemyAnimation(Enemy enemy) {
+        enemy.addRenderState();
+        int index = enemy.getRenderState() % 4;
+        enemy.box.setIcon(enemyImg.get(index));
+        Graphic.panel.repaint();
+    }
+    private static void projectileAnimation(Projectile projectile) {
+        projectile.addRenderState();
+        int index = projectile.getRenderState() % 2;
+        if (projectile.getName().equals("Bomb")) {
+            index += 0;
+        }
+        else if (projectile.getName().equals("Bomb Fragment")) {
+            index += 2;
+        }
+        projectile.box.setIcon(projectileImg.get(index));
+        Graphic.panel.repaint();
+    }
+    public static void initialize() {
+        playerImageInitialize();
+        enemyImageInitialize();
+        projectileImageInitialize();
+    }
+    private static void playerImageInitialize() {
+        String temp = "/Images/Player/player";
+        for (int i=1;i<=4;i++) {
+            for (int j=1;j<=6;j++) {
+                playerImg.add(new ImageIcon(Render.class.getResource(temp + i + j + ".png")));
+            }
+        }
+    }
+    private static void enemyImageInitialize() {
+        String temp = "/Images/Enemy/Slime/slime";
+        for (int i=1;i<=4;i++) {
+            enemyImg.add(new ImageIcon(Render.class.getResource(temp + i + ".png")));
+        }
+    }
+    private static void projectileImageInitialize() {
+        String temp = "/Images/Projectile/";
+        for (int i=1;i<=2;i++) {
+            projectileImg.add(new ImageIcon(Render.class.getResource(temp + "Bomb" + i + ".png")));
+        }
+        for (int i=1;i<=2;i++) {
+            projectileImg.add(new ImageIcon(Render.class.getResource(temp + "BombFragment" + i + ".png")));
+        }
     }
 }

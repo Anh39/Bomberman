@@ -1,5 +1,6 @@
 package BackEnd;
 import Entities.*;
+import Graphic.Graphic;
 
 import javax.swing.*;
 import java.awt.geom.Area;
@@ -62,7 +63,18 @@ public abstract class Physics {
         }
         return false;
     }
-
+    public static void processBuffContact(ArrayList<Buff> buffs, Player player) {
+        for (Buff buff : buffs) {
+            if (!buff.isReceived()) {
+                if (checkIntersect(player.box, buff.box)) {
+                    buff.setReceived(true);
+                    buff.activeBuff(player);
+                    Graphic.panel.remove(buff.box);
+                    Graphic.panel.repaint();
+                }
+            }
+        }
+    }
     /**
      * Xử lý sát thương gây ra bời bom/đạn (Projectile)
      * @param terrains : địa hình

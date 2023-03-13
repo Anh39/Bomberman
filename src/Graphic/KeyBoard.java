@@ -19,6 +19,7 @@ public abstract class KeyBoard {
         KeyState spaceKey = new KeyState(32);
         KeyState eKey = new KeyState(69);
         KeyState qKey = new KeyState(81);
+        KeyState fKey = new KeyState(70);
         KeyState escKey = new KeyState(27);
         keyStates.add(leftKey);
         keyStates.add(rightKey);
@@ -27,6 +28,7 @@ public abstract class KeyBoard {
         keyStates.add(spaceKey);
         keyStates.add(eKey);
         keyStates.add(qKey);
+        keyStates.add(fKey);
         keyStates.add(escKey);
         KeyListener keyListener = new KeyListener() {
             @Override
@@ -80,7 +82,15 @@ public abstract class KeyBoard {
                     MyClock.playerMove(keyStates);
                 }
                 if (key == 81) {
-                    //newGame();
+                    MainProcess.spawnBuff();
+                }
+                if (key == 70) {
+                    if (Graphic.statusPanel.isVisible()) {
+                        Graphic.statusPanel.setVisible(false);
+                    }
+                    else {
+                        Graphic.statusPanel.setVisible(true);
+                    }
                 }
                 if (key == 27) {
                     if (Graphic.menuPanel.isVisible()) {

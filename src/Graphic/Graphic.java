@@ -50,7 +50,7 @@ public abstract class Graphic {
     public static void initialization() {
         menuBackground.setVisible(false);
         StatusBar.initialization();
-        Render.playerImageInitialize();
+        Render.initialize();
         MyClock.startClock();
         MainProcess.generateTerrain();
         KeyBoard.keyInitialization();

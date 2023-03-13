@@ -8,6 +8,7 @@ import BackEnd.DefaultParameter;
  */
 
 public class Projectile extends Entity{
+    private int renderState = 0;
     // Khả năng gây damage đến các đối tượng
     private boolean damageToEnemy = false;
     private boolean damageToPlayer = false;
@@ -16,6 +17,20 @@ public class Projectile extends Entity{
     private int duration = 10; // = n*10, n = seconds
     public Projectile() {
 
+    }
+    public int getRenderState() {
+        return renderState;
+    }
+
+    public void setRenderState(int renderState) {
+        this.renderState = renderState;
+    }
+
+    public void addRenderState() {
+        renderState++;
+        if (renderState > DefaultParameter.maxRenderStates) {
+            renderState = 1;
+        }
     }
 
     public void setDuration(int duration) {
@@ -63,8 +78,6 @@ public class Projectile extends Entity{
         setDamage(DefaultParameter.projectileDamage);
         setSpeed(DefaultParameter.projectileSpeed);
         setRange(DefaultParameter.projectileRange);
-        setHeathRegen(DefaultParameter.projectileHeathRegen);
-        setRegenDuration(DefaultParameter.projectileRegenDuration);
         setAngle(DefaultParameter.projectileAngle);
     }
 }

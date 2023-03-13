@@ -50,7 +50,7 @@ public abstract class MyMenu {
                 }
             }
         };
-        tutorial.setText("Press arrow key to move.\nPress Space to place Bomb.\nPress E to spawn enemies.\nPress Esc to open menu in game");
+        tutorial.setText("Press arrow key to move.\nPress Space to place Bomb.\nPress E to spawn enemies.\nPress Esc to open menu in game.\nPress Q to spawn buff.\nPress F to hide status panel.");
         newGame.addActionListener(actionListener);
         loadGame.addActionListener(actionListener);
         configGame.addActionListener(actionListener);

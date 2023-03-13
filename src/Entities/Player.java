@@ -93,8 +93,6 @@ public class Player extends Entity{
         setDamage(DefaultParameter.playerDamage);
         setSpeed(DefaultParameter.playerSpeed);
         setRange(DefaultParameter.playerRange);
-        setHeathRegen(DefaultParameter.playerHeathRegen);
-        setRegenDuration(DefaultParameter.playerRegenDuration);
         setAngle(DefaultParameter.playerAngle);
         setScore(DefaultParameter.playerScore);
     }

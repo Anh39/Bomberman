@@ -2,9 +2,10 @@ import Graphic.Graphic;
 
 /**
  * Thứ tụ xem để dễ hiểu
+ *      - DefaultParameter (Chỉnh các tham số mặc định trong đây)
  *      - Entities: Entity ->  Player,Enemy,Projectile,Buff -> New
  *      - BackEnd: KeyState -> MyClock -> Physics -> MainProcess
- *      - Graphics: StatusBar,MyPanel,MyMenu -> Render -> Graphic
+ *      - Graphics: StatusBar,MyPanel,MyMenu,KeyBoard -> Render -> Graphic
  */
 
 /**
@@ -32,3 +33,7 @@ public class Main {
         Graphic.startGraphic();
     }
 }
+/**
+ * Note : Đã có thể test phần buff, chỉnh maxNumberOfBuffs trong DefaultParameter,
+ * sau đó thêm trường hợp trong Main , hàm spawnBuff();
+ */

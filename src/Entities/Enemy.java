@@ -13,9 +13,25 @@ import java.util.Random;
  */
 
 public class Enemy extends Entity{
+    private int renderState = 0;
     //cooldown ở đây là khoảng thời gian giữa 2 lần đặt bom
     private int cooldown;
     public Enemy() {
+    }
+
+    public int getRenderState() {
+        return renderState;
+    }
+
+    public void setRenderState(int renderState) {
+        this.renderState = renderState;
+    }
+
+    public void addRenderState() {
+        renderState++;
+        if (renderState > DefaultParameter.maxRenderStates) {
+            renderState = 1;
+        }
     }
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
@@ -94,8 +110,6 @@ public class Enemy extends Entity{
         setDamage(DefaultParameter.enemyDamage);
         setSpeed(DefaultParameter.enemySpeed);
         setRange(DefaultParameter.enemyRange);
-        setHeathRegen(DefaultParameter.enemyHeathRegen);
-        setRegenDuration(DefaultParameter.enemyRegenDuration);
         setAngle(DefaultParameter.enemyAngle);
     }
 }

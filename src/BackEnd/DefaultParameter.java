@@ -6,13 +6,16 @@ import java.awt.*;
  * Lớp trừu tượng chứa các thông số mặc định
  */
 public abstract class DefaultParameter {
+    //Other
+    public static int treeRatio = 5;
+    public static final int maxNumberOfBuffs = 1;  // Số loại buff
     // Color
     public static final Color menuColor = new Color(170,210,239);
     // Frame
     public static final int menuPanelWidth = 1400;
     public static final int menuPanelHeight = 50;
-    public static final int panelWidth = 1400;
-    public static final int panelHeight = 750;
+    public static final int panelWidth = 1400;   // Chiều rộng của màn chơi
+    public static final int panelHeight = 750;   // Chiều cao của màn chơi
     // Label
     public static final int labelWidth = 50;
     public static final int labelHeight = 50;
@@ -23,8 +26,7 @@ public abstract class DefaultParameter {
     public static final int playerMoveDelay = 1;
     public static final int bombDelay = 10;
     public static final int damageDelay = 10;
-    public static final int renderStateDelay = 10;
-    public static final int maxRenderStates = 1;
+    public static final int maxRenderStates = 12;
     // Parameter
     // Entity
     public static int entityMaxHeath = 100;
@@ -87,6 +89,4 @@ public abstract class DefaultParameter {
     public static boolean terrainPassable = false;
     public static boolean treePassable = false;
     public static boolean grassPassable = true;
-    //Other
-    public static int treeRatio = 5;
 }
