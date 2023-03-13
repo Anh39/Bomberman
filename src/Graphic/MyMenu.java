@@ -1,5 +1,6 @@
 package Graphic;
 
+import BackEnd.DefaultParameter;
 import BackEnd.MainProcess;
 import Entities.New;
 
@@ -17,6 +18,10 @@ public abstract class MyMenu {
     public static JButton exitGame = New.exitGameButton();
     public static JTextArea tutorial = New.tutorial();
     public static JButton miniNewGameButton = New.miniNewGameButton();
+    public static JButton miniSaveGameButton = New.miniSaveGameButton();
+    public static JButton miniLoadGameButton = New.miniLoadGameButton();
+    public static JButton miniConfigGameButton = New.miniConfigGameButton();
+    public static JButton miniExitGameButton = New.miniExitGameButton();
     // Khoảng cách giữa các nút trong menu
     public static int yDistance = 50;
 
@@ -41,6 +46,7 @@ public abstract class MyMenu {
                 }
                 else if (e.getSource() == exitGame) {
                     System.out.println("Exit game button clicked");
+                    System.exit(0);
                 }
             }
         };
@@ -49,10 +55,16 @@ public abstract class MyMenu {
         loadGame.addActionListener(actionListener);
         configGame.addActionListener(actionListener);
         exitGame.addActionListener(actionListener);
-        newGame.setBounds(100,100,200,75);
-        loadGame.setBounds(newGame.getX(),newGame.getY()+newGame.getHeight()+yDistance,newGame.getWidth(),newGame.getHeight());
-        configGame.setBounds(loadGame.getX(),loadGame.getY()+loadGame.getHeight()+yDistance,loadGame.getWidth(),loadGame.getHeight());
-        exitGame.setBounds(configGame.getX(),configGame.getY()+configGame.getHeight()+yDistance,configGame.getWidth(),configGame.getHeight());
+        newGame.setBounds(0,0,200,75);
+        loadGame.setBounds(0,0,200,75);
+        configGame.setBounds(0,0,200,75);
+        exitGame.setBounds(0,0,200,75);
+        newGame.setLocation(DefaultParameter.panelWidth-newGame.getWidth()-100,100);
+        loadGame.setLocation(newGame.getX(),newGame.getY()+yDistance+newGame.getHeight());
+        configGame.setLocation(loadGame.getX(),loadGame.getY()+yDistance+loadGame.getHeight());
+        exitGame.setLocation(configGame.getX(),configGame.getY()+yDistance+configGame.getHeight());
+        tutorial.setLocation(configGame.getX()-tutorial.getWidth()-100,configGame.getY());
+
     }
     /**
      * Thêm menu vào màn hình
@@ -87,11 +99,33 @@ public abstract class MyMenu {
                 if (e.getSource() == miniNewGameButton) {
                     MainProcess.newGame();
                 }
+                else if (e.getSource() == miniSaveGameButton) {
+                }
+                else if (e.getSource() == miniLoadGameButton) {
+                }
+                else if (e.getSource() == miniConfigGameButton) {
+                }
+                else if (e.getSource() == miniExitGameButton) {
+                    System.exit(0);
+                }
             }
         };
         Graphic.menuPanel.add(miniNewGameButton);
+        Graphic.menuPanel.add(miniSaveGameButton);
+        Graphic.menuPanel.add(miniLoadGameButton);
+        Graphic.menuPanel.add(miniConfigGameButton);
+        Graphic.menuPanel.add(miniExitGameButton);
         miniNewGameButton.addActionListener(actionListener);
-        miniNewGameButton.setBounds(0,0,100,50);
+        miniSaveGameButton.addActionListener(actionListener);
+        miniLoadGameButton.addActionListener(actionListener);
+        miniConfigGameButton.addActionListener(actionListener);
+        miniExitGameButton.addActionListener(actionListener);
+        miniNewGameButton.setLocation(0,0);
+        miniSaveGameButton.setLocation(miniNewGameButton.getX()+miniNewGameButton.getWidth(),miniNewGameButton.getY());
+        miniLoadGameButton.setLocation(miniSaveGameButton.getX()+miniSaveGameButton.getWidth(),miniSaveGameButton.getY());
+        miniConfigGameButton.setLocation(miniLoadGameButton.getX()+miniLoadGameButton.getWidth(),miniLoadGameButton.getY());
+        miniExitGameButton.setLocation(miniConfigGameButton.getX()+miniConfigGameButton.getWidth(),miniConfigGameButton.getY());
+
     }
     public static void addSubMenu() {
         Graphic.menuPanel.repaint();

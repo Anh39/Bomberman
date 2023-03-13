@@ -2,6 +2,7 @@ package BackEnd;
 
 import Entities.Enemy;
 import Graphic.Render;
+import Graphic.StatusBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +24,8 @@ public abstract class MyClock{
     public static boolean isPlayerMove = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static int playerMovedCount = 0; // Biến dùng cho việc xử lý di chuyển của người chơi
     private static Dimension playerMoveDim = new Dimension();
+    public static int renderStateDelay = 0;
+    public static int renderState = 1;
 
     /**
      * Bắt đầu bộ tính giờ
@@ -53,6 +56,8 @@ public abstract class MyClock{
         damageDelay++;
         enemyMoveDelay++;
         playerMoveDelay++;
+        renderDelay++;
+        renderStateDelay++;
         if (isPlayerMove) {
             //System.out.println(playerMovedCount);
             if (playerMovedCount == DefaultParameter.playerMoveCount) {
@@ -70,6 +75,7 @@ public abstract class MyClock{
         }
         if (renderDelay > DefaultParameter.renderDelay) {
             renderDelay = 0;
+            StatusBar.updateStatusPanel();
             MainProcess.processDeath();
             MainProcess.processStatusBar();
             Render.render(MainProcess.terrains,MainProcess.enemies,MainProcess.projectiles,MainProcess.player);
@@ -87,6 +93,13 @@ public abstract class MyClock{
             enemyMoveDelay = 0;
             for (Enemy enemy : MainProcess.enemies) {
                 enemy.move();
+            }
+        }
+        if (renderStateDelay > DefaultParameter.renderStateDelay) {
+            renderStateDelay = 0;
+            renderState++;
+            if (renderState > DefaultParameter.maxRenderStates) {
+                renderState = 1;
             }
         }
         //Internal Cool down

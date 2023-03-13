@@ -1,9 +1,13 @@
 package BackEnd;
 
+import java.awt.*;
+
 /**
  * Lớp trừu tượng chứa các thông số mặc định
  */
 public abstract class DefaultParameter {
+    // Color
+    public static final Color menuColor = new Color(170,210,239);
     // Frame
     public static final int menuPanelWidth = 1400;
     public static final int menuPanelHeight = 50;
@@ -15,10 +19,12 @@ public abstract class DefaultParameter {
     // Time
     public static final int baseClockDelay = 10;
     public static final int renderDelay = 10;
-    public static final int enemyMoveDelay = 5;
+    public static final int enemyMoveDelay = 50;
     public static final int playerMoveDelay = 1;
     public static final int bombDelay = 10;
     public static final int damageDelay = 10;
+    public static final int renderStateDelay = 10;
+    public static final int maxRenderStates = 1;
     // Parameter
     // Entity
     public static int entityMaxHeath = 100;
@@ -57,6 +63,7 @@ public abstract class DefaultParameter {
     public static boolean playerDamageToPlayer = false;
     public static boolean playerDamageToEnemy = true;
     public static int playerMoveCount = 10;
+    public static int playerScore =0;
     // Projectile
     public static int projectileMaxHeath = 100;
     public static int projectileHeath = 100;

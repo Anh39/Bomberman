@@ -23,6 +23,7 @@ public abstract class Entity {
     // angle là góc quay, hiện tại chưa có ứng dụng
     private double angle;
     private String name;
+    public final double PI = Math.PI;
     public Entity() {
         this.box = new JLabel();
         this.box.setBounds(50,50,50,50);

@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * Đối tượng người chơi
  */
 public class Player extends Entity{
+    private int score;
     /**
      * Khởi tạo mặc định
      */
@@ -29,15 +30,19 @@ public class Player extends Entity{
                 switch (keyStates.get(i).getKeyCode()) {
                     case 37:
                          moveX -= this.getSpeed();
+                         this.setAngle(3*PI/2);
                         break;
                     case 38:
                         moveY -= this.getSpeed();
+                        this.setAngle(0);
                         break;
                     case 39:
                         moveX += this.getSpeed();
+                        this.setAngle(PI/2);
                         break;
                     case 40:
                         moveY += this.getSpeed();
+                        this.setAngle(PI);
                         break;
                     default:
                         break;
@@ -67,6 +72,19 @@ public class Player extends Entity{
         }
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+    public void addScore() {
+        score ++;
+    }
+    public void addScore(int amount) {
+        score += amount;
+    }
     @Override
     public void setDefault() {
         bar.setMaximum(DefaultParameter.playerMaxHeath);
@@ -78,5 +96,6 @@ public class Player extends Entity{
         setHeathRegen(DefaultParameter.playerHeathRegen);
         setRegenDuration(DefaultParameter.playerRegenDuration);
         setAngle(DefaultParameter.playerAngle);
+        setScore(DefaultParameter.playerScore);
     }
 }

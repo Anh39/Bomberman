@@ -158,29 +158,6 @@ public abstract class MainProcess {
             terrains.add(tree);
             System.out.println( "Generating map : " + (i+1)*100/treeNumber + "%");
         }
-        /*int size = height*width;
-        for (int i=0;i<size;i++) {
-            Terrain temp;
-            Random rand = new Random();
-            if (rand.nextInt(0,3+1) != 0) {
-                temp = New.grass();
-            }
-            else {
-                temp = New.tree();
-            }
-            temp.setLocation(getRandomCoordinates());
-            if (terrains.size()==0) {
-                terrains.add(temp);
-            }
-            for (int j=0;j<terrains.size();j++) {
-                if (Physics.checkIntersect(terrains.get(j).box,temp.box)) {
-                    temp.setLocation(getRandomCoordinates());
-                    j=0;
-                }
-            }
-            terrains.add(temp);
-            System.out.println( "Generating map : " + (i+1)*100/size + "%");
-        }*/
     }
 
     /**
@@ -225,6 +202,7 @@ public abstract class MainProcess {
                 Graphic.panel.remove(enemies.get(i).bar);
                 Graphic.panel.repaint();
                 enemies.remove(i);
+                player.addScore();
             }
         }
     }

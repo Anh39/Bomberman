@@ -4,6 +4,7 @@ import BackEnd.DefaultParameter;
 import Graphic.StatusBar;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Lớp trừu tượng dùng để khởi tạo các đối tượng
@@ -12,22 +13,21 @@ import javax.swing.*;
 
 public abstract class New {
     // Hình ảnh để khởi tạo đối tượng
-    public static ImageIcon newGameImg = new ImageIcon(New.class.getResource("/Images/newGameImage.png"));
-    public static ImageIcon loadGameImg = new ImageIcon(New.class.getResource("/Images/loadGameImage.png"));
-    public static ImageIcon configGameImg = new ImageIcon(New.class.getResource("/Images/configGameImage.png"));
-    public static ImageIcon exitGameImg = new ImageIcon(New.class.getResource("/Images/exitGameImage.png"));
-    public static ImageIcon miniNewGameImg = new ImageIcon(New.class.getResource("/Images/miniNewGameImage.png"));
-    public static ImageIcon playerImg1 = new ImageIcon(New.class.getResource("/Images/Player1.png"));
+    private static final Font font = new Font("Arial", Font.PLAIN,30);
+    private static final Font miniFont = new Font("Arial", Font.PLAIN,20);
+    //public static ImageIcon playerImg1 = new ImageIcon(New.class.getResource("/Images/Player1.png"));
     public static ImageIcon grassImg = new ImageIcon(New.class.getResource("/Images/Grass Terrain.png"));
     public static ImageIcon treeImg = new ImageIcon(New.class.getResource("/Images/Tree Terrain.png"));
     public static ImageIcon bombImg = new ImageIcon(New.class.getResource("/Images/Bomb.png"));
     public static ImageIcon bombFragmentImg = new ImageIcon(New.class.getResource("/Images/bombFragment.png"));
     public static ImageIcon slimeImg = new ImageIcon(New.class.getResource("/Images/Slime1.png"));
+    public static ImageIcon menuBackGround = new ImageIcon(New.class.getResource("/Images/Menu Background.jpg"));
+    public static ImageIcon testImg = new ImageIcon(New.class.getResource("/Images/Test.png"));
     //Player
     public static Player player() {
         Player player = new Player();
         player.setDefault();
-        player.box.setIcon(playerImg1);
+        //player.box.setIcon(playerImg1);
         player.setRange(DefaultParameter.playerRange);
         return player;
     }
@@ -38,6 +38,7 @@ public abstract class New {
         enemy.setCooldown(0);
         enemy.box.setIcon(slimeImg);
         enemy.setRange(DefaultParameter.entityRange);
+        enemy.setSpeed(50);
         return enemy;
     }
     //Terrain
@@ -92,42 +93,104 @@ public abstract class New {
         return bombFragment;
     }
     //MyMenu
+    public static JLabel menuBackground() {
+        JLabel menu = new JLabel();
+        menu.setIcon(menuBackGround);
+        menu.setBounds(0,0,DefaultParameter.panelWidth,DefaultParameter.panelHeight);
+        return menu;
+    }
     public static JButton miniNewGameButton() {
         JButton result = new JButton();
         result.setFocusable(false);
-        result.setIcon(miniNewGameImg);
+        result.setFont(miniFont);
+        result.setBounds(0,0,150,50);
+        result.setBackground(DefaultParameter.menuColor);
+        result.setText("New Game");
+        return result;
+    }
+    public static JButton miniSaveGameButton() {
+        JButton result = new JButton();
+        result.setFocusable(false);
+        result.setFont(miniFont);
+        result.setBounds(0,0,150,50);
+        result.setBackground(DefaultParameter.menuColor);
+        result.setText("Save Game");
+        return result;
+    }
+    public static JButton miniLoadGameButton() {
+        JButton result = new JButton();
+        result.setFocusable(false);
+        result.setFont(miniFont);
+        result.setBounds(0,0,150,50);
+        result.setBackground(DefaultParameter.menuColor);
+        result.setText("Load Game");
+        return result;
+    }
+    public static JButton miniConfigGameButton() {
+        JButton result = new JButton();
+        result.setFocusable(false);
+        result.setFont(miniFont);
+        result.setBounds(0,0,150,50);
+        result.setBackground(DefaultParameter.menuColor);
+        result.setText("Config");
+        return result;
+    }
+    public static JButton miniExitGameButton() {
+        JButton result = new JButton();
+        result.setFocusable(false);
+        result.setFont(miniFont);
+        result.setBounds(0,0,150,50);
+        result.setBackground(DefaultParameter.menuColor);
+        result.setText("Exit");
         return result;
     }
     public static JButton newGameButton() {
         JButton result = new JButton();
         result.setFocusable(false);
-        result.setIcon(newGameImg);
+        result.setFont(font);
+        result.setBackground(DefaultParameter.menuColor);
+        result.setText("New Game");
         return result;
     }
     public static JButton loadGameButton() {
         JButton result = new JButton();
         result.setFocusable(false);
-        result.setIcon(loadGameImg);
+        result.setFont(font);
+        result.setBackground(DefaultParameter.menuColor);
+        result.setText("Load Game");
         return result;
     }
     public static JButton configGameButton() {
         JButton result = new JButton();
         result.setFocusable(false);
-        result.setIcon(configGameImg);
+        result.setFont(font);
+        result.setBackground(DefaultParameter.menuColor);
+        result.setText("Config");
         return result;
     }
     public static JButton exitGameButton() {
         JButton result = new JButton();
         result.setFocusable(false);
-        result.setIcon(exitGameImg);
+        result.setFont(font);
+        result.setBackground(DefaultParameter.menuColor);
+        result.setText("Exit");
         return result;
     }
     public static JTextArea tutorial() {
         JTextArea tutorial = new JTextArea();
+        tutorial.setOpaque(false);
         tutorial.setFocusable(false);
-        tutorial.setBounds(500,300,500,200);
+        tutorial.setBounds(0,0,300,200);
         tutorial.setFont(StatusBar.font);
         return tutorial;
+    }
+    public static JTextField statusField() {
+        JTextField status = new JTextField();
+        status.setOpaque(false);
+        status.setFocusable(false);
+        status.setBounds(0,0,250,50);
+        status.setFont(miniFont);
+        return status;
     }
     // Buff
     // Làm theo mẫu dưới đây. <buffName> là tên của buff, bỏ dấu <> đi
