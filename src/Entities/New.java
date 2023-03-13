@@ -206,7 +206,7 @@ public abstract class New {
         return <buffName>;
     }
      */
-        public static Buff Health() {
+    public static Buff Health() {
         Buff moreHealth = new Buff();
         moreHealth.setHeath(moreHealth.getHeath() + 50);
         moreHealth.setName("More Health");
