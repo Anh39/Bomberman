@@ -2,8 +2,10 @@ package BackEnd;
 
 import Entities.Enemy;
 import Graphic.Render;
+import Graphic.StatusBar;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,7 +23,9 @@ public abstract class MyClock{
     public static boolean playerMoveAvailable = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static boolean isPlayerMove = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static int playerMovedCount = 0; // Biến dùng cho việc xử lý di chuyển của người chơi
-    private static ArrayList<KeyState> localKeyState; // Biến dùng cho việc xử lý di chuyển của người chơi
+    private static Dimension playerMoveDim = new Dimension();
+    public static int renderStateDelay = 0;
+    public static int renderState = 1;
 
     /**
      * Bắt đầu bộ tính giờ
@@ -36,16 +40,6 @@ public abstract class MyClock{
             @Override
             public void actionPerformed(ActionEvent e) {
                 runTime();
-                if (isPlayerMove) {
-                    if (playerMovedCount == DefaultParameter.playerMoveCount) {
-                        playerMovedCount = 0;
-                        isPlayerMove = false;
-                    }
-                    else if (playerMoveAvailable) {
-                        MainProcess.player.move(localKeyState, MainProcess.terrains);
-                        playerMovedCount++;
-                    }
-                }
             }
         };
         timer = new Timer(DefaultParameter.baseClockDelay, actionListener);
@@ -62,13 +56,28 @@ public abstract class MyClock{
         damageDelay++;
         enemyMoveDelay++;
         playerMoveDelay++;
+        renderDelay++;
+        renderStateDelay++;
+        if (isPlayerMove) {
+            //System.out.println(playerMovedCount);
+            if (playerMovedCount == DefaultParameter.playerMoveCount) {
+                playerMovedCount = 0;
+                isPlayerMove = false;
+            }
+            else if (playerMoveAvailable) {
+                MainProcess.player.move((int) playerMoveDim.getWidth(),(int) playerMoveDim.getHeight(),MainProcess.terrains);
+                playerMovedCount++;
+            }
+        }
         if (playerMoveDelay > DefaultParameter.playerMoveDelay) {
             playerMoveAvailable= true;
             playerMoveDelay = 0;
         }
         if (renderDelay > DefaultParameter.renderDelay) {
             renderDelay = 0;
+            StatusBar.updateStatusPanel();
             MainProcess.processDeath();
+            MainProcess.processStatusBar();
             Render.render(MainProcess.terrains,MainProcess.enemies,MainProcess.projectiles,MainProcess.player);
         }
         if (bombDelay > DefaultParameter.bombDelay) {
@@ -84,6 +93,13 @@ public abstract class MyClock{
             enemyMoveDelay = 0;
             for (Enemy enemy : MainProcess.enemies) {
                 enemy.move();
+            }
+        }
+        if (renderStateDelay > DefaultParameter.renderStateDelay) {
+            renderStateDelay = 0;
+            renderState++;
+            if (renderState > DefaultParameter.maxRenderStates) {
+                renderState = 1;
             }
         }
         //Internal Cool down
@@ -107,7 +123,7 @@ public abstract class MyClock{
      */
     public static void playerMove(ArrayList<KeyState> keyStates) {
             if (!isPlayerMove) {
-                localKeyState = keyStates;
+                playerMoveDim = MainProcess.player.getMove(keyStates);
                 isPlayerMove = true;
             }
     }

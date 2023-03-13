@@ -4,7 +4,7 @@ import Graphic.Graphic;
  * Thứ tụ xem để dễ hiểu
  *      - Entities: Entity ->  Player,Enemy,Projectile,Buff -> New
  *      - BackEnd: KeyState -> MyClock -> Physics -> MainProcess
- *      - Graphics: StatusBar,MyPanel,Menu -> Render -> Graphic
+ *      - Graphics: StatusBar,MyPanel,MyMenu -> Render -> Graphic
  */
 
 /**
@@ -22,6 +22,7 @@ import Graphic.Graphic;
  *  + JLabel (hitbox của các đối tượng)
  *  + JTextField
  *  + JButton
+ *  + JProgressBar
  *  + ImageIcon
  */
 

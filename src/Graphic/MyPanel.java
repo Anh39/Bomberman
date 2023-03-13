@@ -1,5 +1,7 @@
 package Graphic;
 
+import BackEnd.DefaultParameter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -16,22 +18,15 @@ import java.awt.event.*;
  * panel.add() : thêm phần tử vào bảng
  * panel.remove() : xóa phần tử khỏi bảng ( sau đó cần refresh)
  */
-public class MyPanel extends JLayeredPane implements MouseListener {
-    // Các biến để xử lý chuột. Hiện chưa dùng
-    public boolean isClicked = false;
-    private int mouseX = 0;
-    private int mouseY = 0;
-
+public class MyPanel extends JLayeredPane {
     /**
      * Khởi tạo không tham số
      */
     public MyPanel() {
-        this.setPreferredSize(new Dimension(1400, 800));
+        this.setPreferredSize(new Dimension(DefaultParameter.panelWidth, DefaultParameter.panelHeight));
         this.setBackground(Color.black);
         this.setLayout(null);
-        this.addMouseListener(this);
     }
-
     /**
      * Khởi tạo có tham số
      * @param width : chiều dài
@@ -41,55 +36,5 @@ public class MyPanel extends JLayeredPane implements MouseListener {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.black);
         this.setLayout(null);
-        this.addMouseListener(this);
-    }
-
-    public int getMouseX() {
-        if (getMousePosition() != null) {
-            mouseX = this.getMousePosition().x;
-        }
-        return mouseX;
-    }
-
-    public int getMouseY() {
-        if (getMousePosition() != null) {
-            mouseY = this.getMousePosition().y;
-        }
-        return mouseY;
-    }
-
-    /**
-     * Ghi đè Graphics với Graphics2D
-     * @param g  the Graphics context within which to paint
-     */
-    @Override
-    public void paint(Graphics g) {
-        Graphics2D g2D = (Graphics2D) g;
-        super.paint(g2D);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        isClicked = true;
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
     }
 }

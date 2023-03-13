@@ -76,18 +76,26 @@ public class Enemy extends Entity{
         }
 
         // Kết thúc
-        boolean con = (x+moveX>=0) && (y+moveY>=0) && (x+moveX<=1400-50) && (y+moveY<=800-50); // Kiểm tra xem ngoài khung hình chưa
+        boolean con1 = x+moveX>=0;
+        boolean con2 = y+moveY>=0;
+        boolean con3 = x+moveX<=Graphic.panel.getWidth() -this.box.getWidth();
+        boolean con4 = y+moveY<=Graphic.panel.getHeight()-this.box.getHeight();
+        boolean con = con1 && con2 && con3 && con4; // Kiểm tra xem ngoài khung hình chưa
         if ((!Physics.checkIntersectTerrain(MainProcess.terrains,this,moveX,moveY)) && con) { // Kiểm tra xem có giao với địa hình không
-                this.box.setLocation(x + moveX, y + moveY); // Di chuyển quái
+                this.setLocation(x + moveX, y + moveY); // Di chuyển quái
         }
     }
 
     @Override
     public void setDefault() {
+        bar.setMaximum(DefaultParameter.enemyMaxHeath);
+        setMaxHeath(DefaultParameter.enemyMaxHeath);
         setHeath(DefaultParameter.enemyHeath);
         setDamage(DefaultParameter.enemyDamage);
         setSpeed(DefaultParameter.enemySpeed);
         setRange(DefaultParameter.enemyRange);
+        setHeathRegen(DefaultParameter.enemyHeathRegen);
+        setRegenDuration(DefaultParameter.enemyRegenDuration);
         setAngle(DefaultParameter.enemyAngle);
     }
 }
