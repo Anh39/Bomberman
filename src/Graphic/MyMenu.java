@@ -5,25 +5,34 @@ import BackEnd.MainProcess;
 import Entities.New;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Lớp trừu tượng để xử lý phần menu
  */
 public abstract class MyMenu {
-    public static JButton newGame = New.newGameButton();
-    public static JButton loadGame = New.loadGameButton();
-    public static JButton configGame = New.configGameButton();
-    public static JButton exitGame = New.exitGameButton();
+    public static JButton newGame = New.menuButton();
+    public static JButton loadGame = New.menuButton();
+    public static JButton configGame = New.menuButton();
+    public static JButton exitGame = New.menuButton();
     public static JTextArea tutorial = New.tutorial();
-    public static JButton miniNewGameButton = New.miniNewGameButton();
-    public static JButton miniSaveGameButton = New.miniSaveGameButton();
-    public static JButton miniLoadGameButton = New.miniLoadGameButton();
-    public static JButton miniConfigGameButton = New.miniConfigGameButton();
-    public static JButton miniExitGameButton = New.miniExitGameButton();
+    public static JButton miniNewGameButton = New.miniMenuButton();
+    public static JButton miniSaveGameButton = New.miniMenuButton();
+    public static JButton miniLoadGameButton = New.miniMenuButton();
+    public static JButton miniConfigGameButton = New.miniMenuButton();
+    public static JButton miniExitGameButton = New.miniMenuButton();
+    public static ArrayList<JButton> datas = new ArrayList<>();
+    public static JButton exitButton = New.miniMenuButton();
+    public static JTextArea saveText = New.statusField();
+    public static JTextArea loadText = New.statusField();
     // Khoảng cách giữa các nút trong menu
     public static int yDistance = 50;
+    public static int yDataDistance = 10;
+
+    public static boolean isSaving = false;
 
     /**
      * Phương thức để khởi tạo lớp
@@ -39,6 +48,9 @@ public abstract class MyMenu {
                     Graphic.initialization(); // Khởi tạo graphic
                 }
                 else if (e.getSource() == loadGame) {
+                    isSaving = false;
+                    changeSaveLoad();
+                    Graphic.saveLoadPanel.setVisible(true);
                     System.out.println("Load game button clicked");
                 }
                 else if (e.getSource() == configGame) {
@@ -55,6 +67,10 @@ public abstract class MyMenu {
         loadGame.addActionListener(actionListener);
         configGame.addActionListener(actionListener);
         exitGame.addActionListener(actionListener);
+        newGame.setText("New Game");
+        loadGame.setText("Load Game");
+        configGame.setText("Config");
+        exitGame.setText("Exit");
         newGame.setBounds(0,0,200,75);
         loadGame.setBounds(0,0,200,75);
         configGame.setBounds(0,0,200,75);
@@ -76,7 +92,6 @@ public abstract class MyMenu {
         panel.add(configGame,Integer.valueOf(1));
         panel.add(exitGame,Integer.valueOf(1));
         panel.add(tutorial,Integer.valueOf(1));
-        panel.repaint();
     }
 
     /**
@@ -89,7 +104,6 @@ public abstract class MyMenu {
         panel.remove(configGame);
         panel.remove(exitGame);
         panel.remove(tutorial);
-        panel.repaint();
     }
 
     public static void subMenuInitialization() {
@@ -100,8 +114,14 @@ public abstract class MyMenu {
                     MainProcess.newGame();
                 }
                 else if (e.getSource() == miniSaveGameButton) {
+                    isSaving = true;
+                    changeSaveLoad();
+                    Graphic.saveLoadPanel.setVisible(true);
                 }
                 else if (e.getSource() == miniLoadGameButton) {
+                    isSaving = false;
+                    changeSaveLoad();
+                    Graphic.saveLoadPanel.setVisible(true);
                 }
                 else if (e.getSource() == miniConfigGameButton) {
                 }
@@ -120,6 +140,11 @@ public abstract class MyMenu {
         miniLoadGameButton.addActionListener(actionListener);
         miniConfigGameButton.addActionListener(actionListener);
         miniExitGameButton.addActionListener(actionListener);
+        miniNewGameButton.setText("New Game");
+        miniSaveGameButton.setText("Save Game");
+        miniLoadGameButton.setText("Load Game");
+        miniConfigGameButton.setText("Config");
+        miniExitGameButton.setText("Exit");
         miniNewGameButton.setLocation(0,0);
         miniSaveGameButton.setLocation(miniNewGameButton.getX()+miniNewGameButton.getWidth(),miniNewGameButton.getY());
         miniLoadGameButton.setLocation(miniSaveGameButton.getX()+miniSaveGameButton.getWidth(),miniSaveGameButton.getY());
@@ -127,10 +152,66 @@ public abstract class MyMenu {
         miniExitGameButton.setLocation(miniConfigGameButton.getX()+miniConfigGameButton.getWidth(),miniConfigGameButton.getY());
 
     }
-    public static void addSubMenu() {
-        Graphic.menuPanel.repaint();
+
+    public static void saveLoadMenuInitialization() {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == exitButton) {
+                    Graphic.saveLoadPanel.setVisible(false);
+                }
+                for (int i=0;i<datas.size();i++) {
+                    if (e.getSource() == datas.get(i)) {
+                        System.out.println("Save : " + (i+1) + " Clicked");
+                    }
+                }
+            }
+        };
+
+        for (int i=0;i<DefaultParameter.maxSaveData;i++) {
+            datas.add(New.miniMenuButton());
+            if (datas.size() == 1) {
+                datas.get(i).setLocation(50,50);
+            }
+            else {
+                datas.get(i).setLocation(datas.get(i-1).getX(),datas.get(i-1).getY()+datas.get(i-1).getHeight()+yDataDistance);
+            }
+            datas.get(i).setText("Save " + (i+1));
+            datas.get(i).addActionListener(actionListener);
+            Graphic.saveLoadPanel.add(datas.get(i));
+        }
+
+        int size = datas.size();
+        Graphic.saveLoadPanel.setBounds(0,0,100+datas.get(0).getWidth(),size*datas.get(0).getHeight()+(size-1)*yDataDistance+100);
+        Graphic.saveLoadPanel.setVisible(false);
+
+        saveText.setText("Save");
+        loadText.setText("Load");
+        Graphic.saveLoadPanel.add(saveText);
+        saveText.setBounds(Graphic.saveLoadPanel.getWidth()/2-50,0,Graphic.saveLoadPanel.getWidth()/2,50);
+        Graphic.saveLoadPanel.add(loadText);
+        loadText.setBounds(Graphic.saveLoadPanel.getWidth()/2-50,0,Graphic.saveLoadPanel.getWidth()/2,50);
+
+        Font font = new Font("Arial",Font.PLAIN,10);
+        exitButton.setFont(font);
+        exitButton.setBounds(0,0,40,40);
+        exitButton.setBackground(Color.red);
+        exitButton.setText("X");
+        exitButton.setLocation(Graphic.saveLoadPanel.getWidth()-40,Graphic.saveLoadPanel.getY());
+        exitButton.addActionListener(actionListener);
+
+        Graphic.saveLoadPanel.add(exitButton,Integer.valueOf(1));
+
+        changeSaveLoad();
     }
-    public static void removeSubMenu() {
-        Graphic.menuPanel.repaint();
+    public static void changeSaveLoad() {
+        if (isSaving) {
+            saveText.setVisible(true);
+            loadText.setVisible(false);
+        }
+        else {
+            saveText.setVisible(false);
+            loadText.setVisible(true);
+        }
     }
 }

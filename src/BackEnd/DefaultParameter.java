@@ -9,6 +9,7 @@ public abstract class DefaultParameter {
     //Other
     public static int treeRatio = 5;
     public static final int maxNumberOfBuffs = 1;  // Số loại buff
+    public static final int maxSaveData = 5;
     // Color
     public static final Color menuColor = new Color(170,210,239);
     // Frame
@@ -34,8 +35,6 @@ public abstract class DefaultParameter {
     public static int entityDamage = 10;
     public static int entitySpeed = 10;
     public static int entityRange = 1;
-    public static int entityHeathRegen = 0;
-    public static int entityRegenDuration = 0;
     public static double entityAngle = 0;
     public static String entityName = "Default";
     // Enemy
@@ -44,8 +43,6 @@ public abstract class DefaultParameter {
     public static int enemyDamage = 10;
     public static int enemySpeed = 10;
     public static int enemyRange = 1;
-    public static int enemyHeathRegen = 0;
-    public static int enemyRegenDuration = 0;
     public static double enemyAngle = 0;
     public static int enemyCooldown = 100;
     public static int enemySightDistance = 300;
@@ -58,8 +55,6 @@ public abstract class DefaultParameter {
     public static int playerDamage = 10;
     public static int playerSpeed = 5;
     public static int playerRange = 3;
-    public static int playerHeathRegen = 0;
-    public static int playerRegenDuration = 0;
     public static double playerAngle = 0;
     public static boolean playerDamageToTerrain = true;
     public static boolean playerDamageToPlayer = false;
@@ -83,8 +78,6 @@ public abstract class DefaultParameter {
     public static int terrainDamage = 0;
     public static int terrainSpeed = 0;
     public static int terrainRange = 0;
-    public static int terrainHeathRegen = 0;
-    public static int terrainRegenDuration = 0;
     public static double terrainAngle = 0;
     public static boolean terrainPassable = false;
     public static boolean treePassable = false;

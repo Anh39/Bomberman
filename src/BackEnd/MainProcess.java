@@ -88,7 +88,6 @@ public abstract class MainProcess {
         Projectile bomb = New.bomb(entity);
         bomb.box.setBounds(entity.box.getBounds());
         projectiles.add(bomb);
-        Graphic.panel.repaint();
     }
     //Player
 
@@ -219,7 +218,6 @@ public abstract class MainProcess {
             if (terrains.get(i).getHeath() <= 0) {
                 Graphic.panel.remove(terrains.get(i).box);
                 Graphic.panel.remove(terrains.get(i).bar);
-                Graphic.panel.repaint();
                 terrains.remove(i);
             }
         }
@@ -227,7 +225,6 @@ public abstract class MainProcess {
             if (enemies.get(i).getHeath() <= 0) {
                 Graphic.panel.remove(enemies.get(i).box);
                 Graphic.panel.remove(enemies.get(i).bar);
-                Graphic.panel.repaint();
                 enemies.remove(i);
                 player.addScore();
             }

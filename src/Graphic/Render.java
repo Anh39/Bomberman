@@ -91,13 +91,11 @@ public abstract class Render {
             index += MyClock.renderState%6 + 6*3;
         }
         player.box.setIcon(playerImg.get(index));
-        Graphic.panel.repaint();
     }
     private static void enemyAnimation(Enemy enemy) {
         enemy.addRenderState();
         int index = enemy.getRenderState() % 4;
         enemy.box.setIcon(enemyImg.get(index));
-        Graphic.panel.repaint();
     }
     private static void projectileAnimation(Projectile projectile) {
         projectile.addRenderState();
@@ -109,7 +107,6 @@ public abstract class Render {
             index += 2;
         }
         projectile.box.setIcon(projectileImg.get(index));
-        Graphic.panel.repaint();
     }
     public static void initialize() {
         playerImageInitialize();

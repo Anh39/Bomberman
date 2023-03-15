@@ -18,6 +18,7 @@ public abstract class Graphic {
     public static MyPanel basePanel = new MyPanel();
     public static MyPanel menuPanel = new MyPanel();
     public static MyPanel statusPanel = new MyPanel();
+    public static MyPanel saveLoadPanel = new MyPanel();
     public static JLabel menuBackground = New.menuBackground();
     /**
      * Khởi tạo
@@ -34,14 +35,20 @@ public abstract class Graphic {
         panel.setBounds(0,0,DefaultParameter.panelWidth,DefaultParameter.panelHeight);
         panel.add(menuBackground,Integer.valueOf(0));
         panel.add(statusPanel,Integer.valueOf(10));
+        panel.add(saveLoadPanel,Integer.valueOf(15));
+        saveLoadPanel.setOpaque(true);
+        saveLoadPanel.setBackground(Color.WHITE);
 
         menuPanel.setBounds(0,0,DefaultParameter.menuPanelWidth,DefaultParameter.menuPanelHeight);
         menuPanel.setVisible(false);
 
         frame.pack();
         frame.setVisible(true);
+        MyMenu.saveLoadMenuInitialization();
         MyMenu.mainMenuInitialization(); // Khởi tạo menu
         MyMenu.addMainMenu(panel); // Ban đầu thêm menu
+
+        saveLoadPanel.setLocation(150,100);
     }
 
     /**

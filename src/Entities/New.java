@@ -94,81 +94,19 @@ public abstract class New {
         menu.setBounds(0,0,DefaultParameter.panelWidth,DefaultParameter.panelHeight);
         return menu;
     }
-    public static JButton miniNewGameButton() {
+    public static JButton miniMenuButton() {
         JButton result = new JButton();
         result.setFocusable(false);
         result.setFont(miniFont);
         result.setBounds(0,0,150,50);
         result.setBackground(DefaultParameter.menuColor);
-        result.setText("New Game");
         return result;
     }
-    public static JButton miniSaveGameButton() {
-        JButton result = new JButton();
-        result.setFocusable(false);
-        result.setFont(miniFont);
-        result.setBounds(0,0,150,50);
-        result.setBackground(DefaultParameter.menuColor);
-        result.setText("Save Game");
-        return result;
-    }
-    public static JButton miniLoadGameButton() {
-        JButton result = new JButton();
-        result.setFocusable(false);
-        result.setFont(miniFont);
-        result.setBounds(0,0,150,50);
-        result.setBackground(DefaultParameter.menuColor);
-        result.setText("Load Game");
-        return result;
-    }
-    public static JButton miniConfigGameButton() {
-        JButton result = new JButton();
-        result.setFocusable(false);
-        result.setFont(miniFont);
-        result.setBounds(0,0,150,50);
-        result.setBackground(DefaultParameter.menuColor);
-        result.setText("Config");
-        return result;
-    }
-    public static JButton miniExitGameButton() {
-        JButton result = new JButton();
-        result.setFocusable(false);
-        result.setFont(miniFont);
-        result.setBounds(0,0,150,50);
-        result.setBackground(DefaultParameter.menuColor);
-        result.setText("Exit");
-        return result;
-    }
-    public static JButton newGameButton() {
+    public static JButton menuButton() {
         JButton result = new JButton();
         result.setFocusable(false);
         result.setFont(font);
         result.setBackground(DefaultParameter.menuColor);
-        result.setText("New Game");
-        return result;
-    }
-    public static JButton loadGameButton() {
-        JButton result = new JButton();
-        result.setFocusable(false);
-        result.setFont(font);
-        result.setBackground(DefaultParameter.menuColor);
-        result.setText("Load Game");
-        return result;
-    }
-    public static JButton configGameButton() {
-        JButton result = new JButton();
-        result.setFocusable(false);
-        result.setFont(font);
-        result.setBackground(DefaultParameter.menuColor);
-        result.setText("Config");
-        return result;
-    }
-    public static JButton exitGameButton() {
-        JButton result = new JButton();
-        result.setFocusable(false);
-        result.setFont(font);
-        result.setBackground(DefaultParameter.menuColor);
-        result.setText("Exit");
         return result;
     }
     public static JTextArea tutorial() {

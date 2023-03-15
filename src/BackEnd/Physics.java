@@ -70,7 +70,6 @@ public abstract class Physics {
                     buff.setReceived(true);
                     buff.activeBuff(player);
                     Graphic.panel.remove(buff.box);
-                    Graphic.panel.repaint();
                 }
             }
         }
