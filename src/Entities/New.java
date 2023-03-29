@@ -35,7 +35,7 @@ public abstract class New {
         enemy.setDefault();
         enemy.setCooldown(0);
         enemy.setRange(DefaultParameter.entityRange);
-        enemy.setSpeed(10);
+        enemy.setSpeed(DefaultParameter.enemySpeed);
         return enemy;
     }
     //Terrain
@@ -61,6 +61,7 @@ public abstract class New {
         bomb.setDefault();
         bomb.setDamage(entity.getDamage());
         bomb.setDuration(DefaultParameter.bombDecay);
+        bomb.setMaxDuration(DefaultParameter.bombDecay);
         bomb.setName("Bomb");
         bomb.setRange(entity.getRange());
         if (entity instanceof Player) {
@@ -79,6 +80,7 @@ public abstract class New {
         Projectile bombFragment = new Projectile();
         bombFragment.setDefault();
         bombFragment.setDuration(DefaultParameter.bombFragmentDecay);
+        bombFragment.setMaxDuration(DefaultParameter.bombFragmentDecay);
         bombFragment.setDamage(source.getDamage());
         bombFragment.setName("Bomb Fragment");
         bombFragment.setDamageToTerrain(source.isDamageToTerrain());
@@ -90,7 +92,7 @@ public abstract class New {
     //MyMenu
     public static JLabel menuBackground() {
         JLabel menu = new JLabel();
-        menu.setIcon(menuBackGround);
+        //menu.setIcon(menuBackGround);
         menu.setBounds(0,0,DefaultParameter.panelWidth,DefaultParameter.panelHeight);
         return menu;
     }

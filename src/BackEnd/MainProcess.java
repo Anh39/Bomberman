@@ -166,6 +166,7 @@ public abstract class MainProcess {
             Random rand = new Random();
             int index = rand.nextInt(0,indexArr.size());
             Terrain tree = New.tree();
+            terrains.get(index).setOverlapped(true);
             tree.setLocation(terrains.get(index).box.getX(),terrains.get(index).box.getY());
             terrains.add(tree);
             System.out.println( "Generating map : " + (i+1)*100/treeNumber + "%");

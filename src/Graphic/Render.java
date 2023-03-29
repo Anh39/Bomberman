@@ -99,13 +99,18 @@ public abstract class Render {
     }
     private static void projectileAnimation(Projectile projectile) {
         projectile.addRenderState();
-        int index = projectile.getRenderState() % 2;
+        int index = (int)(3*projectile.getDuration()/projectile.getMaxDuration());
+        if (index > 2) {
+            index = 2;
+        } else if (index < 0) {
+            index = 0;
+        }
         if (projectile.getName().equals("Bomb")) {
             index += 0;
         }
-        else if (projectile.getName().equals("Bomb Fragment")) {
-            index += 2;
-        }
+        /*else if (projectile.getName().equals("Bomb Fragment")) {
+            index += 3;
+        }*/
         projectile.box.setIcon(projectileImg.get(index));
     }
     public static void initialize() {
@@ -128,12 +133,12 @@ public abstract class Render {
         }
     }
     private static void projectileImageInitialize() {
-        String temp = "/Images/Projectile/";
-        for (int i=1;i<=2;i++) {
+        String temp = "/Images/Bomb/";
+        for (int i=1;i<=3;i++) {
             projectileImg.add(new ImageIcon(Render.class.getResource(temp + "Bomb" + i + ".png")));
         }
-        for (int i=1;i<=2;i++) {
+        /*for (int i=1;i<=2;i++) {
             projectileImg.add(new ImageIcon(Render.class.getResource(temp + "BombFragment" + i + ".png")));
-        }
+        }*/
     }
 }

@@ -41,7 +41,7 @@ public abstract class DefaultParameter {
     public static int enemyMaxHeath = 100;
     public static int enemyHeath = 100;
     public static int enemyDamage = 10;
-    public static int enemySpeed = 10;
+    public static int enemySpeed = 50;
     public static int enemyRange = 1;
     public static double enemyAngle = 0;
     public static int enemyCooldown = 100;

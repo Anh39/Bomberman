@@ -15,6 +15,7 @@ public class Projectile extends Entity{
     private boolean damageToTerrain = false;
     // Thời gian tồn tại của Projectile
     private int duration = 10; // = n*10, n = seconds
+    private int maxDuration = duration;
     public Projectile() {
 
     }
@@ -31,6 +32,14 @@ public class Projectile extends Entity{
         if (renderState > DefaultParameter.maxRenderStates) {
             renderState = 1;
         }
+    }
+
+    public void setMaxDuration(int maxDuration) {
+        this.maxDuration = maxDuration;
+    }
+
+    public int getMaxDuration() {
+        return maxDuration;
     }
 
     public void setDuration(int duration) {
