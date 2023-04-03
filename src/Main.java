@@ -1,3 +1,4 @@
+import BackEnd.SoundPlayer;
 import Graphic.Graphic;
 
 /**
@@ -29,8 +30,10 @@ import Graphic.Graphic;
 
 public class Main {
     public static void main(String[] args) {
+        SoundPlayer.soundnen();
         // Khởi tạo game
         Graphic.startGraphic();
+
     }
 }
 /**

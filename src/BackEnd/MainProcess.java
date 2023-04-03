@@ -72,6 +72,7 @@ public abstract class MainProcess {
                 }
             }
         }
+        SoundPlayer.soundboom(); // Sound
     }
 
     /**
@@ -88,6 +89,8 @@ public abstract class MainProcess {
         Projectile bomb = New.bomb(entity);
         bomb.box.setBounds(entity.box.getBounds());
         projectiles.add(bomb);
+
+        SoundPlayer.sounddatboom(); // Sound
     }
     //Player
 
