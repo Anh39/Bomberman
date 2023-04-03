@@ -1,11 +1,6 @@
 package BackEnd;
 
-
-import Entities.New;
-
 import java.io.File;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.sound.sampled.*;
 
 public class SoundPlayer {
@@ -13,11 +8,14 @@ public class SoundPlayer {
 
     public SoundPlayer(String path) {
         try {
+            path = SoundPlayer.class.getResource(path).toString();
+            path = path.substring(6,path.length());
             File file = new File(path);
             AudioInputStream ais = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(ais);
         } catch (Exception e) {
+            System.out.println("Input Sound Error");
         }
     }
 
@@ -41,28 +39,27 @@ public class SoundPlayer {
     }
 
     public static void soundboom() {
-        SoundPlayer sound = new SoundPlayer("\\Music\\boom.wav");
-        System.out.println("AAA");
+        SoundPlayer sound = new SoundPlayer("/Music/boom.wav");
         sound.play();
     }
 
     public static void soundnen() {
-        SoundPlayer sound = new SoundPlayer("C:\\Users\\hungt\\IdeaProjects\\Bomberman (2)\\Bomberman\\src\\Music\\nhacnen.wav");
+        SoundPlayer sound = new SoundPlayer("/Music/nhacnen.wav");
         sound.playloop();
     }
 
     public static void sounddefeat() {
-        SoundPlayer sound = new SoundPlayer("C:\\Users\\hungt\\IdeaProjects\\Bomberman (2)\\Bomberman\\src\\Music\\defeat.wav");
+        SoundPlayer sound = new SoundPlayer("/Music/defeat.wav");
         sound.play();
     }
 
     public static void soundwin() {
-        SoundPlayer sound = new SoundPlayer("C:\\Users\\hungt\\IdeaProjects\\Bomberman (2)\\Bomberman\\src\\Music\\victory.wav");
+        SoundPlayer sound = new SoundPlayer("/Music/victory.wav");
         sound.play();
     }
 
     public static void sounddatboom() {
-        SoundPlayer sound = new SoundPlayer("C:\\Users\\hungt\\IdeaProjects\\Bomberman (2)\\Bomberman\\src\\Music\\Music\\datboom.wav");
+        SoundPlayer sound = new SoundPlayer("/Music/datboom.wav");
         sound.play();
     }
 }
