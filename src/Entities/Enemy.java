@@ -13,12 +13,12 @@ import java.util.Random;
  */
 
 public class Enemy extends Entity{
+    //Biến để quản lý render
     private int renderState = 0;
     //cooldown ở đây là khoảng thời gian giữa 2 lần đặt bom
     private int cooldown;
     public Enemy() {
     }
-
     public int getRenderState() {
         return renderState;
     }
@@ -27,6 +27,9 @@ public class Enemy extends Entity{
         this.renderState = renderState;
     }
 
+    /**
+     * Tăng trạng thái render
+     */
     public void addRenderState() {
         renderState++;
         if (renderState > DefaultParameter.maxRenderStates) {
@@ -40,7 +43,10 @@ public class Enemy extends Entity{
     public int getCooldown() {
         return cooldown;
     }
-    // Giảm cooldown đi 1
+
+    /**
+     * Giảm cooldown đi 1
+     */
     public void reduceCooldown() {
         if (cooldown >0) {
             cooldown--;
@@ -49,6 +55,7 @@ public class Enemy extends Entity{
 
     /**
      * Phương thức dùng để di chuyển kẻ địch
+     * Tính theo 1 lần quét của MyClock
      */
     public void move() {
         int moveX = 0; // Tọa độ X di chuyển thêm
@@ -102,6 +109,9 @@ public class Enemy extends Entity{
         }
     }
 
+    /**
+     * Thiết lập mặc định
+     */
     @Override
     public void setDefault() {
         bar.setMaximum(DefaultParameter.enemyMaxHeath);

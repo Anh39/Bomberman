@@ -15,6 +15,10 @@ public abstract class StatusBar {
     public static Font font = new Font("Arial", Font.PLAIN,20);
     private static JTextArea basicStatus = New.statusField();
     private static JTextArea playerScoreStatus = New.statusField();
+
+    /**
+     * Khởi tạo thanh trạng thái
+     */
     public static void initialization() {
         statusPanel.setBounds(0,0,250,500);
         statusPanel.setLocation(0,50);
@@ -27,6 +31,10 @@ public abstract class StatusBar {
         basicStatus.setLocation(0,0);
         playerScoreStatus.setLocation(basicStatus.getX(), basicStatus.getY()+ basicStatus.getHeight());
     }
+
+    /**
+     * Làm mới trạng thái
+     */
     public static void updateStatusPanel() {
         String temp = "";
         temp += "Heath : " + MainProcess.player.getHeath();

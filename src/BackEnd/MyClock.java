@@ -23,8 +23,8 @@ public abstract class MyClock{
     public static boolean playerMoveAvailable = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static boolean isPlayerMove = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static int playerMovedCount = 0; // Biến dùng cho việc xử lý di chuyển của người chơi
-    private static Dimension playerMoveDim = new Dimension();
-    public static int renderState = 1;
+    private static Dimension playerMoveDim = new Dimension(); // Vector 2 chiều để lưu trạng thái di chuyển hiện tại
+    public static int renderState = 1; // Trạng thái render hiện tại (Dùng cho player và enemmy)
 
     /**
      * Bắt đầu bộ tính giờ
@@ -114,7 +114,7 @@ public abstract class MyClock{
     }
 
     /**
-     * Xử lý di chuyển cho người chơi, hiện vẫn hơi lỗi
+     * Xử lý di chuyển cho người chơi
      * @param keyStates
      */
     public static void playerMove(ArrayList<KeyState> keyStates) {

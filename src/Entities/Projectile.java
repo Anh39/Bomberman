@@ -8,6 +8,7 @@ import BackEnd.DefaultParameter;
  */
 
 public class Projectile extends Entity{
+    // Biến quản lý render của đối tượng
     private int renderState = 0;
     // Khả năng gây damage đến các đối tượng
     private boolean damageToEnemy = false;
@@ -15,6 +16,7 @@ public class Projectile extends Entity{
     private boolean damageToTerrain = false;
     // Thời gian tồn tại của Projectile
     private int duration = 10; // = n*10, n = seconds
+    // Thời gian tồn tại tối đa của Projectile
     private int maxDuration = duration;
     public Projectile() {
 
@@ -79,6 +81,9 @@ public class Projectile extends Entity{
         this.damageToTerrain = damageToTerrain;
     }
 
+    /**
+     * Thiết lập mặc định
+     */
     @Override
     public void setDefault() {
         bar.setMaximum(DefaultParameter.projectileMaxHeath);

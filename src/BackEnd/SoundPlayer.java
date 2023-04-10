@@ -9,8 +9,14 @@ public class SoundPlayer {
     public SoundPlayer(String path) {
         try {
             path = SoundPlayer.class.getResource(path).toString();
-            path = path.substring(6,path.length());
+            for (int i=0;i<path.length();i++) {
+                if (path.charAt(i) == '/' ) {
+                    path = path.substring(i+1, path.length());
+                    break;
+                }
+            }
             File file = new File(path);
+            System.out.println(path);
             AudioInputStream ais = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(ais);

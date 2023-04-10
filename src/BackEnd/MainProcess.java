@@ -11,18 +11,19 @@ import java.util.Random;
  * Lớp trừu tượng để tính toán đa số các tác vụ trong game
  */
 public abstract class MainProcess {
+    // Khởi tạo các đối tượng global
     public static ArrayList<Terrain> terrains = new ArrayList<Terrain>();
     public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     public static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
     public static ArrayList<Buff> buffs = new ArrayList<>();
 
     public static Player player = New.player();
-    // dùng để tạo cooldown cho việc đặt bom của người chơi
+    // Dùng để tạo cooldown cho việc đặt bom của người chơi
     public static boolean playerBombPlaced = false;
     // Projectile
 
     /**
-     * Xừ lý thời gian tồn tại của bom/đạn
+     * Xừ lý thời gian tồn tại của projectile
      */
     public static void projectileDecay() {
         for (int i=0;i<projectiles.size();i++) {
@@ -115,7 +116,7 @@ public abstract class MainProcess {
     //Enemy
 
     /**
-     * Tạo ra kẻ địch tại vị trí ngẫu nhiên không giao với địa hình không đi qua được
+     * Sinh ra kẻ địch tại vị trí ngẫu nhiên không giao với (địa hình không đi qua được)
      */
     public static void spawnEnemy() {
         Enemy enemy = New.slime();
@@ -130,6 +131,10 @@ public abstract class MainProcess {
         }
         enemies.add(enemy);
     }
+
+    /**
+     * Sinh ra buff
+     */
     public static void spawnBuff() {
         Random rand = new Random();
         int buffNumber = rand.nextInt(1,DefaultParameter.maxNumberOfBuffs+1);
@@ -198,6 +203,11 @@ public abstract class MainProcess {
         dim.width = getRandom(0,Graphic.panel.getWidth(),DefaultParameter.labelWidth);
         return dim;
     }
+
+    /**
+     * Phương thức lấy về tọa độ không bị chiếm
+     * @return
+     */
     public static Dimension getAvailableCoordinates() {
         ArrayList<Integer> indexArr = new ArrayList<Integer>();
         for (int i=0;i<terrains.size();i++) {
@@ -245,6 +255,10 @@ public abstract class MainProcess {
             }
         }
     }
+
+    /**
+     * Xử lý thanh trạng thái (Thanh HP)
+     */
     public static void processStatusBar() {
         for (Terrain terrain : terrains) {
             terrain.calculateHeathBar();
@@ -254,6 +268,10 @@ public abstract class MainProcess {
         }
         player.calculateHeathBar();
     }
+
+    /**
+     * Khởi tạo game mới
+     */
     public static void newGame() {
         clearMap();
         terrains.clear();
@@ -263,6 +281,10 @@ public abstract class MainProcess {
         player = New.player();
         generateTerrain();
     }
+
+    /**
+     * Xóa các đối tượng khỏi màn hình (hình ảnh và health bar)
+     */
     public static void clearMap() {
         for (Terrain terrain : terrains) {
             Graphic.panel.remove(terrain.box);

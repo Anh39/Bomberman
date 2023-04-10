@@ -15,17 +15,14 @@ public abstract class New {
     // Hình ảnh để khởi tạo đối tượng
     private static final Font font = new Font("Arial", Font.PLAIN,30);
     private static final Font miniFont = new Font("Arial", Font.PLAIN,20);
-    //public static ImageIcon playerImg1 = new ImageIcon(New.class.getResource("/Images/Player1.png"));
-    public static ImageIcon grassImg = new ImageIcon(New.class.getResource("/Images/Grass Terrain.png"));
-    public static ImageIcon treeImg = new ImageIcon(New.class.getResource("/Images/Tree Terrain.png"));
+    public static ImageIcon grassImg = new ImageIcon(New.class.getResource("/Images/Terrain/Grass Terrain.png"));
+    public static ImageIcon treeImg = new ImageIcon(New.class.getResource("/Images/Terrain/Tree Terrain.png"));
     public static ImageIcon menuBackGround = new ImageIcon(New.class.getResource("/Images/Menu Background.jpg"));
-    public static ImageIcon heathRegenBuff = new ImageIcon(New.class.getResource("/Images/Regen Heath Buff.png"));
-    public static ImageIcon testImg = new ImageIcon(New.class.getResource("/Images/Test.png"));
+    public static ImageIcon heathRegenBuff = new ImageIcon(New.class.getResource("/Images/Buff/Regen Heath Buff.png"));
     //Player
     public static Player player() {
         Player player = new Player();
         player.setDefault();
-        //player.box.setIcon(playerImg1);
         player.setRange(DefaultParameter.playerRange);
         return player;
     }

@@ -63,6 +63,12 @@ public abstract class Physics {
         }
         return false;
     }
+
+    /**
+     * Xử lý khi nhặt buff
+     * @param buffs
+     * @param player
+     */
     public static void processBuffContact(ArrayList<Buff> buffs, Player player) {
         for (Buff buff : buffs) {
             if (!buff.isReceived()) {

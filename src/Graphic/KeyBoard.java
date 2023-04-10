@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public abstract class KeyBoard {
     // Lưu trạng thái bàn phím
     public static ArrayList<KeyState> keyStates = new ArrayList<>();
+
+    /**
+     * Khởi tạo các trạng thái của bàn phím
+     */
     public static void keyInitialization() {
         KeyState leftKey = new KeyState(37);
         KeyState upKey = new KeyState(38);

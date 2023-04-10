@@ -14,28 +14,40 @@ import java.util.ArrayList;
  * Lớp trừu tượng để xử lý phần menu
  */
 public abstract class MyMenu {
+    /**
+     * Menu chính (Title game)
+     */
     public static JButton newGame = New.menuButton();
     public static JButton loadGame = New.menuButton();
     public static JButton configGame = New.menuButton();
     public static JButton exitGame = New.menuButton();
     public static JTextArea tutorial = New.tutorial();
+    /**
+     * Menu phụ ( Khi vào game)
+     */
     public static JButton miniNewGameButton = New.miniMenuButton();
     public static JButton miniSaveGameButton = New.miniMenuButton();
     public static JButton miniLoadGameButton = New.miniMenuButton();
     public static JButton miniConfigGameButton = New.miniMenuButton();
     public static JButton miniExitGameButton = New.miniMenuButton();
+    /**
+     * Đồ họa của menu save / load
+     */
+    // Lưu đồ họa của các file save
     public static ArrayList<JButton> datas = new ArrayList<>();
-    public static JButton exitButton = New.miniMenuButton();
+    // Nút X màu đỏ để thoát
+    public static JButton exitSaveLoad = New.miniMenuButton();
     public static JTextArea saveText = New.statusField();
     public static JTextArea loadText = New.statusField();
     // Khoảng cách giữa các nút trong menu
     public static int yDistance = 50;
+    // Khoảng cách giữa các file save
     public static int yDataDistance = 10;
-
+    // Kiểm tra xem menu hiện tại là save hay load
     public static boolean isSaving = false;
 
     /**
-     * Phương thức để khởi tạo lớp
+     * Phương thức để khởi tạo menu chính
      */
     public static void mainMenuInitialization() {
         ActionListener actionListener = new ActionListener() {
@@ -83,7 +95,7 @@ public abstract class MyMenu {
 
     }
     /**
-     * Thêm menu vào màn hình
+     * Thêm menu chính vào màn hình
      * @param panel
      */
     public static void addMainMenu(JLayeredPane panel) {
@@ -95,7 +107,7 @@ public abstract class MyMenu {
     }
 
     /**
-     * Xóa menu khỏi màn hình
+     * Xóa menu chính khỏi màn hình
      * @param panel
      */
     public static void removeMainMenu(JLayeredPane panel) {
@@ -106,6 +118,9 @@ public abstract class MyMenu {
         panel.remove(tutorial);
     }
 
+    /**
+     * Phương thức khởi tạo menu phụ
+     */
     public static void subMenuInitialization() {
         ActionListener actionListener = new ActionListener() {
             @Override
@@ -153,11 +168,14 @@ public abstract class MyMenu {
 
     }
 
+    /**
+     * Phương thức khởi tạo save load menu
+     */
     public static void saveLoadMenuInitialization() {
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == exitButton) {
+                if (e.getSource() == exitSaveLoad) {
                     Graphic.saveLoadPanel.setVisible(false);
                 }
                 for (int i=0;i<datas.size();i++) {
@@ -193,17 +211,21 @@ public abstract class MyMenu {
         loadText.setBounds(Graphic.saveLoadPanel.getWidth()/2-50,0,Graphic.saveLoadPanel.getWidth()/2,50);
 
         Font font = new Font("Arial",Font.PLAIN,10);
-        exitButton.setFont(font);
-        exitButton.setBounds(0,0,40,40);
-        exitButton.setBackground(Color.red);
-        exitButton.setText("X");
-        exitButton.setLocation(Graphic.saveLoadPanel.getWidth()-40,Graphic.saveLoadPanel.getY());
-        exitButton.addActionListener(actionListener);
+        exitSaveLoad.setFont(font);
+        exitSaveLoad.setBounds(0,0,40,40);
+        exitSaveLoad.setBackground(Color.red);
+        exitSaveLoad.setText("X");
+        exitSaveLoad.setLocation(Graphic.saveLoadPanel.getWidth()-40,Graphic.saveLoadPanel.getY());
+        exitSaveLoad.addActionListener(actionListener);
 
-        Graphic.saveLoadPanel.add(exitButton,Integer.valueOf(1));
+        Graphic.saveLoadPanel.add(exitSaveLoad,Integer.valueOf(1));
 
         changeSaveLoad();
     }
+
+    /**
+     * Chuyển đổi giữa save và load menu
+     */
     public static void changeSaveLoad() {
         if (isSaving) {
             saveText.setVisible(true);

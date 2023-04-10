@@ -2,6 +2,11 @@ package Graphic;
 
 import BackEnd.*;
 import Entities.*;
+
+/**
+ * Lớp thử nghiệm
+ * Note: Chưa áp dụng trong code
+ */
 public abstract class TestModule {
     public static final boolean testEnable = false;
     public static void movePanel(int moveX,int moveY) {

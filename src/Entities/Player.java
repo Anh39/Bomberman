@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * Đối tượng người chơi
  */
 public class Player extends Entity{
+    // Điểm số của người chơi
     private int score;
     /**
      * Khởi tạo mặc định
@@ -21,6 +22,12 @@ public class Player extends Entity{
     public Player() {
         this.box.setLocation(0,0);
     }
+
+    /**
+     * Lấy trạng thái di chuyển hiện tại của người chơi
+     * @param keyStates
+     * @return
+     */
     public Dimension getMove(ArrayList<KeyState> keyStates) {
         int moveX = 0;
         int moveY = 0;
@@ -53,7 +60,7 @@ public class Player extends Entity{
         return dim;
     }
     /**
-     * Phương thức để di chuyển nhân vật
+     * Phương thức để di chuyển nhân vật theo trạng thái hiện tại ( Lấy từ getMove bên trên)
      * @param terrains: Địa hình
      */
     public void move(int moveX,int moveY, ArrayList<Terrain> terrains) {
@@ -85,6 +92,10 @@ public class Player extends Entity{
     public void addScore(int amount) {
         score += amount;
     }
+
+    /**
+     * Thiết lập mặc định
+     */
     @Override
     public void setDefault() {
         bar.setMaximum(DefaultParameter.playerMaxHeath);
