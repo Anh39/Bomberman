@@ -4,7 +4,7 @@ import BackEnd.DefaultParameter;
 import BackEnd.KeyState;
 import BackEnd.Physics;
 import Graphic.Graphic;
-import Graphic.TestModule;
+import Graphic.AdventureMode;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -73,8 +73,8 @@ public class Player extends Entity{
         boolean con = con1 && con2 && con3 && con4;
         if ((!Physics.checkIntersectTerrain(terrains,this,moveX,moveY)) && con) {
             this.setLocation(x + moveX, y + moveY);
-            if (TestModule.testEnable) {
-                TestModule.movePanel(moveX, moveY);
+            if (DefaultParameter.adventureMode) {
+                AdventureMode.movePanel(moveX, moveY);
             }
         }
     }

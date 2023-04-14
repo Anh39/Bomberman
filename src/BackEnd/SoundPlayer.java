@@ -16,7 +16,7 @@ public class SoundPlayer {
                 }
             }
             File file = new File(path);
-            System.out.println(path);
+            //System.out.println(path);
             AudioInputStream ais = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(ais);
@@ -27,6 +27,7 @@ public class SoundPlayer {
 
     public void play() {
         if (clip != null) {
+            VolumeControl.setVolume(this.clip,DefaultParameter.soundEffectVolume);
             stop();
             clip.setFramePosition(0);
             clip.start();
@@ -41,6 +42,7 @@ public class SoundPlayer {
     }
 
     public void playloop() {
+        VolumeControl.setVolume(this.clip,DefaultParameter.backgroundMusicVolume);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
@@ -48,7 +50,6 @@ public class SoundPlayer {
         SoundPlayer sound = new SoundPlayer("/Music/boom.wav");
         sound.play();
     }
-
     public static void soundnen() {
         SoundPlayer sound = new SoundPlayer("/Music/nhacnen.wav");
         sound.playloop();

@@ -20,6 +20,13 @@ public abstract class MainProcess {
     public static Player player = New.player();
     // Dùng để tạo cooldown cho việc đặt bom của người chơi
     public static boolean playerBombPlaced = false;
+    public static void updateDifficulty() {
+        DefaultParameter.enemySpawn = DefaultParameter.enemySpawnD / DefaultParameter.difficulty;
+        DefaultParameter.buffSpawn = DefaultParameter.buffSpawnD * DefaultParameter.difficulty;
+        DefaultParameter.enemyMaxHeath = DefaultParameter.enemyMaxHeathD * DefaultParameter.difficulty;
+        DefaultParameter.enemyHeath = DefaultParameter.enemyHeathD * DefaultParameter.difficulty;
+        DefaultParameter.enemyDamage = DefaultParameter.enemyDamageD * DefaultParameter.difficulty;
+    }
     // Projectile
 
     /**
@@ -49,6 +56,9 @@ public abstract class MainProcess {
         int y = temp.box.getY();
         int width = temp.box.getWidth();
         int height = temp.box.getHeight();
+        Projectile centerFrag = New.bombFragment(temp);
+        centerFrag.setLocation(x,y);
+        projectiles.add(centerFrag);
         for (int direction=0;direction<4;direction++) {
             for (int i = 1; i <= temp.getRange(); i++) {
                 if (direction==0) {
@@ -89,63 +99,15 @@ public abstract class MainProcess {
         }
         Projectile bomb = New.bomb(entity);
         bomb.box.setBounds(entity.box.getBounds());
+        int x = entity.box.getX()/50;
+        int y = entity.box.getY()/50;
+        bomb.box.setLocation(x*50,y*50);
         projectiles.add(bomb);
 
         SoundPlayer.sounddatboom(); // Sound
     }
-    //Player
 
-    /**
-     * Dùng để khởi tạo người chơi để không dính vào cây, kẻ địch
-     * Note : hiện tại chưa dùng
-     */
-    public static void spawnPlayer() {
-        player.setLocation(getRandomCoordinates());
-        for (int i=0;i<terrains.size();i++) {
-            for (int j=0;j<enemies.size();j++) {
-                if (terrains.get(i).isPassable()) {
-                    if (Physics.checkIntersect(terrains.get(i).box, player.box) || Physics.checkIntersect(enemies.get(j).box,player.box)) {
-                        player.setLocation(getRandomCoordinates());
-                        i = 0;
-                        j = 0;
-                    }
-                }
-            }
-        }
-    }
-    //Enemy
 
-    /**
-     * Sinh ra kẻ địch tại vị trí ngẫu nhiên không giao với (địa hình không đi qua được)
-     */
-    public static void spawnEnemy() {
-        Enemy enemy = New.slime();
-        enemy.setLocation(getRandomCoordinates());
-        for(int i=0;i<terrains.size();i++) {
-            if (!terrains.get(i).isPassable()) {
-                if (Physics.checkIntersect(terrains.get(i).box, enemy.box)) {
-                    enemy.setLocation(getRandomCoordinates());
-                    i = 0;
-                }
-            }
-        }
-        enemies.add(enemy);
-    }
-
-    /**
-     * Sinh ra buff
-     */
-    public static void spawnBuff() {
-        Random rand = new Random();
-        int buffNumber = rand.nextInt(1,DefaultParameter.maxNumberOfBuffs+1);
-        // Làm giống vậy , dùng else if (buffNumber == 2 , 3 ,4 , ...)
-        if (buffNumber == 1) {
-            Buff buff = New.Health();
-            buffs.add(buff);
-        }
-        //
-        buffs.get(buffs.size()-1).setLocation(getAvailableCoordinates());
-    }
     //Terrain
 
     /**
@@ -177,7 +139,7 @@ public abstract class MainProcess {
             terrains.get(index).setOverlapped(true);
             tree.setLocation(terrains.get(index).box.getX(),terrains.get(index).box.getY());
             terrains.add(tree);
-            System.out.println( "Generating map : " + (i+1)*100/treeNumber + "%");
+            //System.out.println( "Generating map : " + (i+1)*100/treeNumber + "%");
         }
     }
 
@@ -254,6 +216,9 @@ public abstract class MainProcess {
                 }
             }
         }
+        if (player.getHeath()<=0) {
+            Graphic.gameOver.setVisible(true);
+        }
     }
 
     /**
@@ -278,10 +243,11 @@ public abstract class MainProcess {
         enemies.clear();
         projectiles.clear();
         buffs.clear();
-        player = New.player();
+        player.setDefault();
         generateTerrain();
+        Graphic.panel.setVisible(true);
+        Graphic.gameOver.setVisible(false);
     }
-
     /**
      * Xóa các đối tượng khỏi màn hình (hình ảnh và health bar)
      */

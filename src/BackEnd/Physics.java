@@ -89,24 +89,39 @@ public abstract class Physics {
      */
     public static void processProjectileDamage(ArrayList<Terrain> terrains,ArrayList<Enemy> enemies,ArrayList<Projectile> projectiles,Player player) {
         for(Projectile projectile : projectiles) {
-            if (projectile.isDamageToTerrain()) {
-                for (Terrain terrain : terrains) {
-                    if (checkIntersect(projectile.box,terrain.box) && !terrain.isPassable()) {
-                        terrain.reduceHeath(projectile.getDamage());
+            if (!(projectile.getName().equals("Bomb") && !DefaultParameter.canBombCauseDamage)) {
+                if (projectile.isDamageToTerrain()) {
+                    for (Terrain terrain : terrains) {
+                        if (checkIntersect(projectile.box, terrain.box) && !terrain.isPassable()) {
+                            terrain.reduceHeath(projectile.getDamage());
+                        }
+                    }
+                }
+                if (projectile.isDamageToEnemy()) {
+                    for (Enemy enemy : enemies) {
+                        if (checkIntersect(projectile.box, enemy.box)) {
+                            enemy.reduceHeath(projectile.getDamage());
+                        }
+                    }
+                }
+                if (projectile.isDamageToPlayer()) {
+                    if (checkIntersect(projectile.box, player.box)) {
+                        player.reduceHeath(projectile.getDamage());
                     }
                 }
             }
-            if (projectile.isDamageToEnemy()) {
-                for (Enemy enemy : enemies) {
-                    if (checkIntersect(projectile.box,enemy.box)) {
-                        enemy.reduceHeath(projectile.getDamage());
-                    }
-                }
-            }
-            if (projectile.isDamageToPlayer()) {
-                if (checkIntersect(projectile.box,player.box)) {
-                    player.reduceHeath(projectile.getDamage());
-                }
+        }
+    }
+
+    /**
+     * Xử lý sát thương gây ra khi va chạm
+     * @param enemies
+     * @param player
+     */
+    public static void processIntersectDamage(ArrayList<Enemy> enemies,Player player) {
+        for (Enemy enemy : enemies) {
+            if (checkIntersect(enemy.box,player.box)) {
+                player.reduceHeath(enemy.getDamage());
             }
         }
     }

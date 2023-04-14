@@ -1,21 +1,20 @@
 package Graphic;
 
 import BackEnd.*;
-import Entities.*;
 
 /**
  * Lớp thử nghiệm
  * Note: Chưa áp dụng trong code
  */
-public abstract class TestModule {
-    public static final boolean testEnable = false;
+public abstract class AdventureMode {
     public static void movePanel(int moveX,int moveY) {
         int x = Graphic.panel.getX();
         int y = Graphic.panel.getY();
         Graphic.panel.setLocation(x-moveX,y-moveY);
     }
     public static void panelTestInitialize() {
-        Graphic.panel.setLocation(-400,-400);
-        MainProcess.player.setLocation(800,600);
+        int x = MainProcess.player.box.getX();
+        int y = MainProcess.player.box.getY();
+        Graphic.panel.setLocation(DefaultParameter.panelWidth/2 - x,DefaultParameter.panelHeight/2 - y);
     }
 }

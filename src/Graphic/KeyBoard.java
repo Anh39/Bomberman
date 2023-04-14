@@ -1,8 +1,6 @@
 package Graphic;
 
-import BackEnd.KeyState;
-import BackEnd.MainProcess;
-import BackEnd.MyClock;
+import BackEnd.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -80,13 +78,17 @@ public abstract class KeyBoard {
                     MainProcess.placeBomb(MainProcess.player);
                 }
                 if (key == 69) {
-                    MainProcess.spawnEnemy();
+                    if (DefaultParameter.sandbox) {
+                        SpawnManager.spawnEnemy();
+                    }
                 }
                 if (key == 37 || key == 38 || key == 39 || key == 40) {
                     MyClock.playerMove(keyStates);
                 }
                 if (key == 81) {
-                    MainProcess.spawnBuff();
+                    if (DefaultParameter.sandbox) {
+                        SpawnManager.spawnBuff();
+                    }
                 }
                 if (key == 70) {
                     if (Graphic.statusPanel.isVisible()) {

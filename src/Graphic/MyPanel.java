@@ -25,6 +25,7 @@ public class MyPanel extends JLayeredPane {
     public MyPanel() {
         this.setPreferredSize(new Dimension(DefaultParameter.panelWidth, DefaultParameter.panelHeight));
         this.setBackground(Color.black);
+        this.setBorder(BorderFactory.createLineBorder(DefaultParameter.borderColor,5));
         this.setLayout(null);
     }
     /**

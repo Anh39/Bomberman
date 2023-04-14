@@ -21,6 +21,7 @@ public class VolumeControl {
         gainControl.setValue(newVolume);
     }
     public static void setVolume(Clip clip, float volume) {
+        volume /= 100;
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
         gainControl.setValue(dB);

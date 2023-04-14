@@ -23,8 +23,12 @@ public abstract class Graphic {
     public static MyPanel statusPanel = new MyPanel();
     // Bảng chứa bảng save/load
     public static MyPanel saveLoadPanel = new MyPanel();
+    // Bảng chứa bảng setting
+    public static MyPanel settingPanel = new MyPanel();
     // JLabel để chỉnh hình nền
     public static JLabel menuBackground = New.menuBackground();
+    //
+    public static MyPanel gameOver = New.gameOver();
     /**
      * Khởi tạo đồ họa
      */
@@ -35,15 +39,22 @@ public abstract class Graphic {
         frame.add(basePanel);
 
         // Chỉnh bảng nền
+        basePanel.setBackground(Color.BLACK);
         basePanel.setPreferredSize(new Dimension(DefaultParameter.panelWidth,DefaultParameter.panelHeight));
         basePanel.add(panel,Integer.valueOf(1));
         basePanel.add(menuPanel,Integer.valueOf(2));
 
-        // Chỉnh
-        panel.setBounds(0,0,DefaultParameter.panelWidth,DefaultParameter.panelHeight);
+        //
+        panel.setBounds(0, 0, DefaultParameter.panelWidth, DefaultParameter.panelHeight);
         basePanel.add(menuBackground,Integer.valueOf(0));
         basePanel.add(statusPanel,Integer.valueOf(10));
         basePanel.add(saveLoadPanel,Integer.valueOf(15));
+        basePanel.add(settingPanel,Integer.valueOf(20));
+
+        // Chỉnh bảng setting
+        settingPanel.setOpaque(true);
+        settingPanel.setBackground(DefaultParameter.menuColor);
+        settingPanel.setBounds(250,50,850,650);
 
         // Chỉnh bảng save/load
         saveLoadPanel.setOpaque(true);
@@ -54,29 +65,38 @@ public abstract class Graphic {
         menuPanel.setBounds(0,0,DefaultParameter.menuPanelWidth,DefaultParameter.menuPanelHeight);
         menuPanel.setVisible(false);
 
+        statusPanel.setVisible(false);
+
         frame.pack();
         frame.setVisible(true);
 
         MyMenu.saveLoadMenuInitialization(); // Khỏi tạo menu save/load
         MyMenu.mainMenuInitialization(); // Khởi tạo menu
-        MyMenu.addMainMenu(panel); // Ban đầu thêm menu
-
-
+        MyMenu.addMainMenu(basePanel); // Ban đầu thêm menu
+        MyMenu.showMainMenu();
+        MyMenu.settingMenuInitialization();
+        MyClock.startClock(); // Khỏi tạo đồng hồ
+        StatusBar.initialization(); // Khỏi tạo thanh trạng thái
+        MyMenu.subMenuInitialization(); // Khỏi tạo menu phụ
+        SpawnManager.spawnPlayer();
+        basePanel.add(gameOver,Integer.valueOf(39));
+        gameOver.setVisible(false);
     }
 
     /**
      * Khởi tạo game sau khi đóng menu chính
      */
     public static void initialization() {
+        gameOver.setVisible(false);
         menuBackground.setVisible(false);
-        StatusBar.initialization(); // Khỏi tạo thanh trạng thái
         Render.initialize(); // Khỏi tạo render
-        MyClock.startClock(); // Khỏi tạo đồng hồ
+        if (DefaultParameter.adventureMode) {
+            panel.setBounds(0,0,DefaultParameter.panelWidth*DefaultParameter.adventureModeX, DefaultParameter.panelHeight*DefaultParameter.adventureModeY);
+        }
         MainProcess.generateTerrain(); // Khởi tạo địa hình
         KeyBoard.keyInitialization(); // Khởi tạo trạng thái phím
-        MyMenu.subMenuInitialization(); // Khỏi tạo menu phụ
-        if (TestModule.testEnable) {
-            TestModule.panelTestInitialize();
+        if (DefaultParameter.adventureMode) {
+            AdventureMode.panelTestInitialize();
         }
     }
 }

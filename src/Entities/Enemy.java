@@ -15,6 +15,8 @@ import java.util.Random;
 public class Enemy extends Entity{
     //Biến để quản lý render
     private int renderState = 0;
+    //Chỉnh xem quái có thể đặt bom hay không
+    private boolean canPlaceBomb = true;
     //cooldown ở đây là khoảng thời gian giữa 2 lần đặt bom
     private int cooldown;
     public Enemy() {
@@ -36,6 +38,15 @@ public class Enemy extends Entity{
             renderState = 1;
         }
     }
+
+    public boolean isCanPlaceBomb() {
+        return canPlaceBomb;
+    }
+
+    public void setCanPlaceBomb(boolean canPlaceBomb) {
+        this.canPlaceBomb = canPlaceBomb;
+    }
+
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
     }
@@ -115,6 +126,7 @@ public class Enemy extends Entity{
     @Override
     public void setDefault() {
         bar.setMaximum(DefaultParameter.enemyMaxHeath);
+        setCanPlaceBomb(DefaultParameter.canEnemyPlaceBomb);
         setMaxHeath(DefaultParameter.enemyMaxHeath);
         setHeath(DefaultParameter.enemyHeath);
         setDamage(DefaultParameter.enemyDamage);
