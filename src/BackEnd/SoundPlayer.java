@@ -6,6 +6,10 @@ import javax.sound.sampled.*;
 public class SoundPlayer {
     private Clip clip;
 
+    public Clip getClip() {
+        return clip;
+    }
+
     public SoundPlayer(String path) {
         try {
             path = SoundPlayer.class.getResource(path).toString();
@@ -42,17 +46,13 @@ public class SoundPlayer {
     }
 
     public void playloop() {
-        VolumeControl.setVolume(this.clip,DefaultParameter.backgroundMusicVolume);
+        //VolumeControl.setVolume(this.clip,DefaultParameter.backgroundMusicVolume);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public static void soundboom() {
         SoundPlayer sound = new SoundPlayer("/Music/boom.wav");
         sound.play();
-    }
-    public static void soundnen() {
-        SoundPlayer sound = new SoundPlayer("/Music/nhacnen.wav");
-        sound.playloop();
     }
 
     public static void sounddefeat() {
@@ -69,6 +69,7 @@ public class SoundPlayer {
         SoundPlayer sound = new SoundPlayer("/Music/datboom.wav");
         sound.play();
     }
+
 }
 
 // Nguồn : https://tiengdong.com/

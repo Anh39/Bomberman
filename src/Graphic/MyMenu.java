@@ -1,9 +1,6 @@
 package Graphic;
 
-import BackEnd.DefaultParameter;
-import BackEnd.MainProcess;
-import BackEnd.MyClock;
-import BackEnd.SaverLoader;
+import BackEnd.*;
 import Entities.New;
 
 import javax.swing.*;
@@ -312,6 +309,7 @@ public abstract class MyMenu {
                 if (e.getSource() == musicSlider) {
                     backgroundMusicSetting.setText("Music Volume    : " + musicSlider.getValue());
                     DefaultParameter.backgroundMusicVolume = musicSlider.getValue();
+                    SoundTrack.updateMusic();
                 } else if (e.getSource() == soundSlider) {
                     soundEffectSetting.setText("Sound Volume   : " + soundSlider.getValue());
                     DefaultParameter.soundEffectVolume = soundSlider.getValue();

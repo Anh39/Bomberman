@@ -23,6 +23,14 @@ public abstract class KeyBoard {
         KeyState qKey = new KeyState(81);
         KeyState fKey = new KeyState(70);
         KeyState escKey = new KeyState(27);
+        KeyState bKey = new KeyState(66);
+        KeyState ikey = new KeyState(73);
+        KeyState tKey = new KeyState(84);
+        KeyState dKey = new KeyState(68);
+        keyStates.add(bKey);
+        keyStates.add(ikey);
+        keyStates.add(tKey);
+        keyStates.add(dKey);
         keyStates.add(leftKey);
         keyStates.add(rightKey);
         keyStates.add(upKey);
@@ -105,6 +113,12 @@ public abstract class KeyBoard {
                     else {
                         Graphic.menuPanel.setVisible(true);
                     }
+                }
+                if (key == 66) {
+                    SoundTrack.playSoundTrack();
+                }
+                if (key == 84) {
+                    SoundTrack.off();
                 }
             }
         }
