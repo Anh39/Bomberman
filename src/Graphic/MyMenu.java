@@ -75,6 +75,7 @@ public abstract class MyMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == newGame) {
+                    SoundPlayer.soundClick();
                     System.out.println("New game button clicked");
                     hideMainMenu(); // Xóa menu
                     Render.rendering = true; // Bật render
@@ -82,12 +83,14 @@ public abstract class MyMenu {
                     MainProcess.newGame();
                 }
                 else if (e.getSource() == loadGame) {
+                    SoundPlayer.soundClick();
                     isSaving = false;
                     changeSaveLoad();
                     Graphic.saveLoadPanel.setVisible(true);
                     System.out.println("Load game button clicked");
                 }
                 else if (e.getSource() == configGame) {
+                    SoundPlayer.soundClick();
                     System.out.println("Config game button clicked");
                     if (Graphic.settingPanel.isVisible()) {
                         Graphic.settingPanel.setVisible(false);
@@ -96,6 +99,7 @@ public abstract class MyMenu {
                     }
                 }
                 else if (e.getSource() == exitGame) {
+                    SoundPlayer.soundClick();
                     System.out.println("Exit game button clicked");
                     System.exit(0);
                 }
@@ -160,19 +164,23 @@ public abstract class MyMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == miniNewGameButton) {
+                    SoundPlayer.soundClick();
                     MainProcess.newGame();
                 }
                 else if (e.getSource() == miniSaveGameButton) {
+                    SoundPlayer.soundClick();
                     isSaving = true;
                     changeSaveLoad();
                     Graphic.saveLoadPanel.setVisible(true);
                 }
                 else if (e.getSource() == miniLoadGameButton) {
+                    SoundPlayer.soundClick();
                     isSaving = false;
                     changeSaveLoad();
                     Graphic.saveLoadPanel.setVisible(true);
                 }
                 else if (e.getSource() == miniConfigGameButton) {
+                    SoundPlayer.soundClick();
                     if (Graphic.settingPanel.isVisible()) {
                         Graphic.settingPanel.setVisible(false);
                     } else {
@@ -180,9 +188,11 @@ public abstract class MyMenu {
                     }
                 }
                 else if (e.getSource() == miniExitGameButton) {
+                    SoundPlayer.soundClick();
                     System.exit(0);
                 }
                 else if (e.getSource() == newGameButton2) {
+                    SoundPlayer.soundClick();
                     MainProcess.newGame();
                 }
             }
@@ -223,9 +233,11 @@ public abstract class MyMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == exitSaveLoad) {
+                    SoundPlayer.soundClick();
                     Graphic.saveLoadPanel.setVisible(false);
                 }
                 for (int i=0;i<datas.size();i++) {
+                    SoundPlayer.soundClick();
                     if (e.getSource() == datas.get(i)) {
                         System.out.println("Save : " + (i+1) + " Clicked");
                     }
@@ -384,25 +396,35 @@ public abstract class MyMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == canEnemyPlaceBombCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.canEnemyPlaceBomb = canEnemyPlaceBombCheckBox.isSelected();
                     SaverLoader.changeEnemy();
                 } else if (e.getSource() == intersectDamageCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.intersectDamage = intersectDamageCheckBox.isSelected();
                 } else if (e.getSource() == enemyDamageToEnemyCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.enemyDamageToEnemy = enemyDamageToEnemyCheckBox.isSelected();
                 } else if (e.getSource() == enemyDamageToPlayerCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.enemyDamageToPlayer = enemyDamageToPlayerCheckBox.isSelected();
                 } else if (e.getSource() == enemyDamageToTerrainCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.enemyDamageToTerrain = enemyDamageToTerrainCheckBox.isSelected();
                 } else if (e.getSource() == playerDamageToEnemyCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.playerDamageToEnemy = playerDamageToEnemyCheckBox.isSelected();
                 } else if (e.getSource() == playerDamageToPlayerCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.playerDamageToPlayer = playerDamageToPlayerCheckBox.isSelected();
                 } else if (e.getSource() == playerDamageToTerrainCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.playerDamageToPlayer = playerDamageToPlayerCheckBox.isSelected();
                 } else if (e.getSource() == canBombCauseDamageCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.canBombCauseDamage = canBombCauseDamageCheckBox.isSelected();
                 } else if (e.getSource() == adventureModeCheckBox) {
+                    SoundPlayer.soundClick();
                     DefaultParameter.adventureMode = adventureModeCheckBox.isSelected();
                 }
             }

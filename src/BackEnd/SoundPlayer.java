@@ -29,9 +29,17 @@ public class SoundPlayer {
         }
     }
 
-    public void play() {
+    public void playEffect() {
         if (clip != null) {
             VolumeControl.setVolume(this.clip,DefaultParameter.soundEffectVolume);
+            stop();
+            clip.setFramePosition(0);
+            clip.start();
+        }
+    }
+    public void playSystem() {
+        if (clip != null) {
+            VolumeControl.setVolume(this.clip,DefaultParameter.systemEffectVolume);
             stop();
             clip.setFramePosition(0);
             clip.start();
@@ -46,30 +54,33 @@ public class SoundPlayer {
     }
 
     public void playloop() {
-        //VolumeControl.setVolume(this.clip,DefaultParameter.backgroundMusicVolume);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public static void soundboom() {
         SoundPlayer sound = new SoundPlayer("/Music/boom.wav");
-        sound.play();
+        sound.playEffect();
     }
 
     public static void sounddefeat() {
         SoundPlayer sound = new SoundPlayer("/Music/defeat.wav");
-        sound.play();
+        sound.playSystem();
     }
 
     public static void soundwin() {
         SoundPlayer sound = new SoundPlayer("/Music/victory.wav");
-        sound.play();
+        sound.playSystem();
     }
 
     public static void sounddatboom() {
         SoundPlayer sound = new SoundPlayer("/Music/datboom.wav");
-        sound.play();
+        sound.playEffect();
     }
 
+    public static void soundClick() {
+        SoundPlayer sound = new SoundPlayer("/Music/Click.wav");
+        sound.playSystem();
+    }
 }
 
 // Nguồn : https://tiengdong.com/
