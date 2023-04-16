@@ -13,6 +13,9 @@ import java.util.Random;
  */
 
 public class Enemy extends Entity{
+    int count = 0;
+    int moveX = 0;
+    int moveY = getSpeed();
     //Biến để quản lý render
     private int renderState = 0;
     //Chỉnh xem quái có thể đặt bom hay không
@@ -69,54 +72,51 @@ public class Enemy extends Entity{
      * Tính theo 1 lần quét của MyClock (tầm 1 giây quét 1 lần)
      */
     public void move() {
-        int moveX = 0; // Tọa độ X di chuyển thêm
-        int moveY = 0; // Tọa độ Y di chuyển thêm
         int x = this.box.getX(); // Tọa độ hiện tại
         int y = this.box.getY(); // Tọa độ hiện tại
+        count++;
 
-        // Đoạn code xác định hướng đi
-        // this.getSpeed() để lấy tốc độ của quái
-        // Physic.calculateDistance(player,this) để lấy khoảng cách giữa người chơi và quái, trả về double , quái , người chơi là 50*50
-        // người chơi là MainProcess.player , quái là this ; hitbox là thêm .box vào : MainProcess.player.box, this.box
-        // this.box.getX , getY , getWidth,getHeigh để lấy tọa độ và kích thước
-        // trục tọa độ :
-        /*
-        0---------------->x
-        |
-        |
-        |
-        |
-        mũi tên xuống
-        |y
-        //trục y hướng xuống dưới
-         */
+        if (count == 10) {
+            Random rand = new Random();
+            int direction = rand.nextInt(0, 1000);
 
-        // Chủ yếu là tính cho t cái moveX và moveY
-        // Bắt đầu
-        Random rand = new Random();
-        int direction = rand.nextInt(0,3+1);
-
-        if (direction == 0) {
-            moveX += this.getSpeed();
-        }
-        else if (direction == 1) {
-            moveX -= this.getSpeed();
-        }
-        else if (direction == 2) {
-            moveY += this.getSpeed();
-        }
-        else  {
-            moveY -= this.getSpeed();
+            if (direction >= 0 && direction <= 250) {
+                moveX += this.getSpeed();
+                moveY = 0;
+            } else if (direction >= 251 && direction <= 500) {
+                moveX -= this.getSpeed();
+                moveY = 0;
+            } else if (direction >= 501 && direction <= 750) {
+                moveX = 0;
+            } else {
+                moveX = 0;
+                moveY -= this.getSpeed();
+            }
+            count = 0;
         }
 
-        // Kết thúc
-        boolean con1 = x+moveX>=0;
-        boolean con2 = y+moveY>=0;
-        boolean con3 = x+moveX<=Graphic.panel.getWidth() -this.box.getWidth();
-        boolean con4 = y+moveY<=Graphic.panel.getHeight()-this.box.getHeight();
-        boolean con = con1 && con2 && con3 && con4; // Kiểm tra xem ngoài khung hình chưa
-        if ((!Physics.checkIntersectTerrain(MainProcess.terrains,this,moveX,moveY)) && con) { // Kiểm tra xem có giao với địa hình không
-                this.setLocation(x + moveX, y + moveY); // Di chuyển quái
+        if ((!Physics.checkIntersectTerrain(MainProcess.terrains,this,moveX,moveY))
+                && x+moveX>=0 && y+moveY>=0
+                && x+moveX<=Graphic.panel.getWidth() -this.box.getWidth()
+                && y+moveY<=Graphic.panel.getHeight()-this.box.getHeight()) { // Kiểm tra xem có giao với địa hình không
+            x += moveX; y += moveY;
+            this.setLocation(x, y);
+        } else {
+            Random rand = new Random();
+            int direction = rand.nextInt(0, 1000);
+
+            if (direction >= 0 && direction <= 250) {
+                moveX += this.getSpeed();
+                moveY = 0;
+            } else if (direction >= 251 && direction <= 500) {
+                moveX -= this.getSpeed();
+                moveY = 0;
+            } else if (direction >= 501 && direction <= 750) {
+                moveX = 0;
+            } else {
+                moveX = 0;
+                moveY -= this.getSpeed();
+            }
         }
     }
 
