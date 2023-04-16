@@ -6,10 +6,8 @@ import Entities.New;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * Lớp trừu tượng để xử lý phần menu
@@ -29,6 +27,8 @@ public abstract class MyMenu {
     public static JButton miniConfigGameButton = New.miniMenuButton();
     public static JButton miniExitGameButton = New.miniMenuButton();
     public static JButton newGameButton2 = New.miniMenuButton();
+    public static JLabel invincibleStatus = New.invincibleBuffStatus();
+    public static JLabel speedStatus = New.speedBuffStatus();
     /**
      * Setting
      */
@@ -171,10 +171,16 @@ public abstract class MyMenu {
         miniConfigGameButton.setText("Config");
         miniExitGameButton.setText("Exit");
         newGameButton2.setText("New Game");
-        miniNewGameButton.setLocation(0,0);
-        miniConfigGameButton.setLocation(miniNewGameButton.getX()+miniNewGameButton.getWidth(),miniNewGameButton.getY());
-        miniExitGameButton.setLocation(miniConfigGameButton.getX()+miniConfigGameButton.getWidth(),miniConfigGameButton.getY());
+        int panelY = Graphic.menuPanel.getWidth()-miniNewGameButton.getWidth();
+        miniNewGameButton.setLocation(panelY,0);
+        miniConfigGameButton.setLocation(miniNewGameButton.getX()-miniNewGameButton.getWidth(),miniNewGameButton.getY());
+        miniExitGameButton.setLocation(miniConfigGameButton.getX()-miniConfigGameButton.getWidth(),miniConfigGameButton.getY());
 
+
+        Graphic.menuPanel.add(invincibleStatus);
+        Graphic.menuPanel.add(speedStatus);
+        invincibleStatus.setLocation(0,0);
+        speedStatus.setLocation(invincibleStatus.getWidth(),0);
         Graphic.gameOver.add(newGameButton2,Integer.valueOf(40));
         newGameButton2.setLocation(DefaultParameter.panelWidth/2,DefaultParameter.panelHeight/2);
     }

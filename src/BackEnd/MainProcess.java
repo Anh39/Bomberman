@@ -3,7 +3,6 @@ package BackEnd;
 import Entities.*;
 import Graphic.*;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -46,7 +45,20 @@ public abstract class MainProcess {
             }
         }
     }
-
+    public static void buffDecay() {
+        for (Buff buff : buffs) {
+            if (buff.isReceived()) {
+                buff.reduceDuration();
+                if (buff.getName().equals("Invincible")) {
+                    player.invincibleTime = buff.getBuffDuration();
+                    MyMenu.invincibleStatus.setText("" + MainProcess.player.invincibleTime);
+                } else if (buff.getName().equals("More Speed")) {
+                    player.speedTime = buff.getBuffDuration();
+                    MyMenu.speedStatus.setText("" + MainProcess.player.speedTime);
+                }
+            }
+        }
+    }
     /**
      * Kích nổ bom, tạo các mảnh bom
      * @param index : vị trí của quả bom trong ArrayList<Projectile>

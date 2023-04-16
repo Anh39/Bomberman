@@ -117,6 +117,10 @@ public abstract class Entity {
         this.heath = heath;
     }
     public void addHeath(int heath) {
+        if (this.heath + heath >= this.maxHeath) {
+            this.heath = this.maxHeath;
+            return;
+        }
         this.heath += heath;
     }
     public int getHeath() {

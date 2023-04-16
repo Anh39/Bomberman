@@ -73,6 +73,9 @@ public abstract class Physics {
         for (Buff buff : buffs) {
             if (!buff.isReceived()) {
                 if (checkIntersect(player.box, buff.box)) {
+                    if (buff.getName().equals("More Speed") && MainProcess.player.getSpeed() == 2*DefaultParameter.playerSpeed ) {
+                        break;
+                    }
                     buff.setReceived(true);
                     buff.activeBuff(player);
                     Graphic.panel.remove(buff.box);
@@ -108,7 +111,9 @@ public abstract class Physics {
                 }
                 if (projectile.isDamageToPlayer()) {
                     if (checkIntersect(projectile.box, player.box)) {
-                        player.reduceHeath(projectile.getDamage());
+                        if (!player.invincible) {
+                            player.reduceHeath(projectile.getDamage());
+                        }
                     }
                 }
             }
@@ -123,7 +128,9 @@ public abstract class Physics {
     public static void processIntersectDamage(ArrayList<Enemy> enemies,Player player) {
         for (Enemy enemy : enemies) {
             if (checkIntersect(enemy.box,player.box)) {
-                player.reduceHeath(enemy.getDamage());
+                if (!player.invincible) {
+                    player.reduceHeath(enemy.getDamage());
+                }
             }
         }
     }

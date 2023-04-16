@@ -50,7 +50,21 @@ public abstract class SpawnManager {
         if (buffNumber == 1) {
             Buff buff = New.Health();
             MainProcess.buffs.add(buff);
+        } else if (buffNumber == 2) {
+            Buff buff = New.MoreSpeed();
+            MainProcess.buffs.add(buff);
+        } else if (buffNumber == 3) {
+            Buff buff = New.StrongerBomb();
+            MainProcess.buffs.add(buff);
+        } else if (buffNumber == 4) {
+            Buff buff = New.moreHealth();
+            MainProcess.buffs.add(buff);
+        } else if (buffNumber == 5) {
+            Buff buff = New.invincible();
+            MainProcess.buffs.add(buff);
         }
+
+
         //
         MainProcess.buffs.get(MainProcess.buffs.size() - 1).setLocation(MainProcess.getAvailableCoordinates());
     }

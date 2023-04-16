@@ -14,6 +14,9 @@ import java.util.ArrayList;
  * Đối tượng người chơi
  */
 public class Player extends Entity{
+    public boolean invincible = false;
+    public int invincibleTime = 0;
+    public int speedTime = 0;
     // Điểm số của người chơi
     private int score;
     /**

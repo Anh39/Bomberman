@@ -10,11 +10,11 @@ public abstract class DefaultParameter {
     public static int difficulty = 1;
     public static final boolean sandbox = false;
     public static int treeRatio = 5;
-    public static final int maxNumberOfBuffs = 1;  // Số loại buff
+    public static final int maxNumberOfBuffs = 5;  // Số loại buff
     public static boolean adventureMode = false;
     // Sound
-    public static float backgroundMusicVolume = 0;
-    public static float soundEffectVolume = 1;
+    public static float backgroundMusicVolume = 10;
+    public static float soundEffectVolume = 10;
     public static float systemEffectVolume = 50;
     // Color
     public static final Color menuColor = new Color(170,210,239);
@@ -26,18 +26,19 @@ public abstract class DefaultParameter {
     public static final int menuPanelWidth = 1400;
     public static final int menuPanelHeight = 50;
     public static final int panelWidth = 1400;   // Chiều rộng của màn chơi
-    public static final int panelHeight = 800;   // Chiều cao của màn chơi
+    public static final int panelHeight = 750;   // Chiều cao của màn chơi
     // Label
     public static final int labelWidth = 50;
     public static final int labelHeight = 50;
     // Time
+    public static int buffDelay = 100;
     public static int enemySpawn = 500;
     public static int enemySpawnD = 500;
     public static int buffSpawn = 2500;
     public static int buffSpawnD = 2500;
     public static final int baseClockDelay = 10;
     public static final int renderDelay = 10;
-    public static final int enemyMoveDelay = 50;
+    public static final int enemyMoveDelay = 10;
     public static final int playerMoveDelay = 1;
     public static final int playerPlaceBombDelay = 100;
     public static final int bombDelay = 10;
@@ -59,7 +60,7 @@ public abstract class DefaultParameter {
     public static int enemyHeathD = 50;
     public static int enemyDamage = 10;
     public static int enemyDamageD = 10;
-    public static int enemySpeed = 50;
+    public static int enemySpeed = 10;
     public static int enemyRange = 1;
     public static double enemyAngle = 0;
     public static int enemyCooldown = 100;

@@ -1,5 +1,7 @@
 package Entities;
 
+import BackEnd.MainProcess;
+
 /**
  * Đối tượng Buff
  */
@@ -8,7 +10,7 @@ public class Buff extends Entity{
     private boolean received; // Kiểm tra xem người chơi đã tương tác với buff chưa (Bắt đầu tính thời gian tồn tại)
     public Entity receiver; // Lưu tham chiếu đến đối tượng tương tác với buff
     public Buff() {
-        this.buffDuration = 1;
+        this.buffDuration = 10;
         this.received = false;
     }
 
@@ -27,6 +29,9 @@ public class Buff extends Entity{
 
     public int getBuffDuration() {
         return buffDuration;
+    }
+    public void reduceDuration(){
+        this.buffDuration--;
     }
 
     /**
@@ -56,6 +61,10 @@ public class Buff extends Entity{
         entity.addDamage(this.getDamage());
         entity.addSpeed(this.getSpeed());
         entity.addRange(this.getRange());
+        entity.bar.setMaximum(entity.getMaxHeath());
+        if (this.getName().equals("Invincible")) {
+            MainProcess.player.invincible = true;
+        }
     }
 
     /**
@@ -67,5 +76,8 @@ public class Buff extends Entity{
         receiver.addDamage(-this.getDamage());
         receiver.addSpeed(-this.getSpeed());
         receiver.addRange(-this.getRange());
+        if (this.getName().equals("Invincible")) {
+            MainProcess.player.invincible = false;
+        }
     }
 }

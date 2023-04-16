@@ -55,7 +55,7 @@ public abstract class Graphic {
 
         // Chỉnh bảng menu
         menuPanel.setBounds(0,0,DefaultParameter.menuPanelWidth,DefaultParameter.menuPanelHeight);
-        menuPanel.setVisible(false);
+        menuPanel.setVisible(true);
 
         statusPanel.setVisible(false);
 

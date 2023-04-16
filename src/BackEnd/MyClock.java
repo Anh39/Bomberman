@@ -1,5 +1,6 @@
 package BackEnd;
 
+import Entities.Buff;
 import Entities.Enemy;
 import Graphic.Render;
 import Graphic.StatusBar;
@@ -21,6 +22,7 @@ public abstract class MyClock{
     public static int enemyMoveDelay = 0; // Thời gian kẻ địch di chuyển
     public static int playerMoveDelay = 0; // THời gian người chơi di chuyển
     public static int playerPlaceBombDelay = 0;
+    public static int buffDelay = 0;
     public static boolean playerMoveAvailable = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static boolean isPlayerMove = false; // Biến dùng cho việc xử lý di chuyển của người chơi
     public static int playerMovedCount = 0; // Biến dùng cho việc xử lý di chuyển của người chơi
@@ -58,6 +60,7 @@ public abstract class MyClock{
             playerMoveDelay++;
             playerPlaceBombDelay++;
             renderDelay++;
+            buffDelay++;
             SpawnManager.runTime();
             if (isPlayerMove) {
                 //System.out.println(playerMovedCount);
@@ -65,7 +68,7 @@ public abstract class MyClock{
                     playerMovedCount = 0;
                     isPlayerMove = false;
                 } else if (playerMoveAvailable) {
-                    MainProcess.player.move((int) playerMoveDim.getWidth(), (int) playerMoveDim.getHeight(), MainProcess.terrains);
+                    MainProcess.player.move((int)Math.round(playerMoveDim.getWidth()),(int)Math.round(playerMoveDim.getHeight()), MainProcess.terrains);
                     playerMovedCount++;
                 }
             }
@@ -84,6 +87,10 @@ public abstract class MyClock{
                 if (renderState > DefaultParameter.maxRenderStates) {
                     renderState = 1;
                 }
+            }
+            if (buffDelay > DefaultParameter.buffDelay) {
+                buffDelay = 0;
+                MainProcess.buffDecay();
             }
             if (bombDelay > DefaultParameter.bombDelay) {
                 bombDelay = 0;

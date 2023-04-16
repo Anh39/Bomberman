@@ -23,6 +23,10 @@ public abstract class New {
     public static ImageIcon menuBackGround = new ImageIcon(New.class.getResource("/Images/Other/Menu Background.jpg"));
     public static ImageIcon gameOverImg = new ImageIcon(New.class.getResource("/Images/Other/GameOver.png"));
     public static ImageIcon heathRegenBuff = new ImageIcon(New.class.getResource("/Images/Buff/Regen Heath Buff.png"));
+    public static ImageIcon speedBuff = new ImageIcon(New.class.getResource("/Images/Buff/Speed Buff.png"));
+    public static ImageIcon rangeBuff = new ImageIcon(New.class.getResource("/Images/Buff/Range Buff.png"));
+    public static ImageIcon invincibleBuff = new ImageIcon(New.class.getResource("/Images/Buff/Invincible Buff.png"));
+    public static ImageIcon maxHeathBuff = new ImageIcon(New.class.getResource("/Images/Buff/Max Heath Buff.png"));
     //Player
     public static Player player() {
         Player player = new Player();
@@ -190,22 +194,67 @@ public abstract class New {
      */
     public static Buff Health() {
         Buff moreHealth = new Buff();
-        moreHealth.setHeath(moreHealth.getHeath() + 50);
+        moreHealth.setZero();
+        moreHealth.setBuffDuration(-1);
+        moreHealth.setHeath(50);
         moreHealth.setName("More Health");
         moreHealth.box.setIcon(heathRegenBuff);
+        return moreHealth;
+    }
+    public static Buff moreHealth() {
+        Buff moreMaxHeath = new Buff();
+        moreMaxHeath.setZero();
+        moreMaxHeath.setBuffDuration(-1);
+        moreMaxHeath.setMaxHeath(50);
+        moreMaxHeath.setName("More Max Health");
+        moreMaxHeath.box.setIcon(maxHeathBuff);
+        return moreMaxHeath;
+    }
+    public static Buff invincible() {
+        Buff moreHealth = new Buff();
+        moreHealth.setZero();
+        moreHealth.setBuffDuration(5);
+        moreHealth.setName("Invincible");
+        moreHealth.box.setIcon(invincibleBuff);
         return moreHealth;
     }
 
     public static Buff StrongerBomb() {
         Buff strongerBomb =  new Buff();
         strongerBomb.setZero();
-        strongerBomb.setRange(strongerBomb.getRange() + 1);
+        strongerBomb.setRange(1);
+        strongerBomb.setBuffDuration(-1);
+        strongerBomb.setName("More Range");
+        strongerBomb.box.setIcon(rangeBuff);
         return strongerBomb;
     }
     public static Buff MoreSpeed() {
         Buff faster =  new Buff();
         faster.setZero();
-        faster.setSpeed(faster.getSpeed() + 10);
+        faster.setSpeed(faster.getSpeed() + DefaultParameter.playerSpeed);
+        faster.setName("More Speed");
+        faster.box.setIcon(speedBuff);
         return faster;
     }
+    public static JLabel invincibleBuffStatus() {
+        JLabel label = new JLabel();
+        label.setBounds(0,0,100,50);
+        label.setIcon(invincibleBuff);
+        label.setFont(font);
+        label.setOpaque(true);
+        return label;
+    }
+    public static JLabel speedBuffStatus() {
+        JLabel label = new JLabel();
+        label.setBounds(0,0,100,50);
+        label.setIcon(speedBuff);
+        label.setFont(font);
+        label.setOpaque(true);
+        return label;
+    }
 }
+
+
+
+
+//https://game-endeavor.itch.io/mystic-woods
