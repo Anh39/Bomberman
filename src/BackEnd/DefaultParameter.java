@@ -37,7 +37,7 @@ public abstract class DefaultParameter {
     public static int buffSpawnD = 2500;
     public static final int baseClockDelay = 10;
     public static final int renderDelay = 10;
-    public static final int enemyMoveDelay = 50;
+    public static final int enemyMoveDelay = 10;
     public static final int playerMoveDelay = 1;
     public static final int playerPlaceBombDelay = 100;
     public static final int bombDelay = 10;
