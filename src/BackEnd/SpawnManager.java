@@ -4,6 +4,7 @@ import Entities.Buff;
 import Entities.Enemy;
 import Entities.New;
 import Entities.Terrain;
+import Graphic.Graphic;
 
 import java.util.Random;
 
@@ -58,15 +59,7 @@ public abstract class SpawnManager {
      * Note : hiện tại chưa dùng
      */
     public static void spawnPlayer() {
-        MainProcess.player.setLocation(150,150);
-        //System.out.println(MainProcess.player.box.getX() + "|" + MainProcess.player.box.getY());
-        for (Terrain terrain : MainProcess.terrains) {
-            if (!terrain.isPassable()) {
-                if (terrain.box.getLocation().equals(MainProcess.player.box.getLocation())) {
-                    MainProcess.terrains.remove(terrain);
-                }
-            }
-        }
+        MainProcess.player.setLocation(MainProcess.getAvailableCoordinates());
         spawnEnemy();
     }
 }

@@ -9,10 +9,8 @@ public abstract class DefaultParameter {
     //Other
     public static int difficulty = 1;
     public static final boolean sandbox = false;
-    public static boolean firstTime = true;
     public static int treeRatio = 5;
     public static final int maxNumberOfBuffs = 1;  // Số loại buff
-    public static final int maxSaveData = 5;
     public static boolean adventureMode = false;
     // Sound
     public static float backgroundMusicVolume = 0;
@@ -89,8 +87,6 @@ public abstract class DefaultParameter {
     public static int projectileDamage = 10;
     public static int projectileSpeed = 0;
     public static int projectileRange = 0;
-    public static int projectileHeathRegen = 0;
-    public static int projectileRegenDuration = 0;
     public static double projectileAngle = 0;
     public static int bombDecay = 15;
     public static int bombFragmentDecay = 10;

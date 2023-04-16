@@ -17,8 +17,9 @@ public abstract class New {
     private static final Font font = new Font("Arial", Font.PLAIN,30);
     private static  final Font fontS = new Font("Arial",Font.PLAIN,15);
     private static final Font miniFont = new Font("Arial", Font.PLAIN,20);
-    public static ImageIcon grassImg = new ImageIcon(New.class.getResource("/Images/Terrain/Grass Terrain.png"));
-    public static ImageIcon treeImg = new ImageIcon(New.class.getResource("/Images/Terrain/Tree Terrain.png"));
+    public static ImageIcon floorImg = new ImageIcon(New.class.getResource("/Images/Terrain/Floor.png"));
+    public static ImageIcon borderImg = new ImageIcon(New.class.getResource("/Images/Terrain/Border.png"));
+    public static ImageIcon wallImg = new ImageIcon(New.class.getResource("/Images/Terrain/Wall.png"));
     public static ImageIcon menuBackGround = new ImageIcon(New.class.getResource("/Images/Other/Menu Background.jpg"));
     public static ImageIcon gameOverImg = new ImageIcon(New.class.getResource("/Images/Other/GameOver.png"));
     public static ImageIcon heathRegenBuff = new ImageIcon(New.class.getResource("/Images/Buff/Regen Heath Buff.png"));
@@ -39,21 +40,32 @@ public abstract class New {
         return enemy;
     }
     //Terrain
-    public static Terrain grass() {
-        Terrain grass = new Terrain();
-        grass.setDefault();
-        grass.box.setIcon(grassImg);
-        grass.setPassable(DefaultParameter.grassPassable);
-        grass.setOverlapped(false);
-        return grass;
+    public static Terrain floor() {
+        Terrain floor = new Terrain();
+        floor.setDefault();
+        floor.box.setIcon(floorImg);
+        floor.setPassable(DefaultParameter.grassPassable);
+        floor.setOverlapped(false);
+        floor.setName("Floor");
+        return floor;
     }
-    public static Terrain tree() {
-        Terrain tree = new Terrain();
-        tree.setDefault();
-        tree.box.setIcon(treeImg);
-        tree.setPassable(DefaultParameter.treePassable);
-        tree.setOverlapped(false);
-        return tree;
+    public static Terrain wall() {
+        Terrain wall = new Terrain();
+        wall.setDefault();
+        wall.box.setIcon(wallImg);
+        wall.setPassable(DefaultParameter.treePassable);
+        wall.setOverlapped(false);
+        wall.setName("Wall");
+        return wall;
+    }
+    public static Terrain border() {
+        Terrain border = new Terrain();
+        border.setDefault();
+        border.box.setIcon(borderImg);
+        border.setPassable(DefaultParameter.treePassable);
+        border.setOverlapped(true);
+        border.setName("Border");
+        return border;
     }
     //Projectile
     public static Projectile bomb(Entity entity) {

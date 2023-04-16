@@ -40,11 +40,13 @@ public abstract class Render {
         }
         for (Terrain terrain : terrains) {
             if (terrain.box != null && !Graphic.panel.isAncestorOf(terrain.box)) {
-                if (terrain.isPassable()) {
+                if (terrain.getName().equals("Floor")) {
                     Graphic.panel.add(terrain.box, Integer.valueOf(1));
                 }
-                else {
+                else if (terrain.getName().equals("Wall")) {
                     Graphic.panel.add(terrain.box,Integer.valueOf(2));
+                } else {
+                    Graphic.panel.add(terrain.box,Integer.valueOf(7));
                 }
             }
         }

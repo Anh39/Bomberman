@@ -92,8 +92,10 @@ public abstract class Physics {
             if (!(projectile.getName().equals("Bomb") && !DefaultParameter.canBombCauseDamage)) {
                 if (projectile.isDamageToTerrain()) {
                     for (Terrain terrain : terrains) {
-                        if (checkIntersect(projectile.box, terrain.box) && !terrain.isPassable()) {
-                            terrain.reduceHeath(projectile.getDamage());
+                        if (terrain.getName().equals("Wall")) {
+                            if (checkIntersect(projectile.box, terrain.box)) {
+                                terrain.reduceHeath(projectile.getDamage());
+                            }
                         }
                     }
                 }

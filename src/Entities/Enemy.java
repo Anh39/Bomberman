@@ -66,7 +66,7 @@ public class Enemy extends Entity{
 
     /**
      * Phương thức dùng để di chuyển kẻ địch
-     * Tính theo 1 lần quét của MyClock
+     * Tính theo 1 lần quét của MyClock (tầm 1 giây quét 1 lần)
      */
     public void move() {
         int moveX = 0; // Tọa độ X di chuyển thêm

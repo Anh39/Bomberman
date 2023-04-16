@@ -79,6 +79,8 @@ public abstract class Entity {
         int x = (int)dim.getWidth();
         int y = (int)dim.getHeight();
         this.setLocation(x,y);
+        y -= this.bar.getHeight() + this.box.getHeight()*0.1;
+        this.bar.setLocation(x,y);
     }
     public void setLocation(int x, int y) {
         this.box.setLocation(x,y);

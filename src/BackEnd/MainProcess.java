@@ -3,6 +3,7 @@ package BackEnd;
 import Entities.*;
 import Graphic.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -116,12 +117,28 @@ public abstract class MainProcess {
     public static void generateTerrain() {
         int height = (Graphic.panel.getHeight()) / 50;
         int width = (Graphic.panel.getWidth()) / 50;
-        for (int i=0;i<width;i++) {
-            for (int j=0;j<height;j++) {
-                Terrain grass = New.grass();
+        for (int i=1;i<width-1;i++) {
+            for (int j=1;j<height-1;j++) {
+                Terrain grass = New.floor();
                 grass.setLocation(i*grass.box.getWidth(),j*grass.box.getHeight());
                 terrains.add(grass);
             }
+        }
+        for (int i=0;i<height;i++) {
+            Terrain border1 = New.border();
+            Terrain border2 = New.border();
+            border1.setLocation(0,i*border1.box.getHeight());
+            border2.setLocation(Graphic.panel.getWidth()-border2.box.getWidth(),i*border2.box.getHeight());
+            terrains.add(border1);
+            terrains.add(border2);
+        }
+        for (int i=0;i<width;i++) {
+            Terrain border1 = New.border();
+            Terrain border2 = New.border();
+            border1.setLocation(i*border1.box.getWidth(),0);
+            border2.setLocation(i*border2.box.getWidth(),Graphic.panel.getHeight()-border2.box.getHeight());
+            terrains.add(border1);
+            terrains.add(border2);
         }
         int treeNumber = height*width/DefaultParameter.treeRatio;
         for (int i=0;i<treeNumber;i++) {
@@ -135,7 +152,7 @@ public abstract class MainProcess {
             }
             Random rand = new Random();
             int index = rand.nextInt(0,indexArr.size());
-            Terrain tree = New.tree();
+            Terrain tree = New.wall();
             terrains.get(index).setOverlapped(true);
             tree.setLocation(terrains.get(index).box.getX(),terrains.get(index).box.getY());
             terrains.add(tree);
@@ -152,7 +169,7 @@ public abstract class MainProcess {
      */
     public static int getRandom(int from, int to, int distance) {
         Random rand = new Random();
-        return rand.nextInt(from/distance,to/distance)*distance;
+        return rand.nextInt(from/distance+1,to/distance-1)*distance;
     }
 
     /**
@@ -171,18 +188,17 @@ public abstract class MainProcess {
      * @return
      */
     public static Dimension getAvailableCoordinates() {
-        ArrayList<Integer> indexArr = new ArrayList<Integer>();
-        for (int i=0;i<terrains.size();i++) {
-            if (terrains.get(i).isPassable()) {
-                if (!terrains.get(i).isOverlapped()) {
-                    indexArr.add(i);
+        Entity dummy = New.floor();
+        dummy.setLocation(getRandomCoordinates());
+        for(int i=0;i<MainProcess.terrains.size();i++) {
+            if (!MainProcess.terrains.get(i).isPassable()) {
+                if (Physics.checkIntersect(MainProcess.terrains.get(i).box, dummy.box)) {
+                    dummy.setLocation(MainProcess.getRandomCoordinates());
+                    i = 0;
                 }
             }
         }
-        Random rand = new Random();
-        int index = rand.nextInt(0,indexArr.size());
-        Dimension dim = new Dimension(terrains.get(index).box.getX(),terrains.get(index).box.getY());
-        return dim;
+        return new Dimension(dummy.box.getX(),dummy.box.getY());
     }
     //Other
 
@@ -245,6 +261,7 @@ public abstract class MainProcess {
         buffs.clear();
         player.setDefault();
         generateTerrain();
+        SpawnManager.spawnPlayer();
         Graphic.panel.setVisible(true);
         Graphic.gameOver.setVisible(false);
     }
@@ -270,5 +287,11 @@ public abstract class MainProcess {
         }
         Graphic.panel.remove(player.box);
         Graphic.panel.remove(player.bar);
+    }
+    public static void changeEnemy() {
+        for (Enemy enemy : MainProcess.enemies) {
+            enemy.setCanPlaceBomb(DefaultParameter.canEnemyPlaceBomb);
+
+        }
     }
 }

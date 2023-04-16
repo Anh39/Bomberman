@@ -22,8 +22,6 @@ public abstract class Graphic {
     // Bảng chưa thanh trạng thái
     public static MyPanel statusPanel = new MyPanel();
     // Bảng chứa bảng save/load
-    public static MyPanel saveLoadPanel = new MyPanel();
-    // Bảng chứa bảng setting
     public static MyPanel settingPanel = new MyPanel();
     // JLabel để chỉnh hình nền
     public static JLabel menuBackground = New.menuBackground();
@@ -48,18 +46,12 @@ public abstract class Graphic {
         panel.setBounds(0, 0, DefaultParameter.panelWidth, DefaultParameter.panelHeight);
         basePanel.add(menuBackground,Integer.valueOf(0));
         basePanel.add(statusPanel,Integer.valueOf(10));
-        basePanel.add(saveLoadPanel,Integer.valueOf(15));
         basePanel.add(settingPanel,Integer.valueOf(20));
 
         // Chỉnh bảng setting
         settingPanel.setOpaque(true);
         settingPanel.setBackground(DefaultParameter.menuColor);
         settingPanel.setBounds(250,50,850,650);
-
-        // Chỉnh bảng save/load
-        saveLoadPanel.setOpaque(true);
-        saveLoadPanel.setBackground(Color.WHITE);
-        saveLoadPanel.setLocation(150,100);
 
         // Chỉnh bảng menu
         menuPanel.setBounds(0,0,DefaultParameter.menuPanelWidth,DefaultParameter.menuPanelHeight);
@@ -70,7 +62,6 @@ public abstract class Graphic {
         frame.pack();
         frame.setVisible(true);
 
-        MyMenu.saveLoadMenuInitialization(); // Khỏi tạo menu save/load
         MyMenu.mainMenuInitialization(); // Khởi tạo menu
         MyMenu.addMainMenu(basePanel); // Ban đầu thêm menu
         MyMenu.showMainMenu();
@@ -78,7 +69,6 @@ public abstract class Graphic {
         MyClock.startClock(); // Khỏi tạo đồng hồ
         StatusBar.initialization(); // Khỏi tạo thanh trạng thái
         MyMenu.subMenuInitialization(); // Khỏi tạo menu phụ
-        SpawnManager.spawnPlayer();
         basePanel.add(gameOver,Integer.valueOf(39));
         gameOver.setVisible(false);
     }
@@ -93,6 +83,7 @@ public abstract class Graphic {
         if (DefaultParameter.adventureMode) {
             panel.setBounds(0,0,DefaultParameter.panelWidth*DefaultParameter.adventureModeX, DefaultParameter.panelHeight*DefaultParameter.adventureModeY);
         }
+        SpawnManager.spawnPlayer();
         MainProcess.generateTerrain(); // Khởi tạo địa hình
         KeyBoard.keyInitialization(); // Khởi tạo trạng thái phím
         if (DefaultParameter.adventureMode) {
