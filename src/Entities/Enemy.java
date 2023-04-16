@@ -81,16 +81,17 @@ public class Enemy extends Entity{
             int direction = rand.nextInt(0, 1000);
 
             if (direction >= 0 && direction <= 250) {
-                moveX += this.getSpeed();
+                moveX = this.getSpeed();
                 moveY = 0;
             } else if (direction >= 251 && direction <= 500) {
-                moveX -= this.getSpeed();
+                moveX = -this.getSpeed();
                 moveY = 0;
             } else if (direction >= 501 && direction <= 750) {
                 moveX = 0;
+                moveY = this.getSpeed();
             } else {
                 moveX = 0;
-                moveY -= this.getSpeed();
+                moveY = -this.getSpeed();
             }
             count = 0;
         }
@@ -106,16 +107,17 @@ public class Enemy extends Entity{
             int direction = rand.nextInt(0, 1000);
 
             if (direction >= 0 && direction <= 250) {
-                moveX += this.getSpeed();
+                moveX = this.getSpeed();
                 moveY = 0;
             } else if (direction >= 251 && direction <= 500) {
-                moveX -= this.getSpeed();
+                moveX = -this.getSpeed();
                 moveY = 0;
             } else if (direction >= 501 && direction <= 750) {
                 moveX = 0;
+                moveY = this.getSpeed();
             } else {
                 moveX = 0;
-                moveY -= this.getSpeed();
+                moveY = -this.getSpeed();
             }
         }
     }
