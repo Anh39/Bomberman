@@ -55,7 +55,7 @@ public abstract class Graphic {
 
         // Chỉnh bảng menu
         menuPanel.setBounds(0,0,DefaultParameter.menuPanelWidth,DefaultParameter.menuPanelHeight);
-        menuPanel.setVisible(true);
+        menuPanel.setVisible(false);
 
         statusPanel.setVisible(false);
 
@@ -77,6 +77,7 @@ public abstract class Graphic {
      * Khởi tạo game sau khi đóng menu chính
      */
     public static void initialization() {
+        menuPanel.setVisible(true);
         gameOver.setVisible(false);
         menuBackground.setVisible(false);
         Render.initialize(); // Khỏi tạo render

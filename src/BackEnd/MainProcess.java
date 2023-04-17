@@ -231,6 +231,7 @@ public abstract class MainProcess {
                 Graphic.panel.remove(enemies.get(i).bar);
                 enemies.remove(i);
                 player.addScore();
+                MyMenu.scoreStatus.setText(" Score : " + MainProcess.player.getScore());
             }
         }
         for (int i=0;i<buffs.size();i++) {
@@ -245,7 +246,11 @@ public abstract class MainProcess {
             }
         }
         if (player.getHeath()<=0) {
-            Graphic.gameOver.setVisible(true);
+            if (!Graphic.gameOver.isVisible()) {
+                Graphic.gameOver.setVisible(true);
+                SoundTrack.off();
+                SoundPlayer.sounddefeat();
+            }
         }
     }
 

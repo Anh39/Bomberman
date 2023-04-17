@@ -20,7 +20,7 @@ public abstract class New {
     public static ImageIcon floorImg = new ImageIcon(New.class.getResource("/Images/Terrain/Floor.png"));
     public static ImageIcon borderImg = new ImageIcon(New.class.getResource("/Images/Terrain/Border.png"));
     public static ImageIcon wallImg = new ImageIcon(New.class.getResource("/Images/Terrain/Wall.png"));
-    public static ImageIcon menuBackGround = new ImageIcon(New.class.getResource("/Images/Other/Menu Background.jpg"));
+    public static ImageIcon menuBackGround = new ImageIcon(New.class.getResource("/Images/Other/Menu Background.png"));
     public static ImageIcon gameOverImg = new ImageIcon(New.class.getResource("/Images/Other/GameOver.png"));
     public static ImageIcon heathRegenBuff = new ImageIcon(New.class.getResource("/Images/Buff/Regen Heath Buff.png"));
     public static ImageIcon speedBuff = new ImageIcon(New.class.getResource("/Images/Buff/Speed Buff.png"));
@@ -239,6 +239,7 @@ public abstract class New {
     public static JLabel invincibleBuffStatus() {
         JLabel label = new JLabel();
         label.setBounds(0,0,100,50);
+        label.setBackground(DefaultParameter.menuColor);
         label.setIcon(invincibleBuff);
         label.setFont(font);
         label.setOpaque(true);
@@ -247,7 +248,16 @@ public abstract class New {
     public static JLabel speedBuffStatus() {
         JLabel label = new JLabel();
         label.setBounds(0,0,100,50);
+        label.setBackground(DefaultParameter.menuColor);
         label.setIcon(speedBuff);
+        label.setFont(font);
+        label.setOpaque(true);
+        return label;
+    }
+    public static JLabel scoreStatus() {
+        JLabel label = new JLabel();
+        label.setBounds(0,0,200,50);
+        label.setBackground(DefaultParameter.settingColor);
         label.setFont(font);
         label.setOpaque(true);
         return label;
@@ -258,3 +268,4 @@ public abstract class New {
 
 
 //https://game-endeavor.itch.io/mystic-woods
+//https://cdn.zoomg.ir/2022/2/bomberman-game.jpg

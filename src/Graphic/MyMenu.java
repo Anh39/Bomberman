@@ -29,6 +29,7 @@ public abstract class MyMenu {
     public static JButton newGameButton2 = New.miniMenuButton();
     public static JLabel invincibleStatus = New.invincibleBuffStatus();
     public static JLabel speedStatus = New.speedBuffStatus();
+    public static JLabel scoreStatus = New.scoreStatus();
     /**
      * Setting
      */
@@ -179,8 +180,11 @@ public abstract class MyMenu {
 
         Graphic.menuPanel.add(invincibleStatus);
         Graphic.menuPanel.add(speedStatus);
+        Graphic.menuPanel.add(scoreStatus);
         invincibleStatus.setLocation(0,0);
-        speedStatus.setLocation(invincibleStatus.getWidth(),0);
+        speedStatus.setLocation(invincibleStatus.getWidth()+invincibleStatus.getX(),0);
+        scoreStatus.setLocation(speedStatus.getWidth()+speedStatus.getX(),0);
+        scoreStatus.setText(" Score : " + MainProcess.player.getScore());
         Graphic.gameOver.add(newGameButton2,Integer.valueOf(40));
         newGameButton2.setLocation(DefaultParameter.panelWidth/2,DefaultParameter.panelHeight/2);
     }

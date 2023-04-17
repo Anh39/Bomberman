@@ -34,8 +34,8 @@ public abstract class DefaultParameter {
     public static int buffDelay = 100;
     public static int enemySpawn = 500;
     public static int enemySpawnD = 500;
-    public static int buffSpawn = 2500;
-    public static int buffSpawnD = 2500;
+    public static int buffSpawn = 1000;
+    public static int buffSpawnD = 1000;
     public static final int baseClockDelay = 10;
     public static final int renderDelay = 10;
     public static final int enemyMoveDelay = 10;
@@ -74,7 +74,7 @@ public abstract class DefaultParameter {
     public static int playerHeath = 100;
     public static int playerDamage = 10;
     public static int playerSpeed = 5;
-    public static int playerRange = 3;
+    public static int playerRange = 1;
     public static double playerAngle = 0;
     public static boolean intersectDamage = true;
     public static boolean playerDamageToTerrain = true;
