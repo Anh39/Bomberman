@@ -119,6 +119,7 @@ public class Enemy extends Entity{
                 moveX = 0;
                 moveY = -this.getSpeed();
             }
+            count = 0;
         }
     }
 

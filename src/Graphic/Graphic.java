@@ -35,6 +35,7 @@ public abstract class Graphic {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.add(basePanel);
+        frame.setTitle("Bomberman");
 
         // Chỉnh bảng nền
         basePanel.setBackground(Color.BLACK);

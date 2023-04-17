@@ -27,17 +27,19 @@ public abstract class SpawnManager {
      * Sinh ra kẻ địch tại vị trí ngẫu nhiên không giao với (địa hình không đi qua được)
      */
     public static void spawnEnemy() {
-        Enemy enemy = New.slime();
-        enemy.setLocation(MainProcess.getRandomCoordinates());
-        for(int i=0;i<MainProcess.terrains.size();i++) {
-            if (!MainProcess.terrains.get(i).isPassable()) {
-                if (Physics.checkIntersect(MainProcess.terrains.get(i).box, enemy.box)) {
-                    enemy.setLocation(MainProcess.getRandomCoordinates());
-                    i = 0;
+        if (MainProcess.enemies.size() < DefaultParameter.maxNumberOfEnemies) {
+            Enemy enemy = New.slime();
+            enemy.setLocation(MainProcess.getRandomCoordinates());
+            for (int i = 0; i < MainProcess.terrains.size(); i++) {
+                if (!MainProcess.terrains.get(i).isPassable()) {
+                    if (Physics.checkIntersect(MainProcess.terrains.get(i).box, enemy.box)) {
+                        enemy.setLocation(MainProcess.getRandomCoordinates());
+                        i = 0;
+                    }
                 }
             }
+            MainProcess.enemies.add(enemy);
         }
-        MainProcess.enemies.add(enemy);
     }
 
     /**

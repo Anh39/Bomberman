@@ -7,6 +7,8 @@ import java.awt.*;
  */
 public abstract class DefaultParameter {
     //Other
+    public static int maxNumberOfEnemies = 10;
+    public static int maxNumberOfEnemiesD = 10;
     public static int difficulty = 1;
     public static final boolean sandbox = false;
     public static int treeRatio = 5;

@@ -26,6 +26,7 @@ public abstract class MainProcess {
         DefaultParameter.enemyMaxHeath = DefaultParameter.enemyMaxHeathD * DefaultParameter.difficulty;
         DefaultParameter.enemyHeath = DefaultParameter.enemyHeathD * DefaultParameter.difficulty;
         DefaultParameter.enemyDamage = DefaultParameter.enemyDamageD * DefaultParameter.difficulty;
+        DefaultParameter.maxNumberOfEnemies = DefaultParameter.maxNumberOfEnemiesD * DefaultParameter.difficulty;
     }
     // Projectile
 
@@ -281,6 +282,7 @@ public abstract class MainProcess {
         SpawnManager.spawnPlayer();
         Graphic.panel.setVisible(true);
         Graphic.gameOver.setVisible(false);
+        MyMenu.scoreStatus.setText(" Score : " + MainProcess.player.getScore());
     }
     /**
      * Xóa các đối tượng khỏi màn hình (hình ảnh và health bar)

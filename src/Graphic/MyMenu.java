@@ -87,7 +87,7 @@ public abstract class MyMenu {
                 }
             }
         };
-        tutorial.setText("Press arrow key to move.\nPress Space to place Bomb.\nPress E to spawn enemies.\nPress Esc to open menu in game.\nPress Q to spawn buff.\nPress F to hide status panel.");
+        tutorial.setText("Press arrow key to move.\nPress Space to place Bomb.\nPress E to spawn enemies.\nPress Esc to open menu in game.");
         newGame.addActionListener(actionListener);
         configGame.addActionListener(actionListener);
         exitGame.addActionListener(actionListener);
@@ -316,7 +316,7 @@ public abstract class MyMenu {
                     DefaultParameter.playerDamageToPlayer = playerDamageToPlayerCheckBox.isSelected();
                 } else if (e.getSource() == playerDamageToTerrainCheckBox) {
                     SoundPlayer.soundClick();
-                    DefaultParameter.playerDamageToPlayer = playerDamageToPlayerCheckBox.isSelected();
+                    DefaultParameter.playerDamageToTerrain = playerDamageToTerrainCheckBox.isSelected();
                 } else if (e.getSource() == canBombCauseDamageCheckBox) {
                     SoundPlayer.soundClick();
                     DefaultParameter.canBombCauseDamage = canBombCauseDamageCheckBox.isSelected();
@@ -380,5 +380,8 @@ public abstract class MyMenu {
         adModeXSlider.addChangeListener(changeListener1);
         adModeYSlider.addChangeListener(changeListener1);
         difficultySlider.addChangeListener(changeListener1);
+        adModeX.setVisible(false);
+        adModeY.setVisible(false);
+        adventureMode.setVisible(false);
     }
 }
